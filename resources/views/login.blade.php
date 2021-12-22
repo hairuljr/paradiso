@@ -38,19 +38,29 @@
               </a>
             </div>
             <div class="p-2">
-              <form class="form-horizontal" action="#" method="POST">
+              <form class="form-horizontal" action="{{ route('login') }}" method="POST">
                 @csrf
 
                 <div class="mb-3">
                   <label for="username" class="form-label">Username</label>
-                  <input type="text" class="form-control" id="username" placeholder="Enter username">
+                  <input name="username" type="text" class="form-control @error('username') is-invalid @enderror" id="username" placeholder="Enter username" value="{{ old('username') }}" required autocomplete="email">
+                  @error('username')
+                  <div class="invalid-feedback">
+                    {{ $message }}
+                  </div>
+                  @enderror
                 </div>
 
                 <div class="mb-3">
                   <label class="form-label">Password</label>
                   <div class="input-group auth-pass-inputgroup">
-                    <input type="password" class="form-control" placeholder="Enter password" aria-label="Password" aria-describedby="password-addon">
+                    <input name="password" type="password" class="form-control @error('password') is-invalid @enderror" placeholder="Enter password" aria-label="Password" aria-describedby="password-addon" required>
                     <button class="btn btn-light " type="button" id="password-addon"><i class="mdi mdi-eye-outline"></i></button>
+                    @error('password')
+                    <div class="invalid-feedback">
+                      {{ $message }}
+                    </div>
+                    @enderror
                   </div>
                 </div>
 
