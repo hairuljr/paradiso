@@ -27,17 +27,17 @@
       </button>
 
       <!-- App Search-->
-      <form class="app-search d-none d-lg-block">
+      {{-- <form class="app-search d-none d-lg-block">
         <div class="position-relative">
           <input type="text" class="form-control" placeholder="cari...">
           <span class="bx bx-search-alt"></span>
         </div>
-      </form>
+      </form> --}}
     </div>
 
     <div class="d-flex">
 
-      <div class="dropdown d-inline-block d-lg-none ms-2">
+      {{-- <div class="dropdown d-inline-block d-lg-none ms-2">
         <button type="button" class="btn header-item noti-icon waves-effect" id="page-header-search-dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           <i class="mdi mdi-magnify"></i>
         </button>
@@ -54,7 +54,7 @@
             </div>
           </form>
         </div>
-      </div>
+      </div> --}}
 
       {{-- full screen --}}
       <div class="dropdown d-none d-lg-inline-block ms-1">
