@@ -13,7 +13,7 @@
                         <h4 class="mb-sm-0 font-size-18">Data Bahan Baku</h4>
                         <div class="page-title-right">
                             <ol class="breadcrumb m-0">
-                                <a href="bahanbaku/create" type="button" class="btn btn-success "><i
+                                <a href="{{route('bahanbaku.create')}}" type="button" class="btn btn-success "><i
                                         class="mdi mdi-plus me-1"></i> Add Data </a>
                             </ol>
                         </div>
