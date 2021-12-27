@@ -35,6 +35,6 @@ class Create extends Component
 
     public function render()
     {
-        return view('livewire.bahanbaku.create');
+        return view('livewire.bahanbaku.create')->extends('layouts.skote-admin');
     }
 }

@@ -1,7 +1,6 @@
 <div>
 
     @extends('layouts.skote-admin')
-
     @section('content')
 
 
