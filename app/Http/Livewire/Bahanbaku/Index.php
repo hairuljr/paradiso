@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\Bahanbaku;
 
 use Livewire\Component;
+use Illuminate\Support\Facades\DB;
 
 class Index extends Component
 {
