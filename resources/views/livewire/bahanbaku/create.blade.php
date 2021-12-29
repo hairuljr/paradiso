@@ -3,8 +3,6 @@
     @extends('layouts.skote-admin')
     @section('content')
 
-
-
     <div class="page-content">
         <div class="container-fluid">
 
@@ -30,8 +28,6 @@
                     <div class="card">
                         <div class="card-body">
             
-            
-                           
                                 <form wire:submit.prevent="save">
                                 <div class="mb-3 row">
                                     <label class="col-md-2 col-form-label">Barcode</label>
@@ -86,10 +82,8 @@
                 </div> <!-- end col -->
             </div>
 
-
         </div>
     </div>
-
 
     @endsection
 
