@@ -21,7 +21,7 @@
             <span key="t-ecommerce">Data Master</span>
           </a>
           <ul class="sub-menu" aria-expanded="false">
-            <li><a href="#" key="t-products">Bahan Baku</a></li>
+            <li><a href="/bahanbaku" key="t-products">Bahan Baku</a></li>
             <li><a href="#" key="t-product-detail">Produk</a></li>
             <li><a href="#" key="t-orders">Jenis Produk</a></li>
           </ul>
