@@ -25,7 +25,7 @@ class Create extends Component
     ];
     protected $messages = [
         'kode_bahan_baku.required' => 'Barcode tidak boleh kosong.',
-        'kode_bahan_baku.required' => 'Barcode tidak boleh kosong.',
+        'nama_bahan_baku.required' => 'Nama Bahan Baku tidak boleh kosong.',
         'persediaan.required' => 'Persediaan tidak boleh kosong.',
         'satuan.required' => 'Satuan tidak boleh kosong.',
         'harga_beli.required' => 'Harga tidak boleh kosong.',
@@ -55,6 +55,6 @@ class Create extends Component
 
     public function render()
     {
-        return view('livewire.bahanbaku.create')->extends('layouts.skote-admin');
+        return view('livewire.bahanbaku.create')->extends('template.app');
     }
 }

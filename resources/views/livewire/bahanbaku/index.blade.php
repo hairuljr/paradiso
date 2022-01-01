@@ -31,9 +31,15 @@
 
                             <div class="row mb-2">
                                 <div class="col-sm-4">
-
+                                    @if (session('pesan'))
+                                    <div class="alert alert-primary alert-dismissible fade show" role="alert">
+                                        {{ session('pesan')}}
+                                        <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                            aria-label="Close"></button>
+                                    </div>
+                                    @endif
+                                    {{-- <input wire:model="search" type="text" class="form-control my-3" placeholder="Search"> --}}
                                 </div>
-
                             </div>
                             <div class="table-responsive">
                                 <table id="example" class="table align-middle table-nowrap table-check">
@@ -66,10 +72,16 @@
                                             <td>{{ $bb->satuan_produk}}</td>
                                             <td>
                                                 <div class="d-flex gap-3">
-                                                    <a href="javascript:void(0);" class="text-success"><i
-                                                            class="mdi mdi-pencil font-size-18"></i></a>
-                                                    <a href="javascript:void(0);" class="text-danger"><i
-                                                            class="mdi mdi-delete font-size-18"></i></a>
+                                                    <button wire:click.prevent="DetailData({{ $bb->kode_bahan_baku }})" class="btn btn-warning waves-effect" data-bs-toggle="modal" data-bs-target=".edit">Edit
+                                                    </button>
+
+                                                    {{-- <button button class="text-danger" wire:click="delete({{$bb->kode_bahan_baku}})" data-bs-toggle="modal" data-bs-target=".delete"><i class="mdi mdi-delete font-size-18"></i></button> --}}
+                                                    
+                                                    <button wire:click.prevent="DetailData({{ $bb->kode_bahan_baku }})" class="btn btn-danger waves-effect waves-light" data-bs-toggle="modal" data-bs-target="#delete">
+                                                    Delete
+                                                    </button>
+                                                        
+                                                    
                                                 </div>
                                             </td>
                                         </tr>
@@ -83,6 +95,97 @@
             </div>
         </div>
     </div>
+
+
+    {{-- MODAL EDIT --}}
+    <div wire:ignore.self class="modal fade edit" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="myLargeModalLabel">Large modal</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form wire:submit.prevent="update">
+                        <div class="mb-3 row">
+                            <label class="col-md-2 col-form-label">Barcode</label>
+                            <div class="col-md-5">
+                                <input type="text" name="kode_bahan_baku" wire:model="kode_bahan_baku"
+                                    class="form-control">
+                                @error('kode_bahan_baku') <span class="error">{{ $message }}</span> @enderror
+                            </div>
+                        </div>
+
+                        <div class="mb-3 row">
+                            <label class="col-md-2 col-form-label">Nama</label>
+                            <div class="col-md-10">
+                                <input type="text" name="nama_bahan_baku" wire:model="nama_bahan_baku"
+                                    class="form-control">
+                                @error('nama_bahan_baku') <span class="error">{{ $message }}</span> @enderror
+                            </div>
+                        </div>
+                        <div class="mb-3 row">
+                            <label class="col-md-2 col-form-label">Persediaan</label>
+                            <div class="col-md-10">
+                                <input type="text" name="persediaan" wire:model="persediaan" class="form-control">
+                                @error('persediaan') <span class="error">{{ $message }}</span> @enderror
+                            </div>
+                        </div>
+                        <div class="mb-3 row">
+                            <label class="col-md-2 col-form-label">Satuan</label>
+                            <div class="col-md-10">
+                                <input type="text" name="satuan" wire:model="satuan" class="form-control">
+                                @error('satuan') <span class="error">{{ $message }}</span> @enderror
+                            </div>
+                        </div>
+                        <div class="mb-3 row">
+                            <label class="col-md-2 col-form-label">Harga</label>
+                            <div class="col-md-10">
+                                <input type="text" name="harga_beli" wire:model="harga_beli" class="form-control">
+                                @error('harga_beli') <span class="error">{{ $message }}</span> @enderror
+                            </div>
+                        </div>
+                        <div class="mb-3 row">
+                            <label class="col-md-2 col-form-label">Harga</label>
+                            <div class="col-md-5">
+                                <input type="text" name="satuan_produk" wire:model="satuan_produk" class="form-control">
+                                @error('satuan_produk') <span class="error">{{ $message }}</span> @enderror
+                            </div>
+                            <div class="col-md-5">
+                                <button type="submit" class="btn btn-success" type="button">Finish</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+    {{-- MODAL DELETE --}}
+    
+<div wire:ignore.self class="modal fade" id="delete" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="delete">Modal title</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>I will not close if you click outside me. Don't even try to press escape key.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-danger" wire:click.prevent="delete()">Delete</button>
+            </div>
+        </div>
+    </div>
+</div>
     @endsection
+
+
+
+
+
+
 
 </div>

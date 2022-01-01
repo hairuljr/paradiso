@@ -20,6 +20,7 @@ class CreateTbBahanBakuTable extends Migration
             $table->string('satuan', 15);
             $table->string('harga_beli', 15);
             $table->integer('satuan_produk')->unsigned();
+            $table->timestamps();
         });
     }
 
