@@ -17,7 +17,7 @@
     <link href="{{ asset('assets/skote/css/icons.min.css') }}" rel="stylesheet" type="text/css" />
     <!-- App Css-->
     <link href="{{ asset('assets/skote/css/app.min.css') }}" id="app-style" rel="stylesheet" type="text/css" />
-
+    <link href="{{ asset('assets/skote/libs/select2/css/select2.min.css') }}" rel="stylesheet" type="text/css" />
     @livewireStyles
 
 
@@ -202,7 +202,7 @@
     <script src="{{ asset('assets/skote/libs/metismenu/metisMenu.min.js') }}"></script>
     <script src="{{ asset('assets/skote/libs/simplebar/simplebar.min.js') }}"></script>
     <script src="{{ asset('assets/skote/libs/node-waves/waves.min.js') }}"></script>
-
+    <script src="{{ asset('assets/skote/libs/select2/js/select2.min.js')}}"></script>
     <!-- App js -->
     <script src="{{ asset('assets/skote/js/app.js') }}"></script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
