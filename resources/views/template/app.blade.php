@@ -8,7 +8,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Document</title>
 
-    {{-- <link href="{{ asset('css/app.css') }}" rel="stylesheet"> --}}
+  
 
     <link rel="shortcut icon" href="{{ asset('assets/skote/images/favicon.ico') }}">
     <link href="{{ asset('assets/skote/css/bootstrap.min.css') }}" id="bootstrap-style" rel="stylesheet"
@@ -17,12 +17,7 @@
     <link href="{{ asset('assets/skote/css/icons.min.css') }}" rel="stylesheet" type="text/css" />
     <!-- App Css-->
     <link href="{{ asset('assets/skote/css/app.min.css') }}" id="app-style" rel="stylesheet" type="text/css" />
-    {{-- <link href="{{ asset('assets/skote/libs/sweetalert2/sweetalert2.min.css') }}" rel="stylesheet" type="text/css"
-    /> --}}
-    {{-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
-   
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> --}}
-   
+
     @livewireStyles
 
 
@@ -129,8 +124,8 @@
                             </a>
                             <ul class="sub-menu" aria-expanded="false">
                                 <li><a href="/bahanbaku" key="t-products">Bahan Baku</a></li>
-                                <li><a href="#" key="t-product-detail">Produk</a></li>
-                                <li><a href="#" key="t-orders">Jenis Produk</a></li>
+                                <li><a href="/produk" key="t-product-detail">Produk</a></li>
+                                <li><a href="/jenisproduk" key="t-orders">Jenis Produk</a></li>
                             </ul>
                         </li>
 

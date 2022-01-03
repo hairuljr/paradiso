@@ -25,7 +25,7 @@
             <div class="card">
                 <div class="card-body">
 
-                    <form wire:submit.prevent="save">
+                    <form method="POST" wire:submit.prevent="save">
                         <div class="mb-3 row">
                             <label class="col-md-2 col-form-label">Barcode</label>
                             <div class="col-md-5">
