@@ -1,6 +1,5 @@
 <div>
 
-
     <div class="row">
         <div class="col-12">
             <div class="page-title-box d-sm-flex align-items-center justify-content-between">
@@ -81,16 +80,18 @@
                                         <div class="d-flex gap-3">
                                             <a wire:click.prevent="DetailData('{{$bb->kode_bahan_baku}}')"
                                                 class="text-success" data-bs-toggle="modal"
-                                                data-bs-target="#updateModal"><i class="mdi mdi-pencil font-size-18"></i>
+                                                data-bs-target="#updateModal"><i
+                                                    class="mdi mdi-pencil font-size-18"></i>
                                             </a>
-                                          
 
-                                            <a button class="text-danger" wire:click="DetailData('{{$bb->kode_bahan_baku}}')"
-                                            data-bs-toggle="modal" data-bs-target="#deleteModal"><i
-                                                class="mdi mdi-delete font-size-18"></i></a>
 
-                                           
-                                        
+                                            <a button class="text-danger"
+                                                wire:click="DetailData('{{$bb->kode_bahan_baku}}')"
+                                                data-bs-toggle="modal" data-bs-target="#deleteModal"><i
+                                                    class="mdi mdi-delete font-size-18"></i></a>
+
+
+
                                         </div>
                                     </td>
                                 </tr>
@@ -104,10 +105,9 @@
     </div>
 
 
-
     {{-- MODAL EDIT --}}
-    <div wire:ignore.self id="updateModal" class="modal fade" tabindex="-1" role="dialog"
-        aria-labelledby="updateModal" aria-hidden="true">
+    <div wire:ignore.self id="updateModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="updateModal"
+        aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
@@ -161,8 +161,9 @@
                                 @error('satuan_produk') <span class="error">{{ $message }}</span> @enderror
                             </div>
                             <div class="col-md-5">
-                                 <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
-                                <button type="submit" class="btn btn-success" wire:click.prevent="Update()" type="button">Update</button>
+                                <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-success" wire:click.prevent="Update()"
+                                    type="button">Update</button>
                             </div>
                         </div>
                     </form>

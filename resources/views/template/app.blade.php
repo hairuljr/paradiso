@@ -5,21 +5,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Document</title>
 
     {{-- <link href="{{ asset('css/app.css') }}" rel="stylesheet"> --}}
-    <script src="{{ asset('js/app.js') }}" defer></script>
+
     <link rel="shortcut icon" href="{{ asset('assets/skote/images/favicon.ico') }}">
-    <link href="{{ asset('assets/skote/css/bootstrap.min.css') }}" id="bootstrap-style" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('assets/skote/css/bootstrap.min.css') }}" id="bootstrap-style" rel="stylesheet"
+        type="text/css" />
     <!-- Icons Css -->
     <link href="{{ asset('assets/skote/css/icons.min.css') }}" rel="stylesheet" type="text/css" />
     <!-- App Css-->
     <link href="{{ asset('assets/skote/css/app.min.css') }}" id="app-style" rel="stylesheet" type="text/css" />
-    <link href="{{ asset('assets/skote/libs/sweetalert2/sweetalert2.min.css') }}" rel="stylesheet" type="text/css" />
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+    {{-- <link href="{{ asset('assets/skote/libs/sweetalert2/sweetalert2.min.css') }}" rel="stylesheet" type="text/css"
+    /> --}}
+    {{-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
    
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    {{-- <script src="{{mix('js/app.js') }}"></script> --}}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> --}}
+   
     @livewireStyles
 
 
@@ -28,10 +31,7 @@
 </head>
 
 <body data-sidebar="dark">
-
     <div id="layout-wrapper">
-
-
         <header id="page-topbar">
             <div class="navbar-header">
                 <div class="d-flex">
@@ -60,44 +60,14 @@
                         id="vertical-menu-btn">
                         <i class="fa fa-fw fa-bars"></i>
                     </button>
-
-                    <!-- App Search-->
-                    {{-- <form class="app-search d-none d-lg-block">
-                  <div class="position-relative">
-                    <input type="text" class="form-control" placeholder="cari...">
-                    <span class="bx bx-search-alt"></span>
-                  </div>
-                </form> --}}
                 </div>
 
                 <div class="d-flex">
-
-                    {{-- <div class="dropdown d-inline-block d-lg-none ms-2">
-                  <button type="button" class="btn header-item noti-icon waves-effect" id="page-header-search-dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <i class="mdi mdi-magnify"></i>
-                  </button>
-                  <div class="dropdown-menu dropdown-menu-lg dropdown-menu-end p-0" aria-labelledby="page-header-search-dropdown">
-          
-                    <form class="p-3">
-                      <div class="form-group m-0">
-                        <div class="input-group">
-                          <input type="text" class="form-control" placeholder="Search ..." aria-label="Recipient's username">
-                          <div class="input-group-append">
-                            <button class="btn btn-primary" type="submit"><i class="mdi mdi-magnify"></i></button>
-                          </div>
-                        </div>
-                      </div>
-                    </form>
-                  </div>
-                </div> --}}
-
-                    {{-- full screen --}}
                     <div class="dropdown d-none d-lg-inline-block ms-1">
                         <button type="button" class="btn header-item noti-icon waves-effect" data-toggle="fullscreen">
                             <i class="bx bx-fullscreen"></i>
                         </button>
                     </div>
-
                     <div class="dropdown d-inline-block">
                         <button type="button" class="btn header-item waves-effect" id="page-header-user-dropdown"
                             data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -231,7 +201,7 @@
         </div> <!-- end slimscroll-menu-->
     </div>
     @livewireScripts
-    {{-- <script src="https://cdn.jsdelivr.net/gh/livewire/turbolinks@v0.1.x/dist/livewire-turbolinks.js" data-turbolinks-eval="false" data-turbo-eval="false"></script> --}}
+   
     <script src="{{ asset('assets/skote/libs/jquery/jquery.min.js') }}"></script>
     <script src="{{ asset('assets/skote/libs/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
     <script src="{{ asset('assets/skote/libs/metismenu/metisMenu.min.js') }}"></script>
@@ -242,22 +212,63 @@
     <script src="{{ asset('assets/skote/js/app.js') }}"></script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-
-   
     <script>
-      window.livewire.on('updateModal',()=>{
-          $('#updateModal').modal('hide');
-      });
-  </script>
- <script>
-  window.livewire.on('deleteModal',()=>{
-      $('#deleteModal').modal('hide');
-  });
-</script>
-    <!-- Sweet alert init js-->
+        $(document).ready(function () {
+            $(".keluar").on("click", function (e) {
+                e.preventDefault();
+                let CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+                Swal.fire({
+                    title: 'Apakah anda yakin ingin keluar?',
+                    text: "Sesi login anda akan berkahir.",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    reverseButtons: true,
+                    cancelButtonText: 'Tetap di laman Ini',
+                    confirmButtonText: 'Ya, Keluar Sekarang'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        axios.post("{{ route('logout') }}", {
+                                _token: CSRF_TOKEN
+                            })
+                            .then((response) => {
+                                if (response.status == 204) {
+                                    Swal.fire({
+                                        position: 'center',
+                                        icon: 'success',
+                                        title: 'Anda telah keluar, silahkan login kembali nanti.',
+                                        showConfirmButton: false,
+                                        timer: 3000
+                                    })
+                                    setTimeout(() => {
+                                        window.location.reload()
+                                    }, 2000);
+                                }
+                            }, (error) => {
+                                console.log(error);
+                            });
+                    }
+                })
 
+            });
+        })
 
-    {{-- @include('includes.script') --}}
+    </script>
+
+    <script>
+        window.livewire.on('updateModal', () => {
+            $('#updateModal').modal('hide');
+        });
+
+    </script>
+    <script>
+        window.livewire.on('deleteModal', () => {
+            $('#deleteModal').modal('hide');
+        });
+
+    </script>
+
 </body>
 
 </html>
