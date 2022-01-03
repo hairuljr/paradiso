@@ -34,45 +34,56 @@ class Index extends Component
 
     ];
 
-
-
-    public function DetailData($kode)
+    public function ClearForm()
     {
-        $bahanbaku = BahanBaku::where('kode_bahan_baku', $kode)->first();
+        $this->kode_bahan_baku = '';
+        $this->nama_bahan_baku = '';
+        $this->persediaan = '';
+        $this->satuan = '';
+        $this->harga_beli = '';
+        $this->satuan_produk = '';
+    }
+
+
+    public function DetailData($kode_bahan_baku)
+    {
+        $bahanbaku = BahanBaku::where('kode_bahan_baku', $kode_bahan_baku)->first();
         $this->kode_bahan_baku = $bahanbaku->kode_bahan_baku;
         $this->nama_bahan_baku = $bahanbaku->nama_bahan_baku;
         $this->persediaan = $bahanbaku->persediaan;
+        $this->satuan = $bahanbaku->satuan;
         $this->harga_beli = $bahanbaku->harga_beli;
         $this->satuan_produk = $bahanbaku->satuan_produk;
     }
 
-    public function delete($kode_bahan_baku)
+    public function Update()
+    {
+        $validasi = $this->validate();
+        $bahanbaku = [
+
+            'nama_bahan_baku' => $this->nama_bahan_baku,
+            'persediaan' => $this->persediaan,
+            'satuan' => $this->satuan,
+            'harga_beli' => $this->harga_beli,
+            'satuan_produk' => $this->satuan_produk
+        ];
+        BahanBaku::where('kode_bahan_baku', $this->kode_bahan_baku)->Update($bahanbaku);
+
+        session()->flash('pesan1', 'Data berhasil di edit');
+        $this->Clearform();
+        $this->emit('updateModal');
+    }
+
+    public function delete()
     {
 
-        $bahanbaku = BahanBaku::find($kode_bahan_baku);
-
-        if ($bahanbaku) {
-            $bahanbaku->delete();
-        }
-
+        BahanBaku::where('kode_bahan_baku', $this->kode_bahan_baku)->delete();
         //flash message
-        session()->flash('message', 'Data Berhasil Dihapus.');
-        return redirect()->route('bahanbaku');
+        session()->flash('hapus', 'Data Berhasil Dihapus.');
+        $this->emit('deleteModal');
     }
 
-    public function edit($kode_bahan_baku)
-    {
-        $bahanbaku = BahanBaku::findOrFail($kode_bahan_baku);
 
-        $this->kode_bahan_baku->$bahanbaku->kode_bahan_baku;
-        $this->nama_bahan_baku->$bahanbaku->nama_bahan_baku;
-        $this->persediaan->$bahanbaku->persediaan;
-        $this->satuan->$bahanbaku->satuan;
-        $this->harga_beli->$bahanbaku->harga_beli;
-        $this->satuan_produk->$bahanbaku->satuan_produk;
-
-        return redirect('bahanbaku');
-    }
 
 
     public function render()
