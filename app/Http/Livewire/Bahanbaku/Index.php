@@ -36,9 +36,9 @@ class Index extends Component
 
 
 
-    public function DetailData($kode_bahan_baku)
+    public function DetailData($kode)
     {
-        $bahanbaku = BahanBaku::where('kode_bahan_baku', $kode_bahan_baku)->first();
+        $bahanbaku = BahanBaku::where('kode_bahan_baku', $kode)->first();
         $this->kode_bahan_baku = $bahanbaku->kode_bahan_baku;
         $this->nama_bahan_baku = $bahanbaku->nama_bahan_baku;
         $this->persediaan = $bahanbaku->persediaan;
@@ -78,6 +78,6 @@ class Index extends Component
     public function render()
     {
         $bahanbaku = DB::table('tb_bahan_baku')->get();
-        return view('livewire.bahanbaku.index', ['bahanbaku' => $bahanbaku])->extends('layouts.skote-admin');
+        return view('livewire.bahanbaku.index', ['bahanbaku' => $bahanbaku])->extends('template.app');
     }
 }
