@@ -14,22 +14,24 @@ class Create extends Component
     public $jenis_produk_kode;
     public $harga_satuan;
 
+    public $SelectJenis = null;
 
     protected $rules = [
         'kode_produk' => 'required',
         'nama_produk' => 'required',
-        // 'jenis_produk_kode' => 'required',
+        'jenis_produk_kode' => 'required',
         'harga_satuan' => 'required',
 
     ];
     protected $messages = [
         'kode_produk.required' => 'Barcode tidak boleh kosong.',
         'nama_produk.required' => 'Nama Produk tidak boleh kosong.',
-        // 'jenis_produk_kode.required' => 'Jenis Produk tidak boleh kosong.',
+        'jenis_produk_kode.required' => 'Jenis Produk tidak boleh kosong.',
         'harga_satuan.required' => 'Harga tidak boleh kosong.',
 
 
     ];
+
 
     public function save()
     {

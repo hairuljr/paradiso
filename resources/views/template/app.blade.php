@@ -128,6 +128,22 @@
                                 <li><a href="/jenisproduk" key="t-orders">Jenis Produk</a></li>
                             </ul>
                         </li>
+                        <li>
+                            <a href="#" class="has-arrow waves-effect">
+                                <i class="bx bx-store"></i>
+                                <span key="t-ecommerce">Transaksi</span>
+                            </a>
+                            <ul class="sub-menu" aria-expanded="false">
+                                <li><a href="/bahanbakumasuk" key="t-products">Bahan Baku Masuk</a></li>
+                                <li><a href="ecommerce-product-detail.html" key="t-product-detail">Bahan Baku Keluar</a></li>
+                                <li><a href="ecommerce-orders.html" key="t-orders">Data Penjualan</a></li>
+                                {{-- <li><a href="ecommerce-customers.html" key="t-customers">Customers</a></li>
+                                <li><a href="ecommerce-cart.html" key="t-cart">Cart</a></li>
+                                <li><a href="ecommerce-checkout.html" key="t-checkout">Checkout</a></li>
+                                <li><a href="ecommerce-shops.html" key="t-shops">Shops</a></li>
+                                <li><a href="ecommerce-add-product.html" key="t-add-product">Add Product</a></li> --}}
+                            </ul>
+                        </li>
 
                     </ul>
                 </div>
@@ -263,6 +279,21 @@
         });
 
     </script>
+
+<script>
+    $(document).ready(function() {
+        $(document).on('click', '#select', function() {
+            var bahan_baku_kode = $(this).data('bahan_baku_kode');
+            var nama_bahan_baku = $(this).data('nama_bahan_baku');
+            var satuan = $(this).data('satuan');
+
+            $('#bahan_baku_kode').val(bahan_baku_kode);
+            $('#nama_bahan_baku').val(nama_bahan_baku);
+            $('#satuan').val(satuan);
+            $('#modal-item').modal('hide');
+        })
+    })
+</script>
 
 </body>
 

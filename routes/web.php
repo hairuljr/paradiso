@@ -21,3 +21,6 @@ Route::get('/jenisproduk/create', \App\Http\Livewire\Jenisproduk\Create::class)-
 
 Route::get('/produk', \App\Http\Livewire\Produk\Index::class)->middleware('auth')->name('produk.index');
 Route::get('/produk/create', \App\Http\Livewire\Produk\Create::class)->middleware('auth')->name('produk.create');
+
+Route::get('/bahanbakumasuk', \App\Http\Livewire\Bahanbakumasuk\Index::class)->middleware('auth')->name('bahanbakumasuk.index');
+Route::get('/bahanbakumasuk/create', \App\Http\Livewire\Bahanbakumasuk\Create::class)->middleware('auth')->name('bahanbakumasuk.create');

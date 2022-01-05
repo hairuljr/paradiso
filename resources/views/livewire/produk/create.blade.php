@@ -40,16 +40,17 @@
                             </div>
                         </div>
                         <div class="mb-3 row">
-                            <label class="col-md-2 col-form-label">Jenis Produk</label>
+                            <label  class="col-md-2 col-form-label">Jenis Produk</label>
                             <div class="col-md-10">
-                                <select class="form-control select2-search-disable">
+                                <select name="" wire:model="produk" class="form-control select2-search-disable">
                                     <option value=""disabled="disabled">Pilih</option>
                                     
                                     @foreach ($produk as $pk)
-                                        <option value="{{ $pk->kode_jenis_produk}}">{{ $pk->jenis_produk }}</option>
+                                        <option value="{{ $pk->jenis_produk_kode}}">{{ $pk->jenis_produk }}</option>
                                     @endforeach
                                     
                                 </select>
+                                
                                 {{-- @error('jenis_produk_kode') <span class="error">{{ $message }}</span> @enderror --}}
                             </div>
                         </div>

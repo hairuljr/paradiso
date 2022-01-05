@@ -120,7 +120,7 @@
                             <label class="col-md-2 col-form-label">Barcode</label>
                             <div class="col-md-5">
                                 <input type="text" name="kode_bahan_baku" wire:model="kode_bahan_baku"
-                                    class="form-control" readonly>
+                                    class="form-control" >
                                 @error('kode_bahan_baku') <span class="error">{{ $message }}</span> @enderror
                             </div>
                         </div>
