@@ -11,10 +11,11 @@ class Create extends Component
 {
 
     public $bahan_baku_kode;
+    public $kode_bahan_baku;
     public $nama_bahan_baku;
     public $jumlah;
     public $harga;
-    public $kode_bahan_baku;
+
     public $satuan;
 
     protected $rules = [
@@ -36,34 +37,23 @@ class Create extends Component
     ];
 
 
-    // public function select($kode_bahan_baku)
-    // {
+    public function SelectData($kode_bahan_baku)
+    {
+        $bahanbaku = BahanBaku::where('kode_bahan_baku', $kode_bahan_baku)->first();
+        $this->bahan_baku_kode = $bahanbaku->kode_bahan_baku;
+        $this->nama_bahan_baku = $bahanbaku->nama_bahan_baku;
+        $this->persediaan = $bahanbaku->persediaan;
+        $this->satuan = $bahanbaku->satuan;
+        $this->harga_beli = $bahanbaku->harga_beli;
+        $this->satuan_produk = $bahanbaku->satuan_produk;
+    }
 
-    //     $bahanbaku = BahanBaku::where('kode_bahan_baku', $kode_bahan_baku)->first();
-    //     $this->kode_bahan_baku = $bahanbaku->kode_bahan_baku;
-    //     $this->nama_bahan_baku = $bahanbaku->nama_bahan_baku;
-    //     $this->persediaan = $bahanbaku->persediaan;
-    //     $this->satuan = $bahanbaku->satuan;
-    //     $this->harga_beli = $bahanbaku->harga_beli;
-    //     $this->satuan_produk = $bahanbaku->satuan_produk;
-    // }
-
-    // public function DetailData($kode_bahan_baku)
-    // {
-    //     $bahanbaku = BahanBaku::where('kode_bahan_baku', $kode_bahan_baku)->first();
-    //     $this->kode_bahan_baku = $bahanbaku->kode_bahan_baku;
-    //     $this->nama_bahan_baku = $bahanbaku->nama_bahan_baku;
-    //     $this->persediaan = $bahanbaku->persediaan;
-    //     $this->satuan = $bahanbaku->satuan;
-    //     $this->harga_beli = $bahanbaku->harga_beli;
-    //     $this->satuan_produk = $bahanbaku->satuan_produk;
-    // }
 
     public function save()
     {
-        // $validasi = $this->validate();
+        $validasi = $this->validate();
 
-        BahanBakuMasuk::create([
+        BahanBakuMasuk::create($validasi, [
 
             'bahan_baku_kode' => $this->bahan_baku_kode,
             'jumlah' => $this->jumlah,

@@ -26,48 +26,49 @@
                         <div class="mb-3 row">
                             <label class="col-md-2 col-form-label">Barcode</label>
                             <div class="col-md-5">
-                                <input type="text" name="bahan_baku_kode" wire:model="bahan_baku_kode"
-                                    id="bahan_baku_kode" class="form-control" readonly >
+                                <input type="text" wire:model="bahan_baku_kode" 
+                                    class="form-control" readonly>
                                 @error('bahan_baku_kode') <span class="error">{{ $message }}</span> @enderror
                             </div>
                             <div class="col-md-5">
                                 <div class="col-md-2 col-4">
-                                    <button type="button"  class="btn btn-primary waves-effect waves-light"
-                                        data-bs-toggle="modal" data-bs-target=".bs-example-modal-xl">Cari</button>
+                                    <button type="button" class="btn btn-primary waves-effect waves-light"
+                                        data-bs-toggle="modal" data-bs-target=".BahanBakuMasukModal">Cari</button>
                                 </div>
                             </div>
                         </div>
-                      
+
                         <div class="mb-3 row">
                             <label class="col-md-2 col-form-label">Nama</label>
                             <div class="col-md-10">
-                                <input type="text" name="nama_bahan_baku" 
-                                    id="nama_bahan_baku" class="form-control" readonly>
+                                <input type="text" name="nama_bahan_baku" wire:model="nama_bahan_baku"
+                                    class="form-control" readonly>
                                 @error('nama_bahan_baku') <span class="error">{{ $message }}</span> @enderror
                             </div>
                         </div>
                         <div class="mb-3 row">
                             <label class="col-md-2 col-form-label">Jumlah</label>
                             <div class="col-md-10">
-                                <input type="text" name="jumlah" wire:model="jumlah" class="form-control" >
+                                <input type="text" name="jumlah" wire:model="jumlah" class="form-control">
                                 @error('jumlah') <span class="error">{{ $message }}</span> @enderror
                             </div>
                         </div>
                         <div class="mb-3 row">
                             <label class="col-md-2 col-form-label">Satuan</label>
                             <div class="col-md-10">
-                                <input type="text" name="satuan" class="form-control" id="satuan" readonly>
+                                <input type="text" name="satuan" wire:model="satuan" class="form-control" 
+                                    readonly>
                                 @error('satuan') <span class="error">{{ $message }}</span> @enderror
                             </div>
                         </div>
                         <div class="mb-3 row">
                             <label class="col-md-2 col-form-label">Harga</label>
                             <div class="col-md-10">
-                                <input type="text" name="harga" wire:model="harga" class="form-control" >
-                                @error('satuan') <span class="error">{{ $message }}</span> @enderror
+                                <input type="text" name="harga" wire:model="harga" class="form-control">
+                                @error('harga') <span class="error">{{ $message }}</span> @enderror
                             </div>
                         </div>
-                       
+
                         <div class="mb-3 row">
                             <div class="col-md-5">
                                 <button type="submit" class="btn btn-success" type="button">Finish</button>
@@ -82,8 +83,8 @@
 
 
     {{-- modal --}}
-    <div class="modal fade bs-example-modal-xl"  id="modal-item" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel"
-        aria-hidden="true">
+    <div wire:ignore.self class="modal fade BahanBakuMasukModal" id="modal-item" tabindex="-1" role="dialog"
+        aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-xl">
             <div class="modal-content">
                 <div class="modal-header">
@@ -100,7 +101,7 @@
                                     <th class="align-middle">Nama</th>
                                     <th class="align-middle">Persedian</th>
                                     <th class="align-middle">Satuan</th>
-                               
+
                                     <th class="align-middle">Actions</th>
 
                                 </tr>
@@ -118,15 +119,8 @@
                                     <td>{{ $bb->nama_bahan_baku}}</td>
                                     <td>{{ $bb->persediaan}}</td>
                                     <td>{{ $bb->satuan}}</td>
-
-                                    {{-- <td>{{ $bb->harga_beli}}</td> --}}
-                                    {{-- <td>{{ $bb->satuan_produk}}</td> --}}
                                     <td>
-                                        <button  class="btn btn-xs btn-info" id="select"
-
-                                            data-bahan_baku_kode="{{ $bb->kode_bahan_baku}}"
-                                            data-nama_bahan_baku="{{ $bb->nama_bahan_baku}}"
-                                            data-satuan="{{ $bb->satuan}}">
+                                        <button wire:click.prevent="SelectData('{{$bb->kode_bahan_baku}}')" class="btn btn-xs btn-info" id="select">
                                             <i class="fa fa-check"></i> Select
 
                                         </button>

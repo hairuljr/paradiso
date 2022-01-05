@@ -283,13 +283,7 @@
 <script>
     $(document).ready(function() {
         $(document).on('click', '#select', function() {
-            var bahan_baku_kode = $(this).data('bahan_baku_kode');
-            var nama_bahan_baku = $(this).data('nama_bahan_baku');
-            var satuan = $(this).data('satuan');
-
-            $('#bahan_baku_kode').val(bahan_baku_kode);
-            $('#nama_bahan_baku').val(nama_bahan_baku);
-            $('#satuan').val(satuan);
+          
             $('#modal-item').modal('hide');
         })
     })
