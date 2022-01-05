@@ -11,7 +11,6 @@ class Create extends Component
     public $nama_bahan_baku;
     public $persediaan;
     public $satuan;
-    public $harga_beli;
     public $satuan_produk;
 
 
@@ -20,7 +19,6 @@ class Create extends Component
         'nama_bahan_baku' => 'required',
         'persediaan' => 'required',
         'satuan' => 'required',
-        'harga_beli' => 'required',
         'satuan_produk' => 'required'
     ];
     protected $messages = [
@@ -28,7 +26,6 @@ class Create extends Component
         'nama_bahan_baku.required' => 'Nama Bahan Baku tidak boleh kosong.',
         'persediaan.required' => 'Persediaan tidak boleh kosong.',
         'satuan.required' => 'Satuan tidak boleh kosong.',
-        'harga_beli.required' => 'Harga tidak boleh kosong.',
         'satuan_produk.required' => 'Satuan tidak boleh kosong.',
 
     ];
@@ -44,7 +41,6 @@ class Create extends Component
             'nama_bahan_baku' => $this->nama_bahan_baku,
             'persediaan' => $this->persediaan,
             'satuan' => $this->satuan,
-            'harga_beli' => $this->harga_beli,
             'satuan_produk' => $this->satuan_produk
 
         ]);

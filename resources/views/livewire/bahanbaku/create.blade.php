@@ -59,13 +59,6 @@
                         </div>
                         <div class="mb-3 row">
                             <label class="col-md-2 col-form-label">Harga</label>
-                            <div class="col-md-10">
-                                <input type="text" name="harga_beli" wire:model="harga_beli" class="form-control">
-                                @error('harga_beli') <span class="error">{{ $message }}</span> @enderror
-                            </div>
-                        </div>
-                        <div class="mb-3 row">
-                            <label class="col-md-2 col-form-label">Harga</label>
                             <div class="col-md-5">
                                 <input type="text" name="satuan_produk" wire:model="satuan_produk" class="form-control">
                                 @error('satuan_produk') <span class="error">{{ $message }}</span> @enderror

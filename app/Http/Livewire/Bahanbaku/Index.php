@@ -12,7 +12,6 @@ class Index extends Component
     public $nama_bahan_baku;
     public $persediaan;
     public $satuan;
-    public $harga_beli;
     public $satuan_produk;
 
 
@@ -21,7 +20,6 @@ class Index extends Component
         'nama_bahan_baku' => 'required',
         'persediaan' => 'required',
         'satuan' => 'required',
-        'harga_beli' => 'required',
         'satuan_produk' => 'required'
     ];
     protected $messages = [
@@ -29,7 +27,6 @@ class Index extends Component
         'nama_bahan_baku.required' => 'Nama Bahan Baku tidak boleh kosong.',
         'persediaan.required' => 'Persediaan tidak boleh kosong.',
         'satuan.required' => 'Satuan tidak boleh kosong.',
-        'harga_beli.required' => 'Harga tidak boleh kosong.',
         'satuan_produk.required' => 'Satuan tidak boleh kosong.',
 
     ];
@@ -40,7 +37,6 @@ class Index extends Component
         $this->nama_bahan_baku = '';
         $this->persediaan = '';
         $this->satuan = '';
-        $this->harga_beli = '';
         $this->satuan_produk = '';
     }
 
@@ -52,7 +48,6 @@ class Index extends Component
         $this->nama_bahan_baku = $bahanbaku->nama_bahan_baku;
         $this->persediaan = $bahanbaku->persediaan;
         $this->satuan = $bahanbaku->satuan;
-        $this->harga_beli = $bahanbaku->harga_beli;
         $this->satuan_produk = $bahanbaku->satuan_produk;
     }
 
@@ -64,7 +59,6 @@ class Index extends Component
             'nama_bahan_baku' => $this->nama_bahan_baku,
             'persediaan' => $this->persediaan,
             'satuan' => $this->satuan,
-            'harga_beli' => $this->harga_beli,
             'satuan_produk' => $this->satuan_produk
         ];
         BahanBaku::where('kode_bahan_baku', $this->kode_bahan_baku)->Update($bahanbaku);

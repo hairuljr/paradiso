@@ -56,7 +56,6 @@
                                     <th class="align-middle">Nama</th>
                                     <th class="align-middle">Persedian</th>
                                     <th class="align-middle">Satuan</th>
-                                    <th class="align-middle">Harga Beli</th>
                                     <th class="align-middle">Satuan Produk</th>
                                     <th class="align-middle">Actions</th>
 
@@ -73,8 +72,6 @@
                                     <td>{{ $bb->nama_bahan_baku}}</td>
                                     <td>{{ $bb->persediaan}}</td>
                                     <td>{{ $bb->satuan}}</td>
-
-                                    <td>{{ $bb->harga_beli}}</td>
                                     <td>{{ $bb->satuan_produk}}</td>
                                     <td>
                                         <div class="d-flex gap-3">
@@ -148,14 +145,7 @@
                             </div>
                         </div>
                         <div class="mb-3 row">
-                            <label class="col-md-2 col-form-label">Harga</label>
-                            <div class="col-md-10">
-                                <input type="text" name="harga_beli" wire:model="harga_beli" class="form-control">
-                                @error('harga_beli') <span class="error">{{ $message }}</span> @enderror
-                            </div>
-                        </div>
-                        <div class="mb-3 row">
-                            <label class="col-md-2 col-form-label">Harga</label>
+                            <label class="col-md-2 col-form-label">Satuan Produk</label>
                             <div class="col-md-5">
                                 <input type="text" name="satuan_produk" wire:model="satuan_produk" class="form-control">
                                 @error('satuan_produk') <span class="error">{{ $message }}</span> @enderror
