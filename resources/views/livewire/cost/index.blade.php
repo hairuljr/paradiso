@@ -2,11 +2,11 @@
     <div class="row">
         <div class="col-12">
             <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-                <h4 class="mb-sm-0 font-size-18">Data Bahan Baku Masuk</h4>
+                <h4 class="mb-sm-0 font-size-18">Cost Of Goog Sold</h4>
                 <div class="page-title-right">
                     <ol class="breadcrumb m-0">
-                        <a href="{{route('bahanbakumasuk.create')}}" type="button" class="btn btn-success "><i
-                                class="mdi mdi-plus me-1"></i> Pembelian </a>
+                        <a href="{{route('cost.create')}}" type="button" class="btn btn-success "><i
+                                class="mdi mdi-plus me-1"></i> Hitung </a>
                     </ol>
                 </div>
             </div>
@@ -51,10 +51,11 @@
                             <thead class="table-light">
                                 <tr>
                                     <th class="align-middle">No</th>
-                                    <th class="align-middle">Barcode</th>
+                                    <th class="align-middle">Barcode Produk</th>
                                     <th class="align-middle">Nama</th>
-                                    <th class="align-middle">Jumlah</th>
-                                    <th class="align-middle">Harga</th>
+                                    <th class="align-middle">Barcode BB</th>
+                                    <th class="align-middle">Nama</th>
+                                    <th class="align-middle">Cost</th>
                                     <th class="align-middle">Action</th>
                                 </tr>
                             </thead>
@@ -62,13 +63,14 @@
 
                             <tbody>
                                 @php $no = 1; @endphp
-                                @foreach ($bahanbakumasuk as $bbm)
+                                @foreach ($cost as $cs)
                                 <tr>
                                     <td>{{ $no++ }}</td>
-                                    <td>{{ $bbm->bahan_baku_kode}}</td>
-                                    <td>{{ $bbm->nama_bahan_baku}}</td>
-                                    <td>{{ $bbm->jumlah}}</td>
-                                    <td>{{ $bbm->harga}}</td>
+                                    <td>{{ $cs->kode_produk}}</td>
+                                    <td>{{ $cs->nama_produk}}</td>
+                                    <td>{{ $cs->kode_bahan_baku}}</td>
+                                    <td>{{ $cs->nama_bahan_baku}}</td>
+                                    <td>{{ $cs->harga}}</td>
                                     <td>
                                         <div class="d-flex gap-3">
                                             <a wire:click.prevent="DetailData('{{$bbm->bahan_baku_kode}}')"
@@ -184,5 +186,4 @@
             </div>
         </div>
     </div>
-
 </div>

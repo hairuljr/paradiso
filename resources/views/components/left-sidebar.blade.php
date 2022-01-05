@@ -22,10 +22,27 @@
           </a>
           <ul class="sub-menu" aria-expanded="false">
             <li><a href="/bahanbaku" key="t-products">Bahan Baku</a></li>
-            <li><a href="#" key="t-product-detail">Produk</a></li>
-            <li><a href="#" key="t-orders">Jenis Produk</a></li>
+            <li><a href="/produk" key="t-product-detail">Produk</a></li>
+            <li><a href="/jenisproduk" key="t-orders">Jenis Produk</a></li>
           </ul>
         </li>
+        <li>
+          <a href="#" class="waves-effect">
+              <i class="bx bx-calendar"></i>
+              <span key="t-calendar">Cost Of Good Sold</span>
+          </a>
+        </li>
+        <li>
+          <a href="#" class="has-arrow waves-effect">
+              <i class="bx bx-store"></i>
+              <span key="t-ecommerce">Transaksi</span>
+          </a>
+          <ul class="sub-menu" aria-expanded="false">
+              <li><a href="/bahanbakumasuk" key="t-products">Bahan Baku Masuk</a></li>
+              <li><a href="ecommerce-product-detail.html" key="t-product-detail">Bahan Baku Keluar</a></li>
+              <li><a href="ecommerce-orders.html" key="t-orders">Data Penjualan</a></li>
+          </ul>
+      </li>
 
       </ul>
     </div>

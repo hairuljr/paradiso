@@ -129,6 +129,12 @@
                             </ul>
                         </li>
                         <li>
+                            <a href="cost" class="waves-effect">
+                                <i class="bx bx-calendar"></i>
+                                <span key="t-calendar">Cost Of Good Sold</span>
+                            </a>
+                          </li>
+                        <li>
                             <a href="#" class="has-arrow waves-effect">
                                 <i class="bx bx-store"></i>
                                 <span key="t-ecommerce">Transaksi</span>
