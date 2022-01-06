@@ -40,18 +40,17 @@
                             </div>
                         </div>
                         <div class="mb-3 row">
-                            <label  class="col-md-2 col-form-label">Jenis Produk</label>
+                            <label class="col-md-2 col-form-label">Jenis Produk</label>
                             <div class="col-md-10">
-                                <select name="" wire:model="produk" class="form-control select2-search-disable">
+                                <select class="form-select" wire:model="jenis_produk_kode" aria-label="Default select example">
                                     <option value=""disabled="disabled">Pilih</option>
-                                    
+
                                     @foreach ($produk as $pk)
                                         <option value="{{ $pk->jenis_produk_kode}}">{{ $pk->jenis_produk }}</option>
                                     @endforeach
                                     
                                 </select>
-                                
-                                {{-- @error('jenis_produk_kode') <span class="error">{{ $message }}</span> @enderror --}}
+                                @error('jenis_produk_kode') <span class="error">{{ $message }}</span> @enderror
                             </div>
                         </div>
                         <div class="mb-3 row">

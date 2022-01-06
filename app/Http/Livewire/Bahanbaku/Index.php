@@ -77,9 +77,6 @@ class Index extends Component
         $this->emit('deleteModal');
     }
 
-
-
-
     public function render()
     {
         $bahanbaku = DB::table('tb_bahan_baku')->get();

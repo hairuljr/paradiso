@@ -27,9 +27,9 @@
           </ul>
         </li>
         <li>
-          <a href="#" class="waves-effect">
-              <i class="bx bx-calendar"></i>
-              <span key="t-calendar">Cost Of Good Sold</span>
+          <a href="/cost" class="waves-effect">
+            <i class="bx bx-home-circle"></i>
+              <span key="t-cost">Cost Of Good Sold</span>
           </a>
         </li>
         <li>

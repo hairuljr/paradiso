@@ -9,12 +9,14 @@ use Illuminate\Support\Facades\DB;
 class Create extends Component
 {
 
+
     public $kode_produk;
     public $nama_produk;
     public $jenis_produk_kode;
     public $harga_satuan;
 
-    public $SelectJenis = null;
+    public $jenis_produk;
+    public $kode_jenis_produk;
 
     protected $rules = [
         'kode_produk' => 'required',
@@ -31,7 +33,6 @@ class Create extends Component
 
 
     ];
-
 
     public function save()
     {
@@ -54,12 +55,15 @@ class Create extends Component
     public function render()
     {
 
-        $produk  = DB::table('tb_produk')->join(
-            'tb_jenis_produk',
-            'tb_jenis_produk.kode_jenis_produk',
-            '=',
-            'tb_produk.jenis_produk_kode'
-        )->get();
+        $produk = DB::table('tb_produk')
+            ->join(
+                'tb_jenis_produk',
+                'tb_jenis_produk.kode_jenis_produk',
+                '=',
+                'tb_produk.jenis_produk_kode'
+            )
+            ->get();
+
         return view('livewire.produk.create', ['produk' => $produk])->extends('template.app');
     }
 }

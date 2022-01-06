@@ -56,7 +56,7 @@
                                     <th class="align-middle">Nama</th>
                                     <th class="align-middle">Persedian</th>
                                     <th class="align-middle">Satuan</th>
-                                    <th class="align-middle">Satuan Produk</th>
+                                    <th class="align-middle">Isi Satuan</th>
                                     <th class="align-middle">Actions</th>
 
                                 </tr>
@@ -145,7 +145,7 @@
                             </div>
                         </div>
                         <div class="mb-3 row">
-                            <label class="col-md-2 col-form-label">Satuan Produk</label>
+                            <label class="col-md-2 col-form-label">Isi</label>
                             <div class="col-md-5">
                                 <input type="text" name="satuan_produk" wire:model="satuan_produk" class="form-control">
                                 @error('satuan_produk') <span class="error">{{ $message }}</span> @enderror

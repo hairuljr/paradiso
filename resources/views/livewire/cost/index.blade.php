@@ -2,7 +2,7 @@
     <div class="row">
         <div class="col-12">
             <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-                <h4 class="mb-sm-0 font-size-18">Cost Of Goog Sold</h4>
+                <h4 class="mb-sm-0 font-size-18">Cost Of Good Sold</h4>
                 <div class="page-title-right">
                     <ol class="breadcrumb m-0">
                         <a href="{{route('cost.create')}}" type="button" class="btn btn-success "><i
@@ -53,9 +53,9 @@
                                     <th class="align-middle">No</th>
                                     <th class="align-middle">Barcode Produk</th>
                                     <th class="align-middle">Nama</th>
-                                    <th class="align-middle">Barcode BB</th>
-                                    <th class="align-middle">Nama</th>
-                                    <th class="align-middle">Cost</th>
+                                    <th class="align-middle">Total Cgs</th>
+                                    <th class="align-middle">Harga Jual</th>
+                                    <th class="align-middle">Profit</th>
                                     <th class="align-middle">Action</th>
                                 </tr>
                             </thead>
@@ -68,22 +68,28 @@
                                     <td>{{ $no++ }}</td>
                                     <td>{{ $cs->kode_produk}}</td>
                                     <td>{{ $cs->nama_produk}}</td>
-                                    <td>{{ $cs->kode_bahan_baku}}</td>
+                                    {{-- <td>{{ $cs->kode_bahan_baku}}</td>
                                     <td>{{ $cs->nama_bahan_baku}}</td>
-                                    <td>{{ $cs->harga}}</td>
+                                    <td>{{ $cs->harga}}</td> --}}
                                     <td>
                                         <div class="d-flex gap-3">
-                                            <a wire:click.prevent="DetailData('{{$bbm->bahan_baku_kode}}')"
+                                            <a wire:click.prevent="DetailData('{{$cs->produk_kode}}')"
                                                 class="text-success" data-bs-toggle="modal"
                                                 data-bs-target="#updateModal"><i
                                                     class="mdi mdi-pencil font-size-18"></i>
                                             </a>
 
                                             <a button class="text-danger"
-                                                wire:click="DetailData('{{$bbm->bahan_baku_kode}}')"
+                                                wire:click="DetailData('{{$cs->produk_kode}}')"
                                                 data-bs-toggle="modal" data-bs-target="#deleteModal"><i
-                                                    class="mdi mdi-delete font-size-18"></i></a>
+                                                    class="mdi mdi-delete font-size-18"></i>
+                                            </a>
 
+                                            <a button class="text-secondary"
+                                            wire:click="DetailData('{{$cs->produk_kode}}')"
+                                            data-bs-toggle="modal" data-bs-target="#detailModal"><i
+                                                class="mdi-eye-outline font-size-18"></i>
+                                             </a>
 
 
                                         </div>
