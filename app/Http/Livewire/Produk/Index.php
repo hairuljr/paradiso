@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Produk;
 
+use App\Models\JenisProduk;
 use App\Models\Produk;
 use Livewire\Component;
 use Illuminate\Support\Facades\DB;
@@ -78,6 +79,8 @@ class Index extends Component
 
     public function render()
     {
+        $jenisproduk = JenisProduk::all();
+
         $produk  = DB::table('tb_produk')->join(
             'tb_jenis_produk',
             'tb_jenis_produk.kode_jenis_produk',
@@ -85,6 +88,6 @@ class Index extends Component
             'tb_produk.jenis_produk_kode'
         )->get();
 
-        return view('livewire.produk.index', ['produk' => $produk])->extends('template.app');
+        return view('livewire.produk.index', ['produk' => $produk], ['jenisproduk' => $jenisproduk])->extends('template.app');
     }
 }

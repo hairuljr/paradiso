@@ -80,8 +80,8 @@
 
 
                                             <a button class="text-danger"
-                                                wire:click="DetailData('{{$pk->kode_produk}}')"
-                                                data-bs-toggle="modal" data-bs-target="#deleteModal"><i
+                                                wire:click="DetailData('{{$pk->kode_produk}}')" data-bs-toggle="modal"
+                                                data-bs-target="#deleteModal"><i
                                                     class="mdi mdi-delete font-size-18"></i></a>
 
 
@@ -113,8 +113,8 @@
                         <div class="mb-3 row">
                             <label class="col-md-2 col-form-label">Barcode</label>
                             <div class="col-md-5">
-                                <input type="text" name="kode_produk" wire:model="kode_produk"
-                                    class="form-control" readonly>
+                                <input type="text" name="kode_produk" wire:model="kode_produk" class="form-control"
+                                    readonly>
                                 @error('kode_produk') <span class="error">{{ $message }}</span> @enderror
                             </div>
                         </div>
@@ -122,21 +122,20 @@
                         <div class="mb-3 row">
                             <label class="col-md-2 col-form-label">Nama</label>
                             <div class="col-md-10">
-                                <input type="text" name="nama_produk" wire:model="nama_produk"
-                                    class="form-control">
+                                <input type="text" name="nama_produk" wire:model="nama_produk" class="form-control">
                                 @error('nama_produk') <span class="error">{{ $message }}</span> @enderror
                             </div>
                         </div>
                         <div class="mb-3 row">
                             <label class="col-md-2 col-form-label">Jenis Produk</label>
                             <div class="col-md-10">
-                                <select class="form-control select2-search-disable">
+                                <select wire:model="jenis_produk_kode" class="form-control select2-search-disable">
                                     <option value="" disabled="disabled">Pilih</option>
-                                    @foreach ($produk as $pk)
-                                        <option value="{{ $pk->kode_jenis_produk}}">{{ $pk->jenis_produk }}</option>
+                                    @foreach ($jenisproduk as $jk)
+                                    <option value="{{ $jk->kode_jenis_produk}}">{{ $jk->jenis_produk }}</option>
                                     @endforeach
                                 </select>
-                                {{-- @error('jenis_produk_kode') <span class="error">{{ $message }}</span> @enderror --}}
+                                @error('jenis_produk_kode') <span class="error">{{ $message }}</span> @enderror
                             </div>
                         </div>
                         <div class="mb-3 row">

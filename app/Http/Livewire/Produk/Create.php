@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Produk;
 
+use App\Models\JenisProduk;
 use App\Models\Produk;
 use Livewire\Component;
 use Illuminate\Support\Facades\DB;
@@ -9,7 +10,7 @@ use Illuminate\Support\Facades\DB;
 class Create extends Component
 {
 
-
+    public $produk;
     public $kode_produk;
     public $nama_produk;
     public $jenis_produk_kode;
@@ -34,6 +35,11 @@ class Create extends Component
 
     ];
 
+    public function mount()
+    {
+        $this->jenisproduk = JenisProduk::orderBy('jenis_produk')->get();
+    }
+
     public function save()
     {
 
@@ -55,14 +61,12 @@ class Create extends Component
     public function render()
     {
 
-        $produk = DB::table('tb_produk')
-            ->join(
-                'tb_jenis_produk',
-                'tb_jenis_produk.kode_jenis_produk',
-                '=',
-                'tb_produk.jenis_produk_kode'
-            )
-            ->get();
+        $produk  = DB::table('tb_produk')->join(
+            'tb_jenis_produk',
+            'tb_jenis_produk.kode_jenis_produk',
+            '=',
+            'tb_produk.jenis_produk_kode'
+        )->get();
 
         return view('livewire.produk.create', ['produk' => $produk])->extends('template.app');
     }

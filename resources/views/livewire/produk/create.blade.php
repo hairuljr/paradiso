@@ -21,7 +21,8 @@
             <div class="card">
                 <div class="card-body">
 
-                    <form method="POST" wire:submit.prevent="save">
+                    <form wire:submit.prevent="save">
+                        @csrf
                         <div class="mb-3 row">
                             <label class="col-md-2 col-form-label">Barcode</label>
                             <div class="col-md-5">
@@ -40,13 +41,13 @@
                             </div>
                         </div>
                         <div class="mb-3 row">
-                            <label class="col-md-2 col-form-label">Jenis Produk</label>
+                            <label  class="col-md-2 col-form-label">Jenis Produk</label>
                             <div class="col-md-10">
-                                <select class="form-select" wire:model="jenis_produk_kode" aria-label="Default select example">
+                                <select wire:model="jenis_produk_kode" class="form-select" aria-label="Default select example">
                                     <option value=""disabled="disabled">Pilih</option>
 
-                                    @foreach ($produk as $pk)
-                                        <option value="{{ $pk->jenis_produk_kode}}">{{ $pk->jenis_produk }}</option>
+                                    @foreach ($jenisproduk as $jk)
+                                        <option value="{{ $jk->kode_jenis_produk}}">{{ $jk->jenis_produk }}</option>
                                     @endforeach
                                     
                                 </select>

@@ -70,7 +70,7 @@
                         <div class="row mb-3">
                             <label  class="col-sm-3 col-form-label">Harga </label>
                             <div class="col-sm-9">
-                                <input type="text" class="form-control">
+                                <input type="text" class="form-control" autofocus>
                             </div>
                         </div>
                         <div class="row mb-3">
@@ -189,7 +189,7 @@
                         <div class="row mb-3">
                             <label class="col-sm-3 col-form-label">Harga Jual</label>
                             <div class="col-sm-9">
-                                <input type="text" class="form-control" readonly>
+                                <input type="text" class="form-control" >
                             </div>
                         </div>
                         <div class="row mb-3">
@@ -310,7 +310,7 @@
                                     <td>{{ $pk->harga_satuan}}</td>
                                     <td>
                                         <button wire:click.prevent="SelectData1('{{$pk->kode_produk}}')"
-                                            class="btn btn-xs btn-info" id="select">
+                                            class="btn btn-xs btn-info" id="select1">
                                             <i class="fa fa-check"></i> Select
 
                                         </button>

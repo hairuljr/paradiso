@@ -295,6 +295,14 @@
     })
 </script>
 
+<script>
+    $(document).ready(function() {
+        $(document).on('click', '#select1', function() {
+          
+            $('#modal-item1').modal('hide');
+        })
+    })
+</script>
 </body>
 
 </html>

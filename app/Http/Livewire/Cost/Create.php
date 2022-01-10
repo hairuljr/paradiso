@@ -35,8 +35,8 @@ class Create extends Component
     public function SelectData1($kode_produk)
     {
         $produk = Produk::where('kode_produk', $kode_produk)->first();
-        $this->kode_produk = $produk->kode_produk;
-        $this->nama_produk = $produk->kode_produk;
+        $this->produk_kode = $produk->kode_produk;
+        $this->nama_produk = $produk->nama_produk;
         $this->jenis_produk_kode = $produk->jenis_produk_kode;
         $this->harga_satuan = $produk->harga_satuan;
     }
