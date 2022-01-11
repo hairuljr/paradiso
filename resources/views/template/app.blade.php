@@ -18,6 +18,11 @@
     <!-- App Css-->
     <link href="{{ asset('assets/skote/css/app.min.css') }}" id="app-style" rel="stylesheet" type="text/css" />
     <link href="{{ asset('assets/skote/libs/select2/css/select2.min.css') }}" rel="stylesheet" type="text/css" />
+    <style>
+        .cursor a {
+            cursor: pointer;
+        }
+    </style>
     @livewireStyles
 
 

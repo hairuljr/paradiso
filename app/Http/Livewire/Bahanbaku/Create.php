@@ -36,13 +36,10 @@ class Create extends Component
         $validasi = $this->validate();
 
         BahanBaku::create($validasi, [
-
             'kode_bahan_baku' => $this->kode_bahan_baku,
             'nama_bahan_baku' => $this->nama_bahan_baku,
             'persediaan' => $this->persediaan,
-            'satuan' => $this->satuan,
-            'satuan_produk' => $this->satuan_produk
-
+            'satuan' => $this->satuan
         ]);
         session()->flash('pesan', 'Data berhasil ditambah');
         return redirect('bahanbaku');

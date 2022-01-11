@@ -69,9 +69,9 @@
                                     <td>{{ $pk->kode_produk}}</td>
                                     <td>{{ $pk->nama_produk}}</td>
                                     <td>{{ $pk->jenis_produk}}</td>
-                                    <td>{{ $pk->harga_satuan}}</td>
+                                    <td>{{ rupiah($pk->harga_satuan) }}</td>
                                     <td>
-                                        <div class="d-flex gap-3">
+                                        <div class="d-flex gap-3 cursor">
                                             <a wire:click.prevent="DetailData('{{$pk->kode_produk}}')"
                                                 class="text-success" data-bs-toggle="modal"
                                                 data-bs-target="#updateModal"><i

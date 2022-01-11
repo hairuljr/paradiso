@@ -68,9 +68,9 @@
                                     <td>{{ $bbm->bahan_baku_kode}}</td>
                                     <td>{{ $bbm->nama_bahan_baku}}</td>
                                     <td>{{ $bbm->jumlah}}</td>
-                                    <td>{{ $bbm->harga}}</td>
+                                    <td>{{ rupiah($bbm->harga) }}</td>
                                     <td>
-                                        <div class="d-flex gap-3">
+                                        <div class="d-flex gap-3 cursor">
                                             <a wire:click.prevent="DetailData('{{$bbm->bahan_baku_kode}}')"
                                                 class="text-success" data-bs-toggle="modal"
                                                 data-bs-target="#updateModal"><i

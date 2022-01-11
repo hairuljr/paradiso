@@ -74,7 +74,7 @@
                                     <td>{{ $bb->satuan}}</td>
                                     <td>{{ $bb->satuan_produk}}</td>
                                     <td>
-                                        <div class="d-flex gap-3">
+                                        <div class="d-flex gap-3 cursor">
                                             <a wire:click.prevent="DetailData('{{$bb->kode_bahan_baku}}')"
                                                 class="text-success" data-bs-toggle="modal"
                                                 data-bs-target="#updateModal"><i

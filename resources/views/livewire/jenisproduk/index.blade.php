@@ -67,7 +67,7 @@
                                     <td>{{ $jk->kode_jenis_produk}}</td>
                                     <td>{{ $jk->jenis_produk}}</td>
                                     <td>
-                                        <div class="d-flex gap-3">
+                                        <div class="d-flex gap-3 cursor">
                                             <a wire:click.prevent="DetailData('{{$jk->kode_jenis_produk}}')"
                                                 class="text-success" data-bs-toggle="modal"
                                                 data-bs-target="#updateModal"><i

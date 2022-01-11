@@ -72,7 +72,7 @@
                                     <td>{{ $cs->nama_bahan_baku}}</td>
                                     <td>{{ $cs->harga}}</td> --}}
                                     <td>
-                                        <div class="d-flex gap-3">
+                                        <div class="d-flex gap-3 cursor">
                                             <a wire:click.prevent="DetailData('{{$cs->produk_kode}}')"
                                                 class="text-success" data-bs-toggle="modal"
                                                 data-bs-target="#updateModal"><i
