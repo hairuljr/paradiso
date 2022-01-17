@@ -53,7 +53,7 @@
                                     <th class="align-middle">No</th>
                                     <th class="align-middle">Barcode</th>
                                     <th class="align-middle">Nama</th>
-                                    <th class="align-middle">Jumlah</th>
+                                    <th class="align-middle">Stok Masuk</th>
                                     <th class="align-middle">Harga</th>
                                     <th class="align-middle">Action</th>
                                 </tr>
@@ -67,7 +67,7 @@
                                     <td>{{ $no++ }}</td>
                                     <td>{{ $bbm->bahan_baku_kode}}</td>
                                     <td>{{ $bbm->nama_bahan_baku}}</td>
-                                    <td>{{ $bbm->jumlah}}</td>
+                                    <td>{{ $bbm->stok_masuk}}</td>
                                     <td>{{ rupiah($bbm->harga) }}</td>
                                     <td>
                                         <div class="d-flex gap-3 cursor">
@@ -125,7 +125,7 @@
                             </div>
                         </div>
                         <div class="mb-3 row">
-                            <label class="col-md-2 col-form-label">Jumlah</label>
+                            <label class="col-md-2 col-form-label">Stok</label>
                             <div class="col-md-10">
                                 <input type="text" name="jumlah" wire:model="jumlah" class="form-control">
                                 @error('jumlah') <span class="error">{{ $message }}</span> @enderror

@@ -16,7 +16,7 @@ class CreateTbBahanBakuMasukTable extends Migration
         Schema::create('tb_bahan_baku_masuk', function (Blueprint $table) {
             $table->id();
             $table->string('bahan_baku_kode', 15);
-            $table->integer('jumlah')->unsigned();
+            $table->integer('stok_masuk')->unsigned();
             $table->string('harga', 20);
             $table->timestamps();
         });

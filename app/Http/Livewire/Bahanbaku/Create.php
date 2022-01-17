@@ -26,7 +26,7 @@ class Create extends Component
         'nama_bahan_baku.required' => 'Nama Bahan Baku tidak boleh kosong.',
         'persediaan.required' => 'Persediaan tidak boleh kosong.',
         'satuan.required' => 'Satuan tidak boleh kosong.',
-        'satuan_produk.required' => 'Satuan tidak boleh kosong.',
+        'satuan_produk.required' => 'Isi Satuan tidak boleh kosong.',
 
     ];
 
@@ -39,6 +39,7 @@ class Create extends Component
             'kode_bahan_baku' => $this->kode_bahan_baku,
             'nama_bahan_baku' => $this->nama_bahan_baku,
             'persediaan' => $this->persediaan,
+            'satuan_produk' => $this->satuan_produk,
             'satuan' => $this->satuan
         ]);
         session()->flash('pesan', 'Data berhasil ditambah');

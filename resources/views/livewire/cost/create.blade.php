@@ -68,13 +68,13 @@
                             </div>
                         </div>
                         <div class="row mb-3">
-                            <label  class="col-sm-3 col-form-label">Harga </label>
+                            <label  class="col-sm-3 col-form-label" title="harga didapat dari harga beli bahan baku">Harga </label>
                             <div class="col-sm-9">
                                 <input type="text" class="form-control" autofocus>
                             </div>
                         </div>
                         <div class="row mb-3">
-                            <label  class="col-sm-3 col-form-label" >Isi</label>
+                            <label  class="col-sm-3 col-form-label" title="isi satuan merupakan jumlah isi bahan baku yang dibeli, bisa berbentuk pcs, ml, grm" >Isi Satuan</label>
                             <div class="col-md-5">
                                 <input type="text" class="form-control" wire:model="satuan_produk" readonly>
                             </div>
@@ -95,13 +95,13 @@
                 <div class="card-body">
                     <form>
                         <div class="row mb-3">
-                            <label class="col-sm-3 col-form-label">Digunakan</label>
+                            <label class="col-sm-3 col-form-label" title="jumlah atau takaran bahan baku yang digunakan untuk membuat satu produk">Digunakan</label>
                             <div class="col-sm-9">
                                 <input type="text" class="form-control" id="horizontal-firstname-input">
                             </div>
                         </div>
                         <div class="row mb-3">
-                            <label class="col-sm-3 col-form-label">Cost</label>
+                            <label class="col-sm-3 col-form-label" title="hasilnya didapat dari (harga beli bahan baku dibagi isi satuan) dikali jumlah atau takaran yang digunakan">Cost</label>
                             <div class="col-sm-9">
                                 <input type="email" class="form-control"  readonly>
                             </div>
@@ -181,19 +181,19 @@
                 <div class="card-body">
                     <form>
                         <div class="row mb-3">
-                            <label class="col-sm-3 col-form-label">Total Cgs</label>
+                            <label class="col-sm-3 col-form-label" title="total cgs meruapakan jumlah dari perhitungan sebelumnya yg akan dijumlah kedalam tabel" >Total Cgs</label>
                             <div class="col-sm-9">
                                 <input type="text" class="form-control" readonly>
                             </div>
                         </div>
                         <div class="row mb-3">
-                            <label class="col-sm-3 col-form-label">Harga Jual</label>
+                            <label class="col-sm-3 col-form-label" title="harga jual kita tentukan kemudian harga jual akan mengurangi total cgs">Harga Jual</label>
                             <div class="col-sm-9">
                                 <input type="text" class="form-control" >
                             </div>
                         </div>
                         <div class="row mb-3">
-                            <label class="col-sm-3 col-form-label">Profit</label>
+                            <label class="col-sm-3 col-form-label" title="profit ddiapat dari harga jual dikurang total cgs">Profit</label>
                             <div class="col-sm-9">
                                 <input type="text" class="form-control" readonly>
                             </div>
@@ -233,9 +233,9 @@
                                     <th class="align-middle">No</th>
                                     <th class="align-middle">Kode BK</th>
                                     <th class="align-middle">Nama</th>
-                                    <th class="align-middle">Persedian</th>
-                                    <th class="align-middle">Satuan</th>
+                                    <th class="align-middle">Stok</th>
                                     <th class="align-middle">Isi Satuan</th>
+                                    <th class="align-middle">Satuan</th>
                                     <th class="align-middle">Actions</th>
 
                                 </tr>
@@ -252,8 +252,8 @@
                                     <td>{{ $bb->kode_bahan_baku}}</td>
                                     <td>{{ $bb->nama_bahan_baku}}</td>
                                     <td>{{ $bb->persediaan}}</td>
-                                    <td>{{ $bb->satuan}}</td>
                                     <td>{{ $bb->satuan_produk}}</td>
+                                    <td>{{ $bb->satuan}}</td>
                                     <td>
                                         <button wire:click.prevent="SelectData('{{$bb->kode_bahan_baku}}')"
                                             class="btn btn-xs btn-info" id="select">
@@ -306,8 +306,8 @@
                                     <td>{{ $no++ }}</td>
                                     <td>{{ $pk->kode_produk}}</td>
                                     <td>{{ $pk->nama_produk}}</td>
-                                    <td>{{ $pk->jenis_produk_kode}}</td>
-                                    <td>{{ $pk->harga_satuan}}</td>
+                                    <td>{{ $pk->jenis_produk}}</td>
+                                    <td>{{ rupiah($pk->harga_satuan)}}</td>
                                     <td>
                                         <button wire:click.prevent="SelectData1('{{$pk->kode_produk}}')"
                                             class="btn btn-xs btn-info" id="select1">

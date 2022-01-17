@@ -37,7 +37,6 @@
                                 </div>
                             </div>
                         </div>
-
                         <div class="mb-3 row">
                             <label class="col-md-2 col-form-label">Nama</label>
                             <div class="col-md-10">
@@ -53,14 +52,33 @@
                                 @error('jumlah') <span class="error">{{ $message }}</span> @enderror
                             </div>
                         </div>
-                        <div class="mb-3 row">
-                            <label class="col-md-2 col-form-label">Satuan</label>
-                            <div class="col-md-10">
-                                <input type="text" name="satuan" wire:model="satuan" class="form-control" 
-                                    readonly>
-                                @error('satuan') <span class="error">{{ $message }}</span> @enderror
+                        <div class="row mb-3">
+                            <label  class="col-sm-2 col-form-label" >Isi Satuan</label>
+                            <div class="col-md-5">
+                                <input type="text" class="form-control" name="satuan_produk" wire:model="satuan_produk" readonly>
+                                @error('satuan_produk') <span class="error">{{ $message }}</span> @enderror
                             </div>
-                        </div>
+                            <div class="col-md-2">
+                                <div class="col-md-5">
+                                    <input type="text" name="satuan"  wire:model="satuan" class="form-control" readonly>
+                                    {{-- @error('satuan') <span class="error">{{ $message }}</span> @enderror --}}
+                                </div>
+                            </div>
+                        </div> 
+                        <div class="row mb-3">
+                            <label  class="col-sm-2 col-form-label">Stok Masuk</label>
+                            <div class="col-md-5">
+                                <input type="text" class="form-control" name="stok_masuk" wire:model="stok_masuk" readonly>
+                                @error('stok_masuk') <span class="error">{{ $message }}</span> @enderror
+                            </div>
+                            <div class="col-md-2">
+                                <div class="col-md-5">
+                                    <input type="text" name="satuan"  wire:model="satuan" class="form-control" readonly>
+                                    {{-- @error('satuan') <span class="error">{{ $message }}</span> @enderror --}}
+                                </div>
+                            </div>
+                        </div> 
+                       
                         <div class="mb-3 row">
                             <label class="col-md-2 col-form-label">Harga</label>
                             <div class="col-md-10">
@@ -68,7 +86,6 @@
                                 @error('harga') <span class="error">{{ $message }}</span> @enderror
                             </div>
                         </div>
-
                         <div class="mb-3 row">
                             <div class="col-md-5">
                                 <button type="submit" class="btn btn-success" type="button">Finish</button>
@@ -99,9 +116,9 @@
                                     <th class="align-middle">No</th>
                                     <th class="align-middle">Kode BK</th>
                                     <th class="align-middle">Nama</th>
-                                    <th class="align-middle">Persedian</th>
+                                    <th class="align-middle">Stok</th>
+                                    <th class="align-middle">Isi Satuan</th>
                                     <th class="align-middle">Satuan</th>
-
                                     <th class="align-middle">Actions</th>
 
                                 </tr>
@@ -118,6 +135,7 @@
                                     <td>{{ $bb->kode_bahan_baku}}</td>
                                     <td>{{ $bb->nama_bahan_baku}}</td>
                                     <td>{{ $bb->persediaan}}</td>
+                                    <td>{{ $bb->satuan_produk}}</td>
                                     <td>{{ $bb->satuan}}</td>
                                     <td>
                                         <button wire:click.prevent="SelectData('{{$bb->kode_bahan_baku}}')" class="btn btn-xs btn-info" id="select">

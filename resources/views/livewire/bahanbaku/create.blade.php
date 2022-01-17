@@ -51,17 +51,18 @@
                             </div>
                         </div>
                         <div class="mb-3 row">
-                            <label class="col-md-2 col-form-label">Satuan</label>
-                            <div class="col-md-10">
-                                <input type="text" name="satuan" wire:model="satuan" class="form-control">
-                                @error('satuan') <span class="error">{{ $message }}</span> @enderror
-                            </div>
-                        </div>
-                        <div class="mb-3 row">
-                            <label class="col-md-2 col-form-label">Isi</label>
+                            <label class="col-md-2 col-form-label">Isi Satuan</label>
                             <div class="col-md-5">
                                 <input type="text" name="satuan_produk" wire:model="satuan_produk" class="form-control">
                                 @error('satuan_produk') <span class="error">{{ $message }}</span> @enderror
+                            </div>
+                        </div>
+                      
+                        <div class="mb-3 row">
+                            <label class="col-md-2 col-form-label">Satuan</label>
+                            <div class="col-md-5">
+                                <input type="text" name="satuan" wire:model="satuan" class="form-control">
+                                @error('satuan') <span class="error">{{ $message }}</span> @enderror
                             </div>
                             <div class="col-md-5">
                                 <button type="submit" class="btn btn-success" type="button">Finish</button>

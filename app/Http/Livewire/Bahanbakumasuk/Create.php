@@ -14,15 +14,18 @@ class Create extends Component
     public $kode_bahan_baku;
     public $nama_bahan_baku;
     public $jumlah;
+    public $stok_masuk;
     public $harga;
-
+    public $satuan_produk;
     public $satuan;
 
     protected $rules = [
         'bahan_baku_kode' => 'required',
         'nama_bahan_baku' => 'required',
         'jumlah' => 'required',
+        'satuan_produk' => 'required',
         'satuan' => 'required',
+        'stok_masuk' => 'required',
         'harga' => 'required',
 
     ];
@@ -30,7 +33,9 @@ class Create extends Component
         'bahan_baku_kode.required' => 'Barcode tidak boleh kosong.',
         'nama_bahan_baku.required' => 'Nama Bahan Baku tidak boleh kosong.',
         'jumlah.required' => 'Jumlah tidak boleh kosong.',
+        'satuan_produk.required' => 'Isi Satuan tidak boleh kosong.',
         'satuan.required' => 'Satuan tidak boleh kosong.',
+        'stok_masuk.required' => 'Stok Masuk tidak boleh kosong.',
         'harga.required' => 'Harga tidak boleh kosong.',
 
 
@@ -56,7 +61,7 @@ class Create extends Component
         BahanBakuMasuk::create($validasi, [
 
             'bahan_baku_kode' => $this->bahan_baku_kode,
-            'jumlah' => $this->jumlah,
+            'stok_masuk' => $this->stok_masuk,
             'harga' => $this->harga,
         ]);
         session()->flash('pesan', 'Data berhasil ditambah');

@@ -54,9 +54,9 @@
                                     <th class="align-middle">No</th>
                                     <th class="align-middle">Barcode</th>
                                     <th class="align-middle">Nama</th>
-                                    <th class="align-middle">Persedian</th>
-                                    <th class="align-middle">Satuan</th>
+                                    <th class="align-middle">Persediaan</th>
                                     <th class="align-middle">Isi Satuan</th>
+                                    <th class="align-middle">Satuan</th>
                                     <th class="align-middle">Actions</th>
 
                                 </tr>
@@ -71,8 +71,8 @@
                                     <td>{{ $bb->kode_bahan_baku}}</td>
                                     <td>{{ $bb->nama_bahan_baku}}</td>
                                     <td>{{ $bb->persediaan}}</td>
-                                    <td>{{ $bb->satuan}}</td>
                                     <td>{{ $bb->satuan_produk}}</td>
+                                    <td>{{ $bb->satuan}}</td>
                                     <td>
                                         <div class="d-flex gap-3 cursor">
                                             <a wire:click.prevent="DetailData('{{$bb->kode_bahan_baku}}')"
@@ -138,17 +138,17 @@
                             </div>
                         </div>
                         <div class="mb-3 row">
-                            <label class="col-md-2 col-form-label">Satuan</label>
+                            <label class="col-md-2 col-form-label">Isi Satuan</label>
                             <div class="col-md-10">
-                                <input type="text" name="satuan" wire:model="satuan" class="form-control">
-                                @error('satuan') <span class="error">{{ $message }}</span> @enderror
+                                <input type="text" name="satuan_produk" wire:model="satuan_produk" class="form-control">
+                                @error('satuan_produk') <span class="error">{{ $message }}</span> @enderror
                             </div>
                         </div>
                         <div class="mb-3 row">
-                            <label class="col-md-2 col-form-label">Isi</label>
+                            <label class="col-md-2 col-form-label">Satuan</label>
                             <div class="col-md-5">
-                                <input type="text" name="satuan_produk" wire:model="satuan_produk" class="form-control">
-                                @error('satuan_produk') <span class="error">{{ $message }}</span> @enderror
+                                <input type="text" name="satuan" wire:model="satuan" class="form-control">
+                                @error('satuan') <span class="error">{{ $message }}</span> @enderror
                             </div>
                             <div class="col-md-5">
                                 <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>

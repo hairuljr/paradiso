@@ -20,6 +20,7 @@ class Create extends Component
     public $kode_produk;
     public $nama_produk;
     public $jenis_produk_kode;
+    public $jenis_produk;
     public $harga_satuan;
 
     public function SelectData($kode_bahan_baku)
@@ -45,7 +46,12 @@ class Create extends Component
     {
 
 
-        $produk = DB::table('tb_produk')->get();
+        $produk  = DB::table('tb_produk')->join(
+            'tb_jenis_produk',
+            'tb_jenis_produk.kode_jenis_produk',
+            '=',
+            'tb_produk.jenis_produk_kode'
+        )->get();
         $bahanbaku = DB::table('tb_bahan_baku')->get();
         return view('livewire.cost.create', ['produk' => $produk], ['bahanbaku' => $bahanbaku])->extends('template.app');
     }

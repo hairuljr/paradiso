@@ -47,8 +47,8 @@ class Index extends Component
         $this->kode_bahan_baku = $bahanbaku->kode_bahan_baku;
         $this->nama_bahan_baku = $bahanbaku->nama_bahan_baku;
         $this->persediaan = $bahanbaku->persediaan;
-        $this->satuan = $bahanbaku->satuan;
         $this->satuan_produk = $bahanbaku->satuan_produk;
+        $this->satuan = $bahanbaku->satuan;
     }
 
     public function Update()
@@ -58,8 +58,9 @@ class Index extends Component
 
             'nama_bahan_baku' => $this->nama_bahan_baku,
             'persediaan' => $this->persediaan,
+            'satuan_produk' => $this->satuan_produk,
             'satuan' => $this->satuan,
-            'satuan_produk' => $this->satuan_produk
+
         ];
         BahanBaku::where('kode_bahan_baku', $this->kode_bahan_baku)->Update($bahanbaku);
 

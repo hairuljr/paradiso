@@ -17,6 +17,7 @@ class CreateTbBahanBakuTable extends Migration
             $table->string('kode_bahan_baku', 15)->primary();
             $table->string('nama_bahan_baku', 20);
             $table->integer('persediaan')->unsigned();
+            $table->integer('satuan_produk')->unsigned();
             $table->string('satuan', 15);
             $table->timestamps();
         });
