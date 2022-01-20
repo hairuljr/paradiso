@@ -165,7 +165,7 @@ return [
         /*
          * Package Service Providers...
          */
-
+        Wuwx\LaravelAutoNumber\AutoNumberServiceProvider::class,
         /*
          * Application Service Providers...
          */

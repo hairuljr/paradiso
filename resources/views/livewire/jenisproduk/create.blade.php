@@ -22,14 +22,14 @@
                 <div class="card-body">
 
                     <form method="POST" wire:submit.prevent="save">
-                        <div class="mb-3 row">
+                        {{-- <div class="mb-3 row">
                             <label class="col-md-2 col-form-label">Barcode</label>
                             <div class="col-md-5">
                                 <input type="text" name="kode_jenis_produk" wire:model="kode_jenis_produk"
                                     class="form-control">
                                 @error('kode_jenis_produk') <span class="error">{{ $message }}</span> @enderror
                             </div>
-                        </div>
+                        </div> --}}
 
                         <div class="mb-3 row">
                             <label class="col-md-2 col-form-label">Jenis Produk</label>

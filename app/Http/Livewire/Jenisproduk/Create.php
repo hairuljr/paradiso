@@ -8,12 +8,12 @@ use App\Models\JenisProduk;
 class Create extends Component
 {
 
-    public $kode_jenis_produk;
+    // public $kode_jenis_produk;
     public $jenis_produk;
 
 
     protected $rules = [
-        'kode_jenis_produk' => 'required',
+        // 'kode_jenis_produk' => 'required',
         'jenis_produk' => 'required',
 
     ];
@@ -31,7 +31,7 @@ class Create extends Component
 
         JenisProduk::create($validasi, [
 
-            'kode_jenis_produk' => $this->kode_jenis_produk,
+            // 'kode_jenis_produk' => $this->kode_jenis_produk,
             'jenis_produk' => $this->jenis_produk,
 
 
