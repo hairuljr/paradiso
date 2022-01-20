@@ -18,7 +18,7 @@
                             <div class="col-sm-6">
                                 <label>Barcode </label>
                                 <div class="input-group mb-3">
-                                    <input type="text" class="form-control" wire:model="produk_kode" readonly>
+                                    <input id="produk_kode" type="text" class="form-control" wire:model="produk_kode" readonly>
                                     <div class="input-group-append">
                                         <button type="button" class="btn btn-primary waves-effect waves-light"
                                             data-bs-toggle="modal" data-bs-target=".ProdukModal">Cari</button>
@@ -29,7 +29,7 @@
                                 <div class="mb-3">
                                     <label>Nama Produk </label>
                                     <div class="input-group mb-3">
-                                        <input type="text" class="form-control" wire:model="nama_produk" readonly>
+                                        <input id="nama_produk" type="text" class="form-control" wire:model="nama_produk" readonly>
                                     </div>
                                 </div>
                               
@@ -51,7 +51,7 @@
                         <div class="mb-3 row">
                             <label class="col-sm-3 col-form-label">Barcode</label>
                             <div class="col-md-5">
-                                <input type="text" wire:model="bahan_baku_kode" 
+                                <input id="bahan_baku_kode" type="text" wire:model="bahan_baku_kode" 
                                     class="form-control" readonly>
                             </div>
                             <div class="col-md-2">
@@ -64,19 +64,19 @@
                         <div class="row mb-3">
                             <label class="col-sm-3 col-form-label">Nama</label>
                             <div class="col-sm-9">
-                                <input type="text" class="form-control" wire:model="nama_bahan_baku" readonly>
+                                <input id="nama_bahan_baku" type="text" class="form-control" wire:model="nama_bahan_baku" readonly>
                             </div>
                         </div>
                         <div class="row mb-3">
                             <label  class="col-sm-3 col-form-label" title="harga didapat dari harga beli bahan baku">Harga </label>
                             <div class="col-sm-9">
-                                <input type="text" class="form-control" autofocus>
+                                <input id="harga" type="number" class="form-control" autofocus>
                             </div>
                         </div>
                         <div class="row mb-3">
                             <label  class="col-sm-3 col-form-label" title="isi satuan merupakan jumlah isi bahan baku yang dibeli, bisa berbentuk pcs, ml, grm" >Isi Satuan</label>
                             <div class="col-md-5">
-                                <input type="text" class="form-control" wire:model="satuan_produk" readonly>
+                                <input id="isi_satuan" type="text" class="form-control" wire:model="satuan_produk" readonly>
                             </div>
                             <div class="col-md-2">
                                 <div class="col-md-15">
@@ -97,13 +97,13 @@
                         <div class="row mb-3">
                             <label class="col-sm-3 col-form-label" title="jumlah atau takaran bahan baku yang digunakan untuk membuat satu produk">Digunakan</label>
                             <div class="col-sm-9">
-                                <input type="text" class="form-control" id="horizontal-firstname-input">
+                                <input min="1" type="number" class="form-control" id="digunakan">
                             </div>
                         </div>
                         <div class="row mb-3">
                             <label class="col-sm-3 col-form-label" title="hasilnya didapat dari (harga beli bahan baku dibagi isi satuan) dikali jumlah atau takaran yang digunakan">Cost</label>
                             <div class="col-sm-9">
-                                <input type="email" class="form-control"  readonly>
+                                <input id="cost" type="email" class="form-control"  readonly>
                             </div>
                         </div>
                         <div class="row mb-4">   
@@ -113,7 +113,7 @@
                                 <div class="form-check mb-4">
                                 </div>
                                 <div>
-                                    <button type="submit" class="btn btn-success w-md">Hitung</button>
+                                    <button type="submit" class="btn btn-success w-md btnHitung">Hitung</button>
                                 </div>
                             </div>
                         </div>
@@ -140,9 +140,9 @@
                                 <tr>
                                     <th class="align-middle">No</th>
                                     <th class="align-middle">Barcode Produk</th>
-                                    <th class="align-middle">Nama</th>
+                                    <th class="align-middle">Nama Produk</th>
                                     <th class="align-middle">Barcode BB</th>
-                                    <th class="align-middle">Nama</th>
+                                    <th class="align-middle">Nama Bahan Baku</th>
                                     <th class="align-middle">Cost</th>
 
                                 </tr>
@@ -150,18 +150,26 @@
 
 
                             <tbody>
-                                @php $no = 1; @endphp
-                                {{-- @foreach ($cost as $cs) --}}
-                                <tr>
-                                    {{-- <td>{{ $no++ }}</td>
-                                    <td>{{ $cs->kode_produk}}</td>
-                                    <td>{{ $cs->nama_produk}}</td>
-                                    <td>{{ $cs->kode_bahan_baku}}</td>
-                                    <td>{{ $cs->nama_bahan_baku}}</td>
-                                    <td>{{ $cs->harga}}</td> --}}
-
-                                </tr>
-                                {{-- @endforeach --}}
+                                @php
+                                    $total_cgs = 0;
+                                @endphp
+                                @forelse ($temporaries as $temp)
+                                    <tr>
+                                        <td>{{ $loop->iteration ?? '-' }}</td>
+                                        <td>{{ $temp->produk_kode ?? '-' }}</td>
+                                        <td>{{ $temp->nama_produk ?? '-' }}</td>
+                                        <td>{{ $temp->bahan_baku_kode ?? '-' }}</td>
+                                        <td>{{ $temp->nama_bahan_baku ?? '-' }}</td>
+                                        <td>{{ rupiah($temp->cost) ?? '-' }}</td>
+                                    </tr>
+                                    @php
+                                        $total_cgs += $temp->cost;
+                                    @endphp
+                                @empty
+                                    <tr class="text-center">
+                                        <td colspan="6">Tidak ada data.</td>
+                                    </tr>
+                                @endforelse
                             </tbody>
                         </table>
                     </div>
@@ -183,19 +191,19 @@
                         <div class="row mb-3">
                             <label class="col-sm-3 col-form-label" title="total cgs meruapakan jumlah dari perhitungan sebelumnya yg akan dijumlah kedalam tabel" >Total Cgs</label>
                             <div class="col-sm-9">
-                                <input type="text" class="form-control" readonly>
+                                <input id="total_cgs" type="text" class="form-control" value="{{ $total_cgs }}" readonly>
                             </div>
                         </div>
                         <div class="row mb-3">
                             <label class="col-sm-3 col-form-label" title="harga jual kita tentukan kemudian harga jual akan mengurangi total cgs">Harga Jual</label>
                             <div class="col-sm-9">
-                                <input type="text" class="form-control" >
+                                <input id="hrg_jual" type="text" class="form-control" >
                             </div>
                         </div>
                         <div class="row mb-3">
                             <label class="col-sm-3 col-form-label" title="profit ddiapat dari harga jual dikurang total cgs">Profit</label>
                             <div class="col-sm-9">
-                                <input type="text" class="form-control" readonly>
+                                <input id="profit" type="text" class="form-control" readonly>
                             </div>
                         </div>
                        

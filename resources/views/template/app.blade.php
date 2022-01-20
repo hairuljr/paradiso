@@ -308,6 +308,58 @@
         })
     })
 </script>
+
+<script>
+    $(document).ready(function() {
+        const CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+        $('.btnHitung').on('click', function(e){
+            e.preventDefault()
+            let produk_kode = $('#produk_kode').val()
+            let nama_produk = $('#nama_produk').val()
+            let bahan_baku_kode = $('#bahan_baku_kode').val()
+            let nama_bahan_baku = $('#nama_bahan_baku').val()
+            let harga = $('#harga').val()
+            let isi_satuan = $('#isi_satuan').val()
+            let digunakan = $('#digunakan').val()
+            let cost = (harga/isi_satuan)*digunakan
+            $('#cost').val(cost)
+
+            // Lakukan AJAX ke tbl TEMP
+            axios.post("{{ route('storeTemp') }}", {
+                _token: CSRF_TOKEN,
+                produk_kode: produk_kode,
+                nama_produk: nama_produk,
+                bahan_baku_kode: bahan_baku_kode,
+                nama_bahan_baku: nama_bahan_baku,
+                cost: cost
+            })
+            .then((response) => {
+                if (response.status == 200) {
+                    Swal.fire({
+                        toast: true,
+                        position: 'center',
+                        icon: 'success',
+                        title: response.data.pesan,
+                        showConfirmButton: false,
+                        timer: 3000
+                    })
+                    setTimeout(() => {
+                        window.location.reload()
+                    }, 2500);
+                }
+            }, (error) => {
+                console.log(error);
+            });
+        })
+
+        // Total CGS
+        $("#hrg_jual").keyup(function() {
+            let total_cgs = $('#total_cgs').val()
+            let hrg_jual = $('#hrg_jual').val()
+            $("#profit").val(hrg_jual-total_cgs);
+        });
+    })
+</script>
 </body>
 
 </html>

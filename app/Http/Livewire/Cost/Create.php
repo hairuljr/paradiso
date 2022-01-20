@@ -5,6 +5,7 @@ namespace App\Http\Livewire\Cost;
 use App\Models\Produk;
 use Livewire\Component;
 use App\Models\BahanBaku;
+use App\Models\Temporary;
 use Illuminate\Support\Facades\DB;
 
 class Create extends Component
@@ -53,6 +54,15 @@ class Create extends Component
             'tb_produk.jenis_produk_kode'
         )->get();
         $bahanbaku = DB::table('tb_bahan_baku')->get();
-        return view('livewire.cost.create', ['produk' => $produk], ['bahanbaku' => $bahanbaku])->extends('template.app');
+        $temporaries = Temporary::all();
+        return view(
+            'livewire.cost.create',
+            [
+                'produk' => $produk,
+                'bahanbaku' => $bahanbaku,
+                'temporaries' => $temporaries
+            ]
+        )
+            ->extends('template.app');
     }
 }
