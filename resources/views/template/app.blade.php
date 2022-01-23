@@ -368,7 +368,7 @@
 
     </script>
 
-     {{-- <script>
+     <script>
     $(document).ready(function () {
     
         $("#jumlah").keyup(function () {
@@ -378,7 +378,7 @@
         });
     })
 
-</script> --}}
+</script>
 
 </body>
 
