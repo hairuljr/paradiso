@@ -68,7 +68,8 @@
                         <div class="row mb-3">
                             <label  class="col-sm-2 col-form-label">Stok Masuk</label>
                             <div class="col-md-5">
-                                <input id="stok_masuk" wire:model="stok_masuk" type="text" class="form-control" readonly>
+                                <input type="hidden" id="stok_masuk" wire:model="stok_masuk">
+                                <input id="stok_masukan" type="text" class="form-control" readonly>
                                 @error('stok_masuk') <span class="error">{{ $message }}</span> @enderror
                             </div>
                             <div class="col-md-2">
@@ -150,17 +151,6 @@
                 </div> <!-- /.modal-content -->
             </div><!-- /.modal-dialog -->
         </div><!-- /.modal -->
-        {{-- <script>
-            document.addEventListener('livewire:load', function () {
-        
-                @js($this.jumlah).keyup(function () {
-                let satuan_produk = @js($this.satuan_produk)
-                let jumlah = @js($this.jumlah)
-                @js($this.stok_masuk).val(jumlah * satuan_produk);
-            });
-        })
-    
-         </script> --}}
 
         
     </div>

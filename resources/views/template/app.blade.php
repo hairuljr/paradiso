@@ -364,21 +364,19 @@
                 let hrg_jual = $('#hrg_jual').val()
                 $("#profit").val(hrg_jual - total_cgs);
             });
+        
+            $("#jumlah").keyup(function () {
+                let satuan_produk = $('#satuan_produk').val()
+                let jumlah = $('#jumlah').val()
+                $("#stok_masukan").val(jumlah * satuan_produk);
+                let stok = $("#stok_masukan").val()
+                $("#stok_masuk").val(stok);
+                
+                document.getElementById("stok_masuk").dispatchEvent(new Event('input'));
+            });
         })
 
     </script>
-
-     <script>
-    $(document).ready(function () {
-    
-        $("#jumlah").keyup(function () {
-            let satuan_produk = $('#satuan_produk').val()
-            let jumlah = $('#jumlah').val()
-            $("#stok_masuk").val(jumlah * satuan_produk);
-        });
-    })
-
-</script>
 
 </body>
 
