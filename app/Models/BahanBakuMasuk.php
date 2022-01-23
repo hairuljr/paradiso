@@ -10,5 +10,5 @@ class BahanBakuMasuk extends Model
     use HasFactory;
     protected $table = 'tb_bahan_baku_masuk';
     protected $primaryKey = 'id';
-    protected $fillable = ['bahan_baku_kode', 'jumlah', 'harga'];
+    protected $fillable = ['bahan_baku_kode', 'stok_masuk', 'harga'];
 }

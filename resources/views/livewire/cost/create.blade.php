@@ -103,7 +103,7 @@
                         <div class="row mb-3">
                             <label class="col-sm-3 col-form-label" title="hasilnya didapat dari (harga beli bahan baku dibagi isi satuan) dikali jumlah atau takaran yang digunakan">Cost</label>
                             <div class="col-sm-9">
-                                <input id="cost" type="email" class="form-control"  readonly>
+                                <input id="cost" type="text" class="form-control"  readonly>
                             </div>
                         </div>
                         <div class="row mb-4">   
@@ -203,7 +203,7 @@
                         <div class="row mb-3">
                             <label class="col-sm-3 col-form-label" title="profit ddiapat dari harga jual dikurang total cgs">Profit</label>
                             <div class="col-sm-9">
-                                <input id="profit" type="text" class="form-control" readonly>
+                                <input id="profit" wire:model="profit" type="text" class="form-control" readonly>
                             </div>
                         </div>
                        
@@ -230,7 +230,7 @@
         <div class="modal-dialog modal-xl">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="myExtraLargeModalLabel">Extra large modal</h5>
+                    <h5 class="modal-title" id="myExtraLargeModalLabel">Data Bahan Baku</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="card-body">
@@ -262,6 +262,8 @@
                                     <td>{{ $bb->persediaan}}</td>
                                     <td>{{ $bb->satuan_produk}}</td>
                                     <td>{{ $bb->satuan}}</td>
+                         
+                                    
                                     <td>
                                         <button wire:click.prevent="SelectData('{{$bb->kode_bahan_baku}}')"
                                             class="btn btn-xs btn-info" id="select">
@@ -285,7 +287,7 @@
         <div class="modal-dialog modal-xl">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="myExtraLargeModalLabel">Extra large modal</h5>
+                    <h5 class="modal-title" id="myExtraLargeModalLabel">Data Produk</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="card-body">

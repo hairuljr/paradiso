@@ -29,6 +29,7 @@ class Create extends Component
         'harga' => 'required',
 
     ];
+
     protected $messages = [
         'bahan_baku_kode.required' => 'Barcode tidak boleh kosong.',
         'nama_bahan_baku.required' => 'Nama Bahan Baku tidak boleh kosong.',
@@ -44,6 +45,7 @@ class Create extends Component
 
     public function SelectData($kode_bahan_baku)
     {
+
         $bahanbaku = BahanBaku::where('kode_bahan_baku', $kode_bahan_baku)->first();
         $this->bahan_baku_kode = $bahanbaku->kode_bahan_baku;
         $this->nama_bahan_baku = $bahanbaku->nama_bahan_baku;
@@ -72,8 +74,8 @@ class Create extends Component
     public function render()
     {
 
-
+        $bahanbakumasuk = DB::table('tb_bahan_baku_masuk')->get();
         $bahanbaku = DB::table('tb_bahan_baku')->get();
-        return view('livewire.bahanbakumasuk.create', ['bahanbaku' => $bahanbaku])->extends('template.app');
+        return view('livewire.bahanbakumasuk.create', ['bahanbaku' => $bahanbaku], ['bahanbakumasuk' => $bahanbakumasuk])->extends('template.app');
     }
 }

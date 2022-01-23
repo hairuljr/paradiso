@@ -53,8 +53,10 @@ class Create extends Component
             '=',
             'tb_produk.jenis_produk_kode'
         )->get();
+
         $bahanbaku = DB::table('tb_bahan_baku')->get();
         $temporaries = Temporary::all();
+
         return view(
             'livewire.cost.create',
             [

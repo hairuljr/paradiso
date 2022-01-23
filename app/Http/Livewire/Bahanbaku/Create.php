@@ -7,7 +7,7 @@ use App\Models\BahanBaku;
 
 class Create extends Component
 {
-    public $kode_bahan_baku;
+    // public $kode_bahan_baku;
     public $nama_bahan_baku;
     public $persediaan;
     public $satuan;
@@ -15,7 +15,7 @@ class Create extends Component
 
 
     protected $rules = [
-        'kode_bahan_baku' => 'required',
+        // 'kode_bahan_baku' => 'required',
         'nama_bahan_baku' => 'required',
         'persediaan' => 'required',
         'satuan' => 'required',
@@ -36,7 +36,7 @@ class Create extends Component
         $validasi = $this->validate();
 
         BahanBaku::create($validasi, [
-            'kode_bahan_baku' => $this->kode_bahan_baku,
+            // 'kode_bahan_baku' => $this->kode_bahan_baku,
             'nama_bahan_baku' => $this->nama_bahan_baku,
             'persediaan' => $this->persediaan,
             'satuan_produk' => $this->satuan_produk,

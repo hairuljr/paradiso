@@ -23,14 +23,14 @@
 
                     <form wire:submit.prevent="save">
                         @csrf
-                        <div class="mb-3 row">
+                        {{-- <div class="mb-3 row">
                             <label class="col-md-2 col-form-label">Barcode</label>
                             <div class="col-md-5">
                                 <input type="text" name="kode_produk" wire:model="kode_produk"
                                     class="form-control">
                                 @error('kode_produk') <span class="error">{{ $message }}</span> @enderror
                             </div>
-                        </div>
+                        </div> --}}
 
                         <div class="mb-3 row">
                             <label class="col-md-2 col-form-label">Nama</label>

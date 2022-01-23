@@ -48,14 +48,14 @@
                         <div class="mb-3 row">
                             <label class="col-md-2 col-form-label">Jumlah</label>
                             <div class="col-md-10">
-                                <input type="text" name="jumlah" wire:model="jumlah" class="form-control">
+                                <input type="text" wire:model="jumlah" id="jumlah" name="jumlah" class="form-control" >
                                 @error('jumlah') <span class="error">{{ $message }}</span> @enderror
                             </div>
                         </div>
                         <div class="row mb-3">
                             <label  class="col-sm-2 col-form-label" >Isi Satuan</label>
                             <div class="col-md-5">
-                                <input type="text" class="form-control" name="satuan_produk" wire:model="satuan_produk" readonly>
+                                <input type="text" class="form-control" id="satuan_produk" name="satuan_produk" wire:model="satuan_produk" readonly>
                                 @error('satuan_produk') <span class="error">{{ $message }}</span> @enderror
                             </div>
                             <div class="col-md-2">
@@ -68,7 +68,7 @@
                         <div class="row mb-3">
                             <label  class="col-sm-2 col-form-label">Stok Masuk</label>
                             <div class="col-md-5">
-                                <input type="text" class="form-control" name="stok_masuk" wire:model="stok_masuk" readonly>
+                                <input id="stok_masuk" wire:model="stok_masuk" type="text" class="form-control" readonly>
                                 @error('stok_masuk') <span class="error">{{ $message }}</span> @enderror
                             </div>
                             <div class="col-md-2">
@@ -97,7 +97,6 @@
             </div>
         </div> <!-- end col -->
     </div>
-
 
     {{-- modal --}}
     <div wire:ignore.self class="modal fade BahanBakuMasukModal" id="modal-item" tabindex="-1" role="dialog"
@@ -151,4 +150,17 @@
                 </div> <!-- /.modal-content -->
             </div><!-- /.modal-dialog -->
         </div><!-- /.modal -->
+        {{-- <script>
+            document.addEventListener('livewire:load', function () {
+        
+                @js($this.jumlah).keyup(function () {
+                let satuan_produk = @js($this.satuan_produk)
+                let jumlah = @js($this.jumlah)
+                @js($this.stok_masuk).val(jumlah * satuan_produk);
+            });
+        })
+    
+         </script> --}}
+
+        
     </div>

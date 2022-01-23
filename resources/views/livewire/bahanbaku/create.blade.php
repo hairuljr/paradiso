@@ -26,14 +26,14 @@
                 <div class="card-body">
 
                     <form method="POST" wire:submit.prevent="save">
-                        <div class="mb-3 row">
+                        {{-- <div class="mb-3 row">
                             <label class="col-md-2 col-form-label">Barcode</label>
                             <div class="col-md-5">
                                 <input type="text" name="kode_bahan_baku" wire:model="kode_bahan_baku"
                                     class="form-control">
                                 @error('kode_bahan_baku') <span class="error">{{ $message }}</span> @enderror
                             </div>
-                        </div>
+                        </div> --}}
 
                         <div class="mb-3 row">
                             <label class="col-md-2 col-form-label">Nama</label>
@@ -46,7 +46,7 @@
                         <div class="mb-3 row">
                             <label class="col-md-2 col-form-label">Persediaan</label>
                             <div class="col-md-10">
-                                <input type="text" name="persediaan" wire:model="persediaan" class="form-control">
+                                <input  type="text"  name="persediaan" wire:model="persediaan" class="form-control">
                                 @error('persediaan') <span class="error">{{ $message }}</span> @enderror
                             </div>
                         </div>
@@ -61,7 +61,14 @@
                         <div class="mb-3 row">
                             <label class="col-md-2 col-form-label">Satuan</label>
                             <div class="col-md-5">
-                                <input type="text" name="satuan" wire:model="satuan" class="form-control">
+                                <select wire:model="satuan" class="form-select" aria-label="Default select example">
+                                    <option value=""disabled="disabled">Pilih</option>
+
+                                    <option value="1">Pcs</option>
+                                    <option value="2">Mili</option>
+                                    <option value="3">Gram</option>
+                                    
+                                </select>
                                 @error('satuan') <span class="error">{{ $message }}</span> @enderror
                             </div>
                             <div class="col-md-5">

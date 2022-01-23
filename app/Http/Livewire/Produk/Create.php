@@ -11,7 +11,7 @@ class Create extends Component
 {
 
     public $produk;
-    public $kode_produk;
+    // public $kode_produk;
     public $nama_produk;
     public $jenis_produk_kode;
     public $harga_satuan;
@@ -20,7 +20,7 @@ class Create extends Component
     public $kode_jenis_produk;
 
     protected $rules = [
-        'kode_produk' => 'required',
+        // 'kode_produk' => 'required',
         'nama_produk' => 'required',
         'jenis_produk_kode' => 'required',
         'harga_satuan' => 'required',
@@ -47,7 +47,7 @@ class Create extends Component
 
         Produk::create($validasi, [
 
-            'kode_produk' => $this->kode_produk,
+            // 'kode_produk' => $this->kode_produk,
             'nama_produk' => $this->nama_produk,
             'jenis_produk_kode' => $this->jenis_produk_kode,
             'harga_satuan' => $this->harga_satuan,

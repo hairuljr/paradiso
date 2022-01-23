@@ -8,7 +8,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Document</title>
 
-  
+
 
     <link rel="shortcut icon" href="{{ asset('assets/skote/images/favicon.ico') }}">
     <link href="{{ asset('assets/skote/css/bootstrap.min.css') }}" id="bootstrap-style" rel="stylesheet"
@@ -22,6 +22,7 @@
         .cursor a {
             cursor: pointer;
         }
+
     </style>
     @livewireStyles
 
@@ -128,17 +129,14 @@
                                 <span key="t-ecommerce">Data Master</span>
                             </a>
                             <ul class="sub-menu" aria-expanded="false">
-                                <li><a href="/bahanbaku" key="t-products">Bahan Baku</a></li>
-                                <li><a href="/produk" key="t-product-detail">Produk</a></li>
                                 <li><a href="/jenisproduk" key="t-orders">Jenis Produk</a></li>
+                                <li><a href="/produk" key="t-product-detail">Produk</a></li>
+                                <li><a href="/bahanbaku" key="t-products">Bahan Baku</a></li>
+
+
                             </ul>
                         </li>
-                        <li>
-                            <a href="/cost" class="waves-effect">
-                                <i class="bx bx-calendar"></i>
-                                <span key="t-calendar">Cost Of Good Sold</span>
-                            </a>
-                          </li>
+
                         <li>
                             <a href="#" class="has-arrow waves-effect">
                                 <i class="bx bx-store"></i>
@@ -146,7 +144,8 @@
                             </a>
                             <ul class="sub-menu" aria-expanded="false">
                                 <li><a href="/bahanbakumasuk" key="t-products">Bahan Baku Masuk</a></li>
-                                <li><a href="ecommerce-product-detail.html" key="t-product-detail">Bahan Baku Keluar</a></li>
+                                <li><a href="ecommerce-product-detail.html" key="t-product-detail">Bahan Baku Keluar</a>
+                                </li>
                                 <li><a href="ecommerce-orders.html" key="t-orders">Data Penjualan</a></li>
                                 {{-- <li><a href="ecommerce-customers.html" key="t-customers">Customers</a></li>
                                 <li><a href="ecommerce-cart.html" key="t-cart">Cart</a></li>
@@ -155,7 +154,12 @@
                                 <li><a href="ecommerce-add-product.html" key="t-add-product">Add Product</a></li> --}}
                             </ul>
                         </li>
-
+                        <li>
+                            <a href="/cost" class="waves-effect">
+                                <i class="bx bx-calendar"></i>
+                                <span key="t-calendar">Cost Of Good Sold</span>
+                            </a>
+                        </li>
                     </ul>
                 </div>
                 <!-- Sidebar -->
@@ -223,7 +227,7 @@
         </div> <!-- end slimscroll-menu-->
     </div>
     @livewireScripts
-   
+
     <script src="{{ asset('assets/skote/libs/jquery/jquery.min.js') }}"></script>
     <script src="{{ asset('assets/skote/libs/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
     <script src="{{ asset('assets/skote/libs/metismenu/metisMenu.min.js') }}"></script>
@@ -291,75 +295,91 @@
 
     </script>
 
-<script>
-    $(document).ready(function() {
-        $(document).on('click', '#select', function() {
-          
-            $('#modal-item').modal('hide');
-        })
-    })
-</script>
+    <script>
+        $(document).ready(function () {
+            $(document).on('click', '#select', function () {
 
-<script>
-    $(document).ready(function() {
-        $(document).on('click', '#select1', function() {
-          
-            $('#modal-item1').modal('hide');
-        })
-    })
-</script>
-
-<script>
-    $(document).ready(function() {
-        const CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
-        $('.btnHitung').on('click', function(e){
-            e.preventDefault()
-            let produk_kode = $('#produk_kode').val()
-            let nama_produk = $('#nama_produk').val()
-            let bahan_baku_kode = $('#bahan_baku_kode').val()
-            let nama_bahan_baku = $('#nama_bahan_baku').val()
-            let harga = $('#harga').val()
-            let isi_satuan = $('#isi_satuan').val()
-            let digunakan = $('#digunakan').val()
-            let cost = (harga/isi_satuan)*digunakan
-            $('#cost').val(cost)
-
-            // Lakukan AJAX ke tbl TEMP
-            axios.post("{{ route('storeTemp') }}", {
-                _token: CSRF_TOKEN,
-                produk_kode: produk_kode,
-                nama_produk: nama_produk,
-                bahan_baku_kode: bahan_baku_kode,
-                nama_bahan_baku: nama_bahan_baku,
-                cost: cost
+                $('#modal-item').modal('hide');
             })
-            .then((response) => {
-                if (response.status == 200) {
-                    Swal.fire({
-                        toast: true,
-                        position: 'center',
-                        icon: 'success',
-                        title: response.data.pesan,
-                        showConfirmButton: false,
-                        timer: 3000
+        })
+
+    </script>
+
+    <script>
+        $(document).ready(function () {
+            $(document).on('click', '#select1', function () {
+
+                $('#modal-item1').modal('hide');
+            })
+        })
+
+    </script>
+
+    <script>
+        $(document).ready(function () {
+            const CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+            $('.btnHitung').on('click', function (e) {
+                e.preventDefault()
+                let produk_kode = $('#produk_kode').val()
+                let nama_produk = $('#nama_produk').val()
+                let bahan_baku_kode = $('#bahan_baku_kode').val()
+                let nama_bahan_baku = $('#nama_bahan_baku').val()
+                let harga = $('#harga').val()
+                let isi_satuan = $('#isi_satuan').val()
+                let digunakan = $('#digunakan').val()
+                let cost = (harga / isi_satuan) * digunakan
+                $('#cost').val(cost)
+
+                // Lakukan AJAX ke tbl TEMP
+                axios.post("{{ route('storeTemp') }}", {
+                        _token: CSRF_TOKEN,
+                        produk_kode: produk_kode,
+                        nama_produk: nama_produk,
+                        bahan_baku_kode: bahan_baku_kode,
+                        nama_bahan_baku: nama_bahan_baku,
+                        cost: cost
                     })
-                    setTimeout(() => {
-                        window.location.reload()
-                    }, 2500);
-                }
-            }, (error) => {
-                console.log(error);
+                    .then((response) => {
+                        if (response.status == 200) {
+                            Swal.fire({
+                                toast: true,
+                                position: 'center',
+                                icon: 'success',
+                                title: response.data.pesan,
+                                showConfirmButton: false,
+                                timer: 3000
+                            })
+                            setTimeout(() => {
+                                window.location.reload()
+                            }, 2500);
+                        }
+                    }, (error) => {
+                        console.log(error);
+                    });
+            })
+
+            // Total CGS
+            $("#hrg_jual").keyup(function () {
+                let total_cgs = $('#total_cgs').val()
+                let hrg_jual = $('#hrg_jual').val()
+                $("#profit").val(hrg_jual - total_cgs);
             });
         })
 
-        // Total CGS
-        $("#hrg_jual").keyup(function() {
-            let total_cgs = $('#total_cgs').val()
-            let hrg_jual = $('#hrg_jual').val()
-            $("#profit").val(hrg_jual-total_cgs);
+    </script>
+
+     {{-- <script>
+    $(document).ready(function () {
+    
+        $("#jumlah").keyup(function () {
+            let satuan_produk = $('#satuan_produk').val()
+            let jumlah = $('#jumlah').val()
+            $("#stok_masuk").val(jumlah * satuan_produk);
         });
     })
-</script>
+
+</script> --}}
+
 </body>
 
 </html>
