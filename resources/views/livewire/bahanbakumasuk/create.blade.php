@@ -154,3 +154,20 @@
 
         
     </div>
+
+    <script type="text/javascript">
+    
+    $(document).ready(function () {
+     //Hitung pembelian Bahan Baku
+     $("#jumlah").keyup(function () {
+            let satuan_produk = $('#satuan_produk').val()
+            let jumlah = $('#jumlah').val()
+            $("#stok_masukan").val(jumlah * satuan_produk);
+            let stok = $("#stok_masukan").val()
+            $("#stok_masuk").val(stok);
+            
+            document.getElementById("stok_masuk").dispatchEvent(new Event('input'));
+        }); 
+
+    });
+    </script>

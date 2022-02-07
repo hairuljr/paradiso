@@ -29,5 +29,6 @@ Route::get('/cost', \App\Http\Livewire\Cost\Index::class)->middleware('auth')->n
 Route::get('/cost/create', \App\Http\Livewire\Cost\Create::class)->middleware('auth')->name('cost.create');
 
 
+
 // AJAX
-Route::post('temp', [\App\Http\Controllers\AJAXController::class, 'storeTemp'])->name('storeTemp');
+// Route::post('temp', [\App\Http\Controllers\AJAXController::class, 'storeTemp'])->name('storeTemp');

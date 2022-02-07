@@ -1,13 +1,12 @@
 <div>
-
     <div class="row">
         <div class="col-12">
             <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-                <h4 class="mb-sm-0 font-size-18">Data Bahan Baku</h4>
+                <h4 class="mb-sm-0 font-size-18">Cost Of Good Sold</h4>
                 <div class="page-title-right">
                     <ol class="breadcrumb m-0">
-                        <a href="{{route('bahanbaku.create')}}" type="button" class="btn btn-success "><i
-                                class="mdi mdi-plus me-1"></i> Add Data </a>
+                        <a href="{{route('cost.create')}}" type="button" class="btn btn-success "><i
+                                class="mdi mdi-plus me-1"></i> Hitung </a>
                     </ol>
                 </div>
             </div>
@@ -52,43 +51,45 @@
                             <thead class="table-light">
                                 <tr>
                                     <th class="align-middle">No</th>
-                                    <th class="align-middle">Barcode</th>
+                                    <th class="align-middle">Barcode Produk</th>
                                     <th class="align-middle">Nama</th>
-                                    <th class="align-middle">Persediaan</th>
-                                    <th class="align-middle">Isi Satuan</th>
-                                    <th class="align-middle">Satuan</th>
-                                    <th class="align-middle">Harga</th>
-                                    <th class="align-middle">Actions</th>
-
+                                    <th class="align-middle">Total Cgs</th>
+                                    <th class="align-middle">Harga Jual</th>
+                                    <th class="align-middle">Profit</th>
+                                    <th class="align-middle">Action</th>
                                 </tr>
                             </thead>
 
 
                             <tbody>
                                 @php $no = 1; @endphp
-                                @foreach ($bahanbaku as $bb)
+                                @foreach ($cost as $cs)
                                 <tr>
                                     <td>{{ $no++ }}</td>
-                                    <td>{{ $bb->kode_bahan_baku}}</td>
-                                    <td>{{ $bb->nama_bahan_baku}}</td>
-                                    <td>{{ $bb->persediaan}}</td>
-                                    <td>{{ $bb->satuan_produk}}</td>
-                                    <td>{{ $bb->satuan}}</td>
-                                    <td>{{ $bb->harga}}</td>
+                                    <td>{{ $cs->kode_produk}}</td>
+                                    <td>{{ $cs->nama_produk}}</td>
+                                    <td>{{ $cs->kode_bahan_baku}}</td>
+                                    <td>{{ $cs->nama_bahan_baku}}</td>
+                                    <td>{{ $cs->harga}}</td>
                                     <td>
                                         <div class="d-flex gap-3 cursor">
-                                            <a wire:click.prevent="DetailData('{{$bb->kode_bahan_baku}}')"
+                                            <a wire:click.prevent="DetailData('{{$cs->produk_kode}}')"
                                                 class="text-success" data-bs-toggle="modal"
                                                 data-bs-target="#updateModal"><i
                                                     class="mdi mdi-pencil font-size-18"></i>
                                             </a>
 
-
                                             <a button class="text-danger"
-                                                wire:click="DetailData('{{$bb->kode_bahan_baku}}')"
+                                                wire:click="DetailData('{{$cs->produk_kode}}')"
                                                 data-bs-toggle="modal" data-bs-target="#deleteModal"><i
-                                                    class="mdi mdi-delete font-size-18"></i></a>
+                                                    class="mdi mdi-delete font-size-18"></i>
+                                            </a>
 
+                                            <a button class="text-secondary"
+                                            wire:click="DetailData('{{$cs->produk_kode}}')"
+                                            data-bs-toggle="modal" data-bs-target="#detailModal"><i
+                                                class="mdi-eye-outline font-size-18"></i>
+                                             </a>
 
 
                                         </div>
@@ -118,9 +119,9 @@
                         <div class="mb-3 row">
                             <label class="col-md-2 col-form-label">Barcode</label>
                             <div class="col-md-5">
-                                <input type="text" name="kode_bahan_baku" wire:model="kode_bahan_baku"
-                                    class="form-control" >
-                                @error('kode_bahan_baku') <span class="error">{{ $message }}</span> @enderror
+                                <input type="text" wire:model="bahan_baku_kode" 
+                                    class="form-control" readonly>
+                                @error('bahan_baku_kode') <span class="error">{{ $message }}</span> @enderror
                             </div>
                         </div>
 
@@ -128,30 +129,37 @@
                             <label class="col-md-2 col-form-label">Nama</label>
                             <div class="col-md-10">
                                 <input type="text" name="nama_bahan_baku" wire:model="nama_bahan_baku"
-                                    class="form-control">
-                                @error('nama_bahan_baku') <span class="error">{{ $message }}</span> @enderror
+                                    class="form-control" readonly>
                             </div>
                         </div>
                         <div class="mb-3 row">
-                            <label class="col-md-2 col-form-label">Persediaan</label>
+                            <label class="col-md-2 col-form-label">Jumlah</label>
                             <div class="col-md-10">
-                                <input type="text" name="persediaan" wire:model="persediaan" class="form-control">
-                                @error('persediaan') <span class="error">{{ $message }}</span> @enderror
-                            </div>
-                        </div>
-                        <div class="mb-3 row">
-                            <label class="col-md-2 col-form-label">Isi Satuan</label>
-                            <div class="col-md-10">
-                                <input type="text" name="satuan_produk" wire:model="satuan_produk" class="form-control">
-                                @error('satuan_produk') <span class="error">{{ $message }}</span> @enderror
+                                <input type="text" name="jumlah" wire:model="jumlah" class="form-control">
+                                @error('jumlah') <span class="error">{{ $message }}</span> @enderror
                             </div>
                         </div>
                         <div class="mb-3 row">
                             <label class="col-md-2 col-form-label">Satuan</label>
-                            <div class="col-md-5">
-                                <input type="text" name="satuan" wire:model="satuan" class="form-control">
-                                @error('satuan') <span class="error">{{ $message }}</span> @enderror
+                            <div class="col-md-10">
+                                <input type="text" name="satuan" wire:model="satuan" class="form-control" 
+                                    readonly>
                             </div>
+                        </div>
+                        <div class="mb-3 row">
+                            <label class="col-md-2 col-form-label">Harga</label>
+                            <div class="col-md-10">
+                                <input type="text" name="harga" wire:model="harga" class="form-control">
+                                @error('harga') <span class="error">{{ $message }}</span> @enderror
+                            </div>
+                        </div>
+
+                        <div class="mb-3 row">
+                            {{-- <label class="col-md-2 col-form-label">Harga</label>
+                            <div class="col-md-5">
+                                <input type="text" name="satuan_produk" wire:model="satuan_produk" class="form-control">
+                                @error('satuan_produk') <span class="error">{{ $message }}</span> @enderror
+                            </div> --}}
                             <div class="col-md-5">
                                 <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
                                 <button type="submit" class="btn btn-success" wire:click.prevent="Update()"
@@ -184,5 +192,4 @@
             </div>
         </div>
     </div>
-
 </div>

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTbBahanBakuTable extends Migration
+class CreateTbSementaraTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,13 @@ class CreateTbBahanBakuTable extends Migration
      */
     public function up()
     {
-        Schema::create('tb_bahan_baku', function (Blueprint $table) {
-            $table->string('kode_bahan_baku', 15)->primary();
+        Schema::create('tb_sementara', function (Blueprint $table) {
+            $table->id();
+            $table->string('produk_kode', 20);
+            $table->string('nama_produk', 20);
+            $table->string('bahan_baku_kode', 15);
             $table->string('nama_bahan_baku', 20);
-            $table->integer('persediaan')->unsigned();
-            $table->integer('satuan_produk')->unsigned();
-            $table->string('satuan', 15);
+            $table->integer('cost');
             $table->timestamps();
         });
     }
@@ -30,6 +31,6 @@ class CreateTbBahanBakuTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tb_bahan_baku');
+        Schema::dropIfExists('tb_sementara');
     }
 }

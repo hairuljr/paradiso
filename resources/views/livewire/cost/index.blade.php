@@ -52,7 +52,7 @@
                                 <tr>
                                     <th class="align-middle">No</th>
                                     <th class="align-middle">Barcode Produk</th>
-                                    <th class="align-middle">Nama</th>
+                                    {{-- <th class="align-middle">Nama</th> --}}
                                     <th class="align-middle">Total Cgs</th>
                                     <th class="align-middle">Harga Jual</th>
                                     <th class="align-middle">Profit</th>
@@ -63,33 +63,33 @@
 
                             <tbody>
                                 @php $no = 1; @endphp
-                                @foreach ($cost as $cs)
+                                @foreach ($detailcost as $ds)
                                 <tr>
                                     <td>{{ $no++ }}</td>
-                                    <td>{{ $cs->kode_produk}}</td>
-                                    <td>{{ $cs->nama_produk}}</td>
-                                    {{-- <td>{{ $cs->kode_bahan_baku}}</td>
-                                    <td>{{ $cs->nama_bahan_baku}}</td>
-                                    <td>{{ $cs->harga}}</td> --}}
+                                    <td>{{ $ds->id_cost}}</td>
+                                    <td>{{ $ds->total_cgs}}</td>
+                                    <td>{{ $ds->harga_jual}}</td>
+                                    <td>{{ $ds->profit}}</td>
+                                 
                                     <td>
                                         <div class="d-flex gap-3 cursor">
-                                            <a wire:click.prevent="DetailData('{{$cs->produk_kode}}')"
+                                            <a wire:click.prevent="DetailData('{{$ds->id_cost}}')"
                                                 class="text-success" data-bs-toggle="modal"
                                                 data-bs-target="#updateModal"><i
                                                     class="mdi mdi-pencil font-size-18"></i>
                                             </a>
 
                                             <a button class="text-danger"
-                                                wire:click="DetailData('{{$cs->produk_kode}}')"
+                                                wire:click="DetailData('{{$ds->id_cost}}')"
                                                 data-bs-toggle="modal" data-bs-target="#deleteModal"><i
                                                     class="mdi mdi-delete font-size-18"></i>
                                             </a>
 
-                                            <a button class="text-secondary"
+                                            {{-- <a button class="text-secondary"
                                             wire:click="DetailData('{{$cs->produk_kode}}')"
                                             data-bs-toggle="modal" data-bs-target="#detailModal"><i
                                                 class="mdi-eye-outline font-size-18"></i>
-                                             </a>
+                                             </a> --}}
 
 
                                         </div>

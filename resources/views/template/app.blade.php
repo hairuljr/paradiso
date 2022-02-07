@@ -18,6 +18,7 @@
     <!-- App Css-->
     <link href="{{ asset('assets/skote/css/app.min.css') }}" id="app-style" rel="stylesheet" type="text/css" />
     <link href="{{ asset('assets/skote/libs/select2/css/select2.min.css') }}" rel="stylesheet" type="text/css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <style>
         .cursor a {
             cursor: pointer;
@@ -160,6 +161,12 @@
                                 <span key="t-calendar">Cost Of Good Sold</span>
                             </a>
                         </li>
+                        {{-- <li>
+                            <a href="/detailcost" class="waves-effect">
+                                <i class="bx bx-calendar"></i>
+                                <span key="t-calendar">Detail Cost</span>
+                            </a>
+                        </li> --}}
                     </ul>
                 </div>
                 <!-- Sidebar -->
@@ -238,6 +245,7 @@
     <script src="{{ asset('assets/skote/js/app.js') }}"></script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
     <script>
         $(document).ready(function () {
             $(".keluar").on("click", function (e) {
@@ -288,12 +296,14 @@
         });
 
     </script>
+    
     <script>
         window.livewire.on('deleteModal', () => {
             $('#deleteModal').modal('hide');
         });
 
     </script>
+   
 
     <script>
         $(document).ready(function () {
@@ -315,68 +325,10 @@
 
     </script>
 
-    <script>
-        $(document).ready(function () {
-            const CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
-            $('.btnHitung').on('click', function (e) {
-                e.preventDefault()
-                let produk_kode = $('#produk_kode').val()
-                let nama_produk = $('#nama_produk').val()
-                let bahan_baku_kode = $('#bahan_baku_kode').val()
-                let nama_bahan_baku = $('#nama_bahan_baku').val()
-                let harga = $('#harga').val()
-                let isi_satuan = $('#isi_satuan').val()
-                let digunakan = $('#digunakan').val()
-                let cost = (harga / isi_satuan) * digunakan
-                $('#cost').val(cost)
 
-                // Lakukan AJAX ke tbl TEMP
-                axios.post("{{ route('storeTemp') }}", {
-                        _token: CSRF_TOKEN,
-                        produk_kode: produk_kode,
-                        nama_produk: nama_produk,
-                        bahan_baku_kode: bahan_baku_kode,
-                        nama_bahan_baku: nama_bahan_baku,
-                        cost: cost
-                    })
-                    .then((response) => {
-                        if (response.status == 200) {
-                            Swal.fire({
-                                toast: true,
-                                position: 'center',
-                                icon: 'success',
-                                title: response.data.pesan,
-                                showConfirmButton: false,
-                                timer: 3000
-                            })
-                            setTimeout(() => {
-                                window.location.reload()
-                            }, 2500);
-                        }
-                    }, (error) => {
-                        console.log(error);
-                    });
-            })
 
-            // Total CGS
-            $("#hrg_jual").keyup(function () {
-                let total_cgs = $('#total_cgs').val()
-                let hrg_jual = $('#hrg_jual').val()
-                $("#profit").val(hrg_jual - total_cgs);
-            });
-        
-            $("#jumlah").keyup(function () {
-                let satuan_produk = $('#satuan_produk').val()
-                let jumlah = $('#jumlah').val()
-                $("#stok_masukan").val(jumlah * satuan_produk);
-                let stok = $("#stok_masukan").val()
-                $("#stok_masuk").val(stok);
-                
-                document.getElementById("stok_masuk").dispatchEvent(new Event('input'));
-            });
-        })
 
-    </script>
+   
 
 </body>
 

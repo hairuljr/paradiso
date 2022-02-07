@@ -46,7 +46,7 @@
                         <div class="mb-3 row">
                             <label class="col-md-2 col-form-label">Persediaan</label>
                             <div class="col-md-10">
-                                <input  type="text"  name="persediaan" wire:model="persediaan" class="form-control">
+                                <input  type="text"  name="persediaan" wire:model="persediaan" class="form-control" value="{{ $persediaan }} " readonly>
                                 @error('persediaan') <span class="error">{{ $message }}</span> @enderror
                             </div>
                         </div>
@@ -64,12 +64,21 @@
                                 <select wire:model="satuan" class="form-select" aria-label="Default select example">
                                     <option value=""disabled="disabled">Pilih</option>
 
-                                    <option value="1">Pcs</option>
-                                    <option value="2">Mili</option>
-                                    <option value="3">Gram</option>
+                                    <option value="Pcs">Pcs</option>
+                                    <option value="Mili">Mili</option>
+                                    <option value="Gram">Gram</option>
                                     
                                 </select>
                                 @error('satuan') <span class="error">{{ $message }}</span> @enderror
+                            </div>
+                          
+                           
+                        </div>
+                        <div class="mb-3 row">
+                            <label class="col-md-2 col-form-label">Harga</label>
+                            <div class="col-md-5">
+                                <input type="text" name="harga" wire:model="harga" class="form-control">
+                                @error('harga') <span class="error">{{ $message }}</span> @enderror
                             </div>
                             <div class="col-md-5">
                                 <button type="submit" class="btn btn-success" type="button">Finish</button>
