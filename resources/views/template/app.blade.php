@@ -147,7 +147,7 @@
                                 <li><a href="/bahanbakumasuk" key="t-products">Bahan Baku Masuk</a></li>
                                 <li><a href="ecommerce-product-detail.html" key="t-product-detail">Bahan Baku Keluar</a>
                                 </li>
-                                <li><a href="ecommerce-orders.html" key="t-orders">Data Penjualan</a></li>
+                                <li><a href="/penjualan" key="t-orders">Penjualan</a></li>
                                 {{-- <li><a href="ecommerce-customers.html" key="t-customers">Customers</a></li>
                                 <li><a href="ecommerce-cart.html" key="t-cart">Cart</a></li>
                                 <li><a href="ecommerce-checkout.html" key="t-checkout">Checkout</a></li>

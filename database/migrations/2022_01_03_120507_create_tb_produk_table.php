@@ -17,7 +17,6 @@ class CreateTbProdukTable extends Migration
             $table->string('kode_produk', 15)->primary();
             $table->string('nama_produk', 20);
             $table->string('jenis_produk_kode', 15);
-            $table->string('harga_satuan', 20);
             $table->timestamps();
         });
         Schema::table('tb_produk', function (Blueprint $table) {

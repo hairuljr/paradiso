@@ -28,6 +28,10 @@ Route::get('/bahanbakumasuk/create', \App\Http\Livewire\Bahanbakumasuk\Create::c
 Route::get('/cost', \App\Http\Livewire\Cost\Index::class)->middleware('auth')->name('cost.index');
 Route::get('/cost/create', \App\Http\Livewire\Cost\Create::class)->middleware('auth')->name('cost.create');
 
+Route::get('/penjualan', \App\Http\Livewire\Penjualan\Index::class)->middleware('auth')->name('penjualan.index');
+Route::get('/penjualan/create', \App\Http\Livewire\Penjualan\Create::class)->middleware('auth')->name('penjualan.create');
+
+
 
 
 // AJAX

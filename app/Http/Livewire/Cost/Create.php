@@ -170,14 +170,6 @@ class Create extends Component
         }
 
 
-
-
-
-
-
-
-
-
         return redirect('cost');
     }
 
