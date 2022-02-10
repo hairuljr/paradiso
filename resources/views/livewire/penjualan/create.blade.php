@@ -76,7 +76,7 @@
                         <div class="row mb-3">
                             <label class="col-sm-3 col-form-label">Jumlah </label>
                             <div class="col-sm-9">
-                                <input id="jumlah" type="number" class="form-control" wire:model="jumlah" autofocus>
+                                <input min="1" id="jumlah" type="number" class="form-control" wire:model="jumlah" autofocus>
                                 @error('jumlah') <span class="error">{{ $message }}</span> @enderror
                             </div>
                         </div>
@@ -159,11 +159,11 @@
                                 <thead class=" -light">
                                     <tr>
 
-                                        <th class="align-middle">Barcode Produk</th>
+                                        <th class="align-middle">No Transaksi</th>
+                                        <th class="align-middle">Barcode</th>
                                         <th class="align-middle">Nama Produk</th>
-                                        <th class="align-middle">Barcode BB</th>
-                                        <th class="align-middle">Nama Bahan Baku</th>
-                                        <th class="align-middle">Cost</th>
+                                        <th class="align-middle">Jumlah</th>
+                                        <th class="align-middle">Total</th>
                                         <th class="align-middle">Actions</th>
 
                                     </tr>
