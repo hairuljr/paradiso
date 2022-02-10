@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Penjualan;
 
+use App\Models\Cost;
 use App\Models\Produk;
 use Livewire\Component;
 use Illuminate\Support\Facades\DB;
@@ -51,6 +52,8 @@ class Create extends Component
 
             )->get();
 
+        // query join 3 tbl
+        $varnya = Cost::with(['produk', 'detailCost'])->get();
 
         return view(
             'livewire.penjualan.create',

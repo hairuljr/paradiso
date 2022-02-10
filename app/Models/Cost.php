@@ -33,4 +33,14 @@ class Cost extends Model
     //     $id_cost = "MP" . date('ymd') . $no;
     //     return $id_cost;
     // }
+
+    public function produk()
+    {
+        return $this->belongsTo(Produk::class, 'produk_kode', 'kode_produk');
+    }
+
+    public function detailCost()
+    {
+        return $this->hasOne(DetailCost::class, 'id_cost', 'cost_id');
+    }
 }
