@@ -12,7 +12,7 @@ class Cost extends Model
     protected $table = 'tb_cost';
     protected $primaryKey = 'id';
 
-    protected $fillable = ['cost_id', 'produk_kode', 'bahan_baku_kode', 'cost'];
+    protected $fillable = ['cost_id', 'produk_kode', 'bahan_baku_kode', 'digunakan', 'cost'];
 
 
     // public function getKode()

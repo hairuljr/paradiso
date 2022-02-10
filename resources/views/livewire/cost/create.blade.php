@@ -195,6 +195,7 @@
                                                 <td>{{ $sa->nama_produk}}</td>
                                                 <td>{{ $sa->bahan_baku_kode}}</td>
                                                 <td>{{ $sa->nama_bahan_baku}}</td>
+                                               
                                                 <td>{{ $sa->cost}}</td>
                                                 <td>
 
@@ -251,6 +252,8 @@
 
                         <input type="hidden" id="nama_bahan_bakus" wire:model="nama_bahan_baku">
                         <input type="hidden" id="nama_bahan_baku_masukan" class="form-control" value="{{ $sa->nama_bahan_baku }}" readonly>
+                        
+                        <input type="hidden" id="digunakan" class="form-control" value="{{ $sa->digunakan }}" readonly>
 
                         <input type="hidden" id="cost_masuk " wire:model="cost">
                         <input type="hidden" id="cost_masuk" class="form-control" value="{{ $sa->cost }}" readonly>

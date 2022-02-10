@@ -19,6 +19,7 @@ class CreateTbSementaraTable extends Migration
             $table->string('nama_produk', 20);
             $table->string('bahan_baku_kode', 15);
             $table->string('nama_bahan_baku', 20);
+            $table->string('digunakan', 20);
             $table->integer('cost');
             $table->timestamps();
         });

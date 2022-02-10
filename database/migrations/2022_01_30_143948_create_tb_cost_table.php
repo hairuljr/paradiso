@@ -18,6 +18,7 @@ class CreateTbCostTable extends Migration
             $table->string('cost_id', 20);
             $table->string('produk_kode', 20);
             $table->string('bahan_baku_kode', 20);
+            $table->string('digunakan', 20);
             $table->string('cost', 20);
             $table->timestamps();
         });

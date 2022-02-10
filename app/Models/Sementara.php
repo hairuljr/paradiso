@@ -10,5 +10,5 @@ class Sementara extends Model
     use HasFactory;
     protected $table = 'tb_sementara';
     protected $primaryKey = 'id';
-    protected $fillable = ['produk_kode', 'nama_produk', 'bahan_baku_kode', 'nama_bahan_baku', 'cost'];
+    protected $fillable = ['produk_kode', 'nama_produk', 'bahan_baku_kode', 'nama_bahan_baku', 'digunakan', 'cost'];
 }

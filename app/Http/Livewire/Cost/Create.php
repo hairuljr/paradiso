@@ -163,6 +163,7 @@ class Create extends Component
                 'cost_id' => $this->cost_id,
                 'produk_kode' => $sa->produk_kode,
                 'bahan_baku_kode' => $sa->bahan_baku_kode,
+                'digunakan' => $sa->digunakan,
                 'cost' => $sa->cost,
             );
             Cost::insert($data);
