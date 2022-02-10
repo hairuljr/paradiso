@@ -54,7 +54,7 @@
                                     <th class="align-middle">Barcode</th>
                                     <th class="align-middle">Nama</th>
                                     <th class="align-middle">Jenis Produk</th>
-                                    <th class="align-middle">Harga Satuan</th>
+                                    {{-- <th class="align-middle">Harga Satuan</th> --}}
                                     <th class="align-middle">Actions</th>
 
                                 </tr>
@@ -69,7 +69,7 @@
                                     <td>{{ $pk->kode_produk}}</td>
                                     <td>{{ $pk->nama_produk}}</td>
                                     <td>{{ $pk->jenis_produk}}</td>
-                                    <td>{{ rupiah($pk->harga_satuan) }}</td>
+                                    {{-- <td>{{ rupiah($pk->harga_satuan) }}</td> --}}
                                     <td>
                                         <div class="d-flex gap-3 cursor">
                                             <a wire:click.prevent="DetailData('{{$pk->kode_produk}}')"

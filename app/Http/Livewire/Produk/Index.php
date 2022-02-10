@@ -13,14 +13,14 @@ class Index extends Component
     public $kode_produk;
     public $nama_produk;
     public $jenis_produk_kode;
-    public $harga_satuan;
+    // public $harga_satuan;
 
 
     protected $rules = [
         'kode_produk' => 'required',
         'nama_produk' => 'required',
         // 'jenis_produk_kode' => 'required',
-        'harga_satuan' => 'required',
+        // 'harga_satuan' => 'required',
 
     ];
     protected $messages = [
@@ -37,7 +37,7 @@ class Index extends Component
         $this->kode_produk = '';
         $this->nama_produk = '';
         $this->jenis_produk_kode = '';
-        $this->harga_satuan = '';
+        // $this->harga_satuan = '';
     }
 
 
@@ -47,7 +47,7 @@ class Index extends Component
         $this->kode_produk = $produk->kode_produk;
         $this->nama_produk = $produk->nama_produk;
         $this->jenis_produk_kode = $produk->jenis_produk_kode;
-        $this->harga_satuan = $produk->harga_satuan;
+        // $this->harga_satuan = $produk->harga_satuan;
     }
 
     public function Update()
@@ -58,7 +58,7 @@ class Index extends Component
             'kode_produk' => $this->kode_produk,
             'nama_produk' => $this->nama_produk,
             'jenis_produk_kode' => $this->jenis_produk_kode,
-            'harga_satuan' => $this->harga_satuan,
+            // 'harga_satuan' => $this->harga_satuan,
 
         ];
         Produk::where('kode_produk', $this->kode_produk)->Update($produk);

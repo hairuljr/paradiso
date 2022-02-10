@@ -156,7 +156,7 @@
                         </div>
                         <div class="table-responsive">
                             <table id="example" class="table align-middle table-nowrap table-check">
-                                <thead class="table-light">
+                                <thead class=" -light">
                                     <tr>
 
                                         <th class="align-middle">Barcode Produk</th>
@@ -368,7 +368,7 @@
                                     <th class="align-middle">Barcode</th>
                                     <th class="align-middle">Nama</th>
                                     <th class="align-middle">Jenis Produk</th>
-                                    <th class="align-middle">Harga Satuan</th>
+                                    {{-- <th class="align-middle">Harga Satuan</th> --}}
 
                                     <th class="align-middle">Actions</th>
 
@@ -387,7 +387,7 @@
                                     <td>{{ $pk->kode_produk}}</td>
                                     <td>{{ $pk->nama_produk}}</td>
                                     <td>{{ $pk->jenis_produk}}</td>
-                                    <td>{{ rupiah($pk->harga_satuan)}}</td>
+                                    {{-- <td>{{ rupiah($pk->harga_satuan)}}</td> --}}
                                     <td>
                                         <button wire:click.prevent="SelectData1('{{$pk->kode_produk}}')"
                                             class="btn btn-xs btn-info" id="select1">

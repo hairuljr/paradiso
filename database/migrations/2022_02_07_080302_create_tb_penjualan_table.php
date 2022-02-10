@@ -24,9 +24,12 @@ class CreateTbPenjualanTable extends Migration
         Schema::table('tb_penjualan', function (Blueprint $table) {
 
 
+
+
+            // $table->foreign('produk_kode')->references('id')->on('tb_cost')
+            //     ->onDelete('restric')->onUpdate('restric');
+
             $table->foreign('transaksi_no')->references('no_transaksi')->on('tb_detailpenjualan')
-                ->onDelete('cascade')->onUpdate('cascade');
-            $table->foreign('produk_kode')->references('kode_produk')->on('tb_produk')
                 ->onDelete('cascade')->onUpdate('cascade');
         });
     }

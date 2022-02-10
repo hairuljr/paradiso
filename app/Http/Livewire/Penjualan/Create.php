@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Penjualan;
 
+use App\Models\Produk;
 use Livewire\Component;
 use Illuminate\Support\Facades\DB;
 
@@ -12,14 +13,27 @@ class Create extends Component
     public $jumlah;
     public $sub_total;
 
+    // public $produk;
+    public $kode_produk;
+    public $nama_produk;
+    public $jenis_produk_kode;
+    // public $harga_satuan;
+
+    public $jenis_produk;
+    public $kode_jenis_produk;
+
 
 
     public function render()
     {
-        $produk = DB::table('tb_produk');
+        $produk  = DB::table('tb_produk')->join(
+            'tb_jenis_produk',
+            'tb_jenis_produk.kode_jenis_produk',
+            '=',
+            'tb_produk.jenis_produk_kode'
+        )->get();
         $sementara = DB::table('tb_sementara');
         $penjualan = DB::table('tb_penjualan')
-
             ->join(
                 'tb_produk',
                 'tb_produk.kode_produk',

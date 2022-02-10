@@ -14,7 +14,7 @@ class Create extends Component
     // public $kode_produk;
     public $nama_produk;
     public $jenis_produk_kode;
-    public $harga_satuan;
+    // public $harga_satuan;
 
     public $jenis_produk;
     public $kode_jenis_produk;
@@ -23,7 +23,7 @@ class Create extends Component
         // 'kode_produk' => 'required',
         'nama_produk' => 'required',
         'jenis_produk_kode' => 'required',
-        'harga_satuan' => 'required',
+        // 'harga_satuan' => 'required',
 
     ];
     protected $messages = [
@@ -50,7 +50,7 @@ class Create extends Component
             // 'kode_produk' => $this->kode_produk,
             'nama_produk' => $this->nama_produk,
             'jenis_produk_kode' => $this->jenis_produk_kode,
-            'harga_satuan' => $this->harga_satuan,
+            // 'harga_satuan' => $this->harga_satuan,
 
 
         ]);

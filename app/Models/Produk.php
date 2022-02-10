@@ -12,7 +12,7 @@ class Produk extends Model
     protected $table = 'tb_produk';
     protected $primaryKey = 'kode_produk';
     protected $keyType = 'string';
-    protected $fillable = ['kode_produk', 'nama_produk', 'jenis_produk_kode', 'harga_satuan'];
+    protected $fillable = ['kode_produk', 'nama_produk', 'jenis_produk_kode'];
 
     public function getAutoNumberOptions()
     {
