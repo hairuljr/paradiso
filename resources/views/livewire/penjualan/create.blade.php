@@ -20,9 +20,9 @@
                             <div class="col-sm-6">
                                 <label>No Transaksi </label>
                                 <div class="input-group mb-3">
-                                    <input id="produk_kode" type="text" class="form-control" wire:model="produk_kode"
+                                    <input id="no_transaksi" type="text" class="form-control" wire:model="no_transaksi"
                                         readonly>
-                                    @error('produk_kode') <span class="error">{{ $message }}</span> @enderror
+                                    @error('no_transaksi') <span class="error">{{ $message }}</span> @enderror
                                    
                                 </div>
                             </div>
@@ -73,6 +73,7 @@
                                 @error('nama_bahan_baku') <span class="error">{{ $message }}</span> @enderror
                             </div>
                         </div>
+                      
                         <div class="row mb-3">
                             <label class="col-sm-3 col-form-label">Jumlah </label>
                             <div class="col-sm-9">
@@ -80,6 +81,14 @@
                                 @error('jumlah') <span class="error">{{ $message }}</span> @enderror
                             </div>
                         </div>
+                        
+                     
+                      
+                        {{-- @foreach ($cost as $cs)
+                            <input type="text" wire:model="bahan_baku_kode" value="{{ $cs->bahan_baku_kode}}">
+                            <input type="text" wire:model="digunakan" value="{{ $cs->digunakan}}">
+                        @endforeach --}}
+                        
                         <div class="row mb-3">
                    
                             <div class="col-sm-9">
@@ -93,20 +102,19 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="row mb-3">
-                            <label class="col-sm-3 col-form-label">Harga </label>
+                            <label class="col-sm-3 col-form-label">Harga</label>
                             <div class="col-sm-9">
-                                <input id="harga" type="number" class="form-control" wire:model="harga" autofocus
-                                    readonly>
-                                @error('harga') <span class="error">{{ $message }}</span> @enderror
+                                <input id="harga_jual" type="text" class="form-control"
+                                    wire:model="harga_jual" readonly>
+                                @error('nama_bahan_baku') <span class="error">{{ $message }}</span> @enderror
                             </div>
-                        </div>    
+                        </div>
                         <div class="row mb-3">
                             <label class="col-sm-3 col-form-label">Total</label>
                                 <div class="col-sm-9">
                                     <input type="hidden" id="total" wire:model="total">
                                     <input id="total_masukan" type="text" class="form-control" readonly>
-                               
-                                  
+                            
                                     @error('cost') <span class="error">{{ $message }}</span> @enderror
                                 </div>
                         </div>
@@ -125,8 +133,34 @@
                 </div>
             </div>
         </div>
+        
+        {{-- @foreach ($produk as $dt)
+        <input id="bahan_baku_kode_{{$dt->id}}" type="text" value="{{ $dt->bahan_baku_kode}}">
+        @endforeach --}}
+        @if ($bahan_baku_kode)
+        @foreach ($bahan_baku_kode as $bh)
+            <input id="bahan_baku_kode" type="text" wire:model="bahan_baku_kode">
+            <input id="bahan_baku_kodes" type="text" value="{{ $bh->kode_bahan_baku}}">
+        @endforeach
+        @endif
+      
+
+        @if ($digunakan)
+        @foreach ($digunakan as $bh)
+            <input id="digunakan" type="text" wire:model="digunakan">
+            <input id="digunakans" type="text" value="{{ $bh}}">
+        @endforeach
+        @endif
+      
     </form>
-    
+   
+    {{-- @foreach ($cost as $cs)
+    <input type="text" id="bahan_baku_kode">
+  
+
+    <input type="text" id="bahan_baku_kode" >
+    @endforeach --}}
+   
         
   
 
@@ -369,8 +403,8 @@
                                     <th class="align-middle">No</th>
                                     <th class="align-middle">Barcode</th>
                                     <th class="align-middle">Nama</th>
-                                    <th class="align-middle">Jenis Produk</th>
-                                    {{-- <th class="align-middle">Harga Satuan</th> --}}
+                                    {{-- <th class="align-middle">Jenis Produk</th> --}}
+                                    <th class="align-middle">Harga Jual</th>
 
                                     <th class="align-middle">Actions</th>
 
@@ -380,25 +414,31 @@
 
                             <tbody>
                                 @php $no = 1; @endphp
-                                @foreach ($produk as $pk)
+                                @foreach ($produk as $dt)
                                 <tr>
-                                  
 
 
                                     <td>{{ $no++ }}</td>
-                                    <td>{{ $pk->kode_produk}}</td>
-                                    <td>{{ $pk->nama_produk}}</td>
-                                    <td>{{ $pk->jenis_produk}}</td>
-                                    {{-- <td>{{ rupiah($pk->harga_satuan)}}</td> --}}
+                                    <td>{{ $dt->produk->kode_produk}}</td>
+                                    <td>{{ $dt->produk->nama_produk}}</td>
+                                    <td>{{ rupiah($dt->detailCost->harga_jual)}}</td>
+                                    
+                                   
+                                  
+                                    <input id="bahan_baku_kodes_{{ $dt->id }}" type="text"  value="{{ $dt->bahan_baku_kode}}">
+                                    <input id="digunakans_{{ $dt->id }}" type="text"  value="{{ $dt->digunakan}}">
+                                   
                                     <td>
-                                        <button wire:click.prevent="SelectData1('{{$pk->kode_produk}}')"
+                                        <button wire:click.prevent="SelectData1('{{$dt->produk_kode}}')"
                                             class="btn btn-xs btn-info" id="select1">
                                             <i class="fa fa-check"></i> Select
 
                                         </button>
                                     </td>
                                 </tr>
+                               
                                 @endforeach
+                                
                             </tbody>
                         </table>
                     </div>
@@ -430,73 +470,36 @@
 
 </div>
 
-{{-- <script type="text/javascript">
-$(document).ready(function () {
-// Cost
-$("#digunakan").keyup(function () {
-    // ---------------------------------------------------------------------
-    let produk_kode = $("#produk_kode_masukan").val()
-    $("#produk_kodes").val(produk_kode);
 
-    let nama_produk = $("#nama_produk_masukan").val()
-    $("#nama_produks").val(nama_produk);
+<script type="text/javascript">
+    
+    $(document).ready(function () {    
 
-    let bahan_baku_kode = $("#bahan_baku_kode_masukan").val()
-    $("#bahan_baku_kodes").val(bahan_baku_kode);
+     //Hitung pembelian Bahan Baku
+     $("#jumlah").keyup(function () {
+     
+            
 
-    let nama_bahan_baku = $("#nama_bahan_baku_masukan").val()
-    $("#nama_bahan_bakus").val(nama_bahan_baku);
+            let harga_jual = $('#harga_jual').val()
+            let jumlah = $('#jumlah').val()
+            $("#total_masukan").val(jumlah * harga_jual);
+            let total = $("#total_masukan").val()
+            $("#total").val(total);
+            
+            document.getElementById("total").dispatchEvent(new Event('input'));
 
-    let cost1 = $("#cost_masuk").val()
-    $("#cost").val(cost1);
-   
-    document.getElementById("produk_kode").dispatchEvent(new Event('input'));
-    document.getElementById("nama_produk").dispatchEvent(new Event('input'));
-    document.getElementById("bahan_baku_kode").dispatchEvent(new Event('input'));
-    document.getElementById("nama_bahan_baku").dispatchEvent(new Event('input'));
-    document.getElementById("cost").dispatchEvent(new Event('input'));
-    // ---------------------------------------------------------------------
-    // Hitung Cost
-    let harga = $('#harga').val()
-    let satuan_produk = $('#satuan_produk').val()
-    let digunakan = $('#digunakan').val()
-    $("#cost_masukan").val(harga / satuan_produk * digunakan);
-    let cost = $("#cost_masukan").val()
-    $("#cost").val(cost);
+         
 
-    document.getElementById("cost").dispatchEvent(new Event('input'));
-}); 
+        }); 
+      
+            let bahan_baku_kode = $("#bahan_baku_kodes").val()
+            $("#bahan_baku_kode").val(nama_bahan_baku);
 
+            let digunakan = $("#digunakans").val()
+            $("#digunakan").val(digunakan);
+           
+            document.getElementById("bahan_baku_kode").dispatchEvent(new Event('input'));
+            document.getElementById("digunakan").dispatchEvent(new Event('input'));
 
-    // ---------------------------------------------------------------------
-    let cost_id = $("#cost_id_masukan").val()
-    $("#cost_id").val(cost_id);
-    let id_cost = $("#id_cost_masukan").val()
-    $("#id_cost").val(id_cost);
-
-    document.getElementById("cost_id").dispatchEvent(new Event('input'));
-    document.getElementById("id_cost").dispatchEvent(new Event('input'));
-    // ---------------------------------------------------------------------
-// Hitung Profit
-$("#hrg_jual").keyup(function () {
-
-    $("#total_cgs_masukan").val();
-    let total_cgs = $('#total_cgs_masukan').val()
-    $("#total_cgs").val(total_cgs);
-
-    document.getElementById("total_cgs").dispatchEvent(new Event('input'));
-
-    let hrg_jual = $('#hrg_jual').val()
-    $("#profit_masukan").val(hrg_jual - total_cgs);
-    let profit = $("#profit_masukan").val()
-    $("#profit").val(profit);
-
-    document.getElementById("profit").dispatchEvent(new Event('input'));
-
- 
-});
-
-  
-});
-
-</script> --}}
+    });
+    </script>

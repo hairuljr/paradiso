@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Models\Produk;
+use App\Models\DetailCost;
 use Illuminate\Database\Eloquent\Model;
 use Wuwx\LaravelAutoNumber\AutoNumberTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
