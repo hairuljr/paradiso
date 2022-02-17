@@ -163,7 +163,7 @@ class Create extends Component
                     'jumlah' => $digunakan,
                 ]);
                 // Mengurangi persediaan bahan baku
-                $bahanBaku = BahanBaku::where('kode_bahan_baku', $item)->first();
+                $bahanBaku = BahanBaku::where('kode_bahan_baku', $kode)->first();
                 if ($bahanBaku) {
                     $bahanBaku->update([
                         'persediaan' => $bahanBaku->persediaan - $digunakan
