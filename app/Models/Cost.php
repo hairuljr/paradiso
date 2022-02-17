@@ -45,4 +45,9 @@ class Cost extends Model
     {
         return $this->hasOne(DetailCost::class, 'id_cost', 'cost_id');
     }
+
+    public function bahanBaku()
+    {
+        return $this->belongsTo(BahanBaku::class, 'bahan_baku_kode', 'kode_bahan_baku');
+    }
 }

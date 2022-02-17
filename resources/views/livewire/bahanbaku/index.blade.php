@@ -74,7 +74,7 @@
                                     <td>{{ $bb->persediaan}}</td>
                                     <td>{{ $bb->satuan_produk}}</td>
                                     <td>{{ $bb->satuan}}</td>
-                                    <td>{{ $bb->harga}}</td>
+                                    <td>{{ rupiah($bb->harga) }}</td>
                                     <td>
                                         <div class="d-flex gap-3 cursor">
                                             <a wire:click.prevent="DetailData('{{$bb->kode_bahan_baku}}')"

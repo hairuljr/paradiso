@@ -68,7 +68,7 @@
                                     <td>{{ $no++ }}</td>
                                     <td>{{ $ds->id_cost}}</td>
                                     <td>{{ $ds->total_cgs}}</td>
-                                    <td>{{ $ds->harga_jual}}</td>
+                                    <td>{{ rupiah($ds->harga_jual) }}</td>
                                     <td>{{ $ds->profit}}</td>
                                  
                                     <td>

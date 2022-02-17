@@ -3,8 +3,11 @@
 namespace App\Http\Livewire\Penjualan;
 
 use App\Models\BahanBaku;
+use App\Models\BahanBakuKeluar;
 use App\Models\Cost;
-use App\Models\Produk;
+use App\Models\DetailPenjualan;
+use App\Models\Penjualan;
+use App\Models\SementaraPenjualan;
 use Livewire\Component;
 use Illuminate\Support\Facades\DB;
 
@@ -19,7 +22,9 @@ class Create extends Component
     public $kode_produk;
     public $nama_produk;
     public $jenis_produk_kode;
-    // public $harga_satuan;
+    public $harga_jual;
+
+    public $dataSementara;
 
     public $jenis_produk;
     public $kode_jenis_produk;
@@ -39,32 +44,34 @@ class Create extends Component
     {
 
         $datanya = Cost::with(['produk', 'detailCost'])->where('produk_kode', $produk_kode)->first();
-        $this->produk_kode = $datanya->produk_kode;
+        $this->kode_produk = $datanya->produk_kode;
         $this->nama_produk = $datanya->produk->nama_produk;
         $this->harga_jual = $datanya->detailCost->harga_jual;
-        $this->bahan_baku_kode = $datanya->bahan_baku_kode;
-        $this->digunakan = $datanya->digunakan;
 
-        $kode = Cost::where('produk_kode', $produk_kode)
-            ->pluck('bahan_baku_kode');
-        $bahan_baku_kode = BahanBaku::whereIn('kode_bahan_baku', $kode)->get();
-        $this->bahan_baku_kode = $bahan_baku_kode;
+        $kode = Cost::with(['bahanBaku', 'produk'])->where('produk_kode', $produk_kode)
+            ->get();
 
+        $merged = collect($kode)->map(function ($item) {
+            return [
+                'kode_bahan_baku' => $item->bahanBaku->kode_bahan_baku,
+                'nama_bahan_baku' => $item->bahanBaku->nama_bahan_baku,
+                'persediaan' => $item->bahanBaku->persediaan,
+                'satuan_produk' => $item->bahanBaku->satuan_produk,
+                'satuan' => $item->bahanBaku->satuan,
+                'harga' => $item->bahanBaku->harga,
+                'digunakan' => $item->digunakan,
+                'produk_kode' => $item->produk_kode,
+                'nama_produk' => $item->produk->nama_produk,
+            ];
+        });
 
-        $digunakan = Cost::where('produk_kode', $produk_kode)
-            ->pluck('digunakan');
-        $this->digunakan = $digunakan;
+        $this->bahan_baku_kode = $merged;
     }
 
 
     public function render()
     {
-        $produk  = DB::table('tb_produk')->join(
-            'tb_jenis_produk',
-            'tb_jenis_produk.kode_jenis_produk',
-            '=',
-            'tb_produk.jenis_produk_kode'
-        )->get();
+
         $sementara = DB::table('tb_sementara');
         $penjualan = DB::table('tb_penjualan')
             ->join(
@@ -92,6 +99,8 @@ class Create extends Component
         // $datanya->first()->produk->nama_produk;
         // $datanya->first()->detailCost->harga_jual;
 
+        $temp = SementaraPenjualan::get();
+
         return view(
             'livewire.penjualan.create',
             [
@@ -99,12 +108,59 @@ class Create extends Component
                 'sementara' => $sementara,
                 'cost' => $cost,
                 'produk' => $datanya,
-
-                'detailCost' => $datanya
-                // 'bahan' => $this->bahan_baku_kode
+                'detailCost' => $datanya,
+                'temp' => $temp
 
 
             ]
         )->extends('template.app');
+    }
+
+    public function keranjang()
+    {
+        $data = collect($this->bahan_baku_kode)->map(function ($item) {
+            return [
+                'bahan_baku' => $item,
+            ];
+        });
+        SementaraPenjualan::create([
+            'no_trf' => 'TRF-' . rand(10, 100),
+            'produk_kode' => $this->kode_produk,
+            'nama_produk' => $this->nama_produk,
+            'jumlah' => $this->jumlah,
+            'total' => $this->total,
+            'bahan_baku' => $data
+        ]);
+
+        session()->flash('pesan', 'Produk berhasil ditambahkan');
+        return redirect('/penjualan/create');
+    }
+
+    public function save()
+    {
+        $sementara = SementaraPenjualan::get();
+        $subTotal = array_sum($sementara->pluck('total')->toArray());
+        foreach ($sementara as $value) {
+            DetailPenjualan::create([
+                'no_transaksi' => $value->no_trf,
+                'tgl_transaksi' => now(),
+                'sub_total' => $subTotal
+            ]);
+
+            Penjualan::create([
+                'transaksi_no' => $value->no_trf,
+                'produk_kode' => $value->produk_kode,
+                'jumlah' => $value->jumlah,
+                'sub_total' => $value->total
+            ]);
+
+            // mengupdate bahan baku
+            foreach ($value->bahan_baku as  $item) {
+                BahanBakuKeluar::create([
+                    'bahan_baku_kode' => $item['bahan_baku']['kode_bahan_baku'],
+                    'jumlah' => $item['bahan_baku']['digunakan'],
+                ]);
+            }
+        }
     }
 }
