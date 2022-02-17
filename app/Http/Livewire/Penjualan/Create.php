@@ -156,11 +156,23 @@ class Create extends Component
 
             // mengupdate bahan baku
             foreach ($value->bahan_baku as  $item) {
+                $kode = $item['bahan_baku']['kode_bahan_baku'];
+                $digunakan = $item['bahan_baku']['digunakan'];
                 BahanBakuKeluar::create([
-                    'bahan_baku_kode' => $item['bahan_baku']['kode_bahan_baku'],
-                    'jumlah' => $item['bahan_baku']['digunakan'],
+                    'bahan_baku_kode' => $kode,
+                    'jumlah' => $digunakan,
                 ]);
+                // Mengurangi persediaan bahan baku
+                $bahanBaku = BahanBaku::where('kode_bahan_baku', $item)->first();
+                if ($bahanBaku) {
+                    $bahanBaku->update([
+                        'persediaan' => $bahanBaku->persediaan - $digunakan
+                    ]);
+                }
             }
         }
+
+        // Kosongkan Tbl Sementara Penjualan
+        SementaraPenjualan::truncate();
     }
 }
