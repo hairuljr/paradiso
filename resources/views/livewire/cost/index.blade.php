@@ -63,24 +63,24 @@
 
                             <tbody>
                                 @php $no = 1; @endphp
-                                @foreach ($detailcost as $ds)
+                                @foreach ($cost as $cs)
                                 <tr>
                                     <td>{{ $no++ }}</td>
-                                    <td>{{ $ds->id_cost}}</td>
-                                    <td>{{ $ds->total_cgs}}</td>
-                                    <td>{{ rupiah($ds->harga_jual) }}</td>
-                                    <td>{{ $ds->profit}}</td>
+                                    <td>{{ $cs->id_cost}}</td>
+                                    <td>{{ rupiah($cs->total_cgs) }}</td>
+                                    <td>{{ rupiah($cs->harga_jual) }}</td>
+                                    <td>{{ rupiah($cs->profit)}}</td>
                                  
                                     <td>
                                         <div class="d-flex gap-3 cursor">
-                                            <a wire:click.prevent="DetailData('{{$ds->id_cost}}')"
+                                            <a wire:click.prevent="DetailData('{{$cs->id_cost}}')"
                                                 class="text-success" data-bs-toggle="modal"
                                                 data-bs-target="#updateModal"><i
                                                     class="mdi mdi-pencil font-size-18"></i>
                                             </a>
 
                                             <a button class="text-danger"
-                                                wire:click="DetailData('{{$ds->id_cost}}')"
+                                                wire:click="DetailData('{{$cs->id_cost}}')"
                                                 data-bs-toggle="modal" data-bs-target="#deleteModal"><i
                                                     class="mdi mdi-delete font-size-18"></i>
                                             </a>

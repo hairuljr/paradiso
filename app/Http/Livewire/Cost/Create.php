@@ -88,6 +88,13 @@ class Create extends Component
 
     ];
 
+    public function ClearForm()
+    {
+        $this->produk_kode = '';
+        $this->nama_produk = '';
+        $this->bahan_baku_kode = '';
+        $this->nama_bahan_baku = '';
+    }
     public function SelectData($kode_bahan_baku)
     {
         $bahanbaku = BahanBaku::where('kode_bahan_baku', $kode_bahan_baku)->first();
@@ -108,9 +115,10 @@ class Create extends Component
         $this->harga_satuan = $produk->harga_satuan;
     }
 
-    public function DetailDataKeranjang($produk_kode)
+    public function DetailDataKeranjang($bahan_baku_kode)
     {
-        $sementara = Sementara::where('produk_kode', $produk_kode)->first();
+        $sementara = Sementara::where('bahan_baku_kode', $bahan_baku_kode)->first();
+        $this->id = $sementara->id;
         $this->produk_kode = $sementara->produk_kode;
         $this->nama_produk = $sementara->nama_produk;
         $this->bahan_baku_kode = $sementara->bahan_baku_kode;
@@ -121,7 +129,8 @@ class Create extends Component
     public function DeleteKeranjang()
     {
 
-        Sementara::where('produk_kode', $this->produk_kode)->delete();
+        Sementara::where('bahan_baku_kode', $this->bahan_baku_kode)->delete();
+        $this->Clearform();
         $this->emit('deleteModal');
     }
 
@@ -150,7 +159,7 @@ class Create extends Component
 
 
         $sementara = Sementara::all();
-        DetailCost::create([
+        Cost::create([
 
             'id_cost' => $this->id_cost,
             'total_cgs' => $this->total_cgs,
@@ -166,7 +175,7 @@ class Create extends Component
                 'digunakan' => $sa->digunakan,
                 'cost' => $sa->cost,
             );
-            Cost::insert($data);
+            DetailCost::insert($data);
             $sa->delete();
         }
 
@@ -179,7 +188,7 @@ class Create extends Component
     public function render()
     {
 
-        $detailcost = DetailCost::kode();
+        $detailcost = Cost::kode();
 
         $produk  = DB::table('tb_produk')->join(
             'tb_jenis_produk',
@@ -190,25 +199,25 @@ class Create extends Component
 
         $bahanbaku = BahanBaku::all();
         $sementara = Sementara::all();
-        $cost = DB::table('tb_cost')
+        $cost = DB::table('tb_detailcost')
 
             ->join(
-                'tb_detailcost',
-                'tb_detailcost.id_cost',
+                'tb_cost',
+                'tb_cost.id_cost',
                 '=',
-                'tb_cost.cost_id'
+                'tb_detailcost.cost_id'
 
             )->join(
                 'tb_produk',
                 'tb_produk.kode_produk',
                 '=',
-                'tb_cost.produk_kode'
+                'tb_detailcost.produk_kode'
 
             )->join(
                 'tb_bahan_baku',
                 'tb_bahan_baku.kode_bahan_baku',
                 '=',
-                'tb_cost.bahan_baku_kode'
+                'tb_detailcost.bahan_baku_kode'
 
             )->get();
 
@@ -223,8 +232,8 @@ class Create extends Component
                 'produk' => $produk,
                 'bahanbaku' => $bahanbaku,
                 'sementara' => $sementara,
+                'detailcost' => $detailcost,
                 'cost' => $cost,
-                'detailcost' => $detailcost
 
             ]
 

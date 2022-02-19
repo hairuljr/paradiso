@@ -48,14 +48,14 @@
                         <div class="mb-3 row">
                             <label class="col-md-2 col-form-label">Jumlah</label>
                             <div class="col-md-10">
-                                <input type="text" wire:model="jumlah" id="jumlah" name="jumlah" class="form-control" >
+                                <input type="text" wire:model="jumlah" id="jumlah"  class="form-control" >
                                 @error('jumlah') <span class="error">{{ $message }}</span> @enderror
                             </div>
                         </div>
                         <div class="row mb-3">
                             <label  class="col-sm-2 col-form-label" >Isi Satuan</label>
                             <div class="col-md-5">
-                                <input type="text" class="form-control" id="satuan_produk" name="satuan_produk" wire:model="satuan_produk" readonly>
+                                <input type="text" class="form-control" id="satuan_produk"  wire:model="satuan_produk" readonly>
                                 @error('satuan_produk') <span class="error">{{ $message }}</span> @enderror
                             </div>
                             <div class="col-md-2">

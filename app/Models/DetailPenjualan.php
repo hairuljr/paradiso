@@ -9,6 +9,6 @@ class DetailPenjualan extends Model
 {
     use HasFactory;
 
-    protected $table = 'tb_detailpenjualan';
+    protected $table = 'tb_detail_penjualan';
     protected $guarded = [];
 }

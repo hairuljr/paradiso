@@ -52,9 +52,7 @@
                                 <tr>
                                     <th class="align-middle">No</th>
                                     <th class="align-middle">No Transaksi</th>
-                                    {{-- <th class="align-middle">Nama</th> --}}
-                                    <th class="align-middle">Kode Produk</th>
-                                    <th class="align-middle">Jumlah</th>
+                                    <th class="align-middle">Tanggal</th>
                                     <th class="align-middle">Sub Total</th>
                                     <th class="align-middle">Action</th>
                                 </tr>
@@ -66,30 +64,24 @@
                                 @foreach ($penjualan as $pn)
                                 <tr>
                                     <td>{{ $no++ }}</td>
-                                    <td>{{ $pn->transaksi_no}}</td>
-                                    <td>{{ $pn->produk_kode}}</td>
-                                    <td>{{ $pn->jumlah}}</td>
-                                    <td>{{ $pn->sub_total}}</td>
-                                 
+                                    <td>{{ $pn->no_transaksi}}</td>
+                                    <td>{{ $pn->tgl_transaksi}}</td>
+                                    <td>{{ rupiah($pn->sub_total)}}</td>
                                     <td>
                                         <div class="d-flex gap-3 cursor">
-                                            <a wire:click.prevent="DetailData('{{$ds->id_cost}}')"
+                                            <a wire:click.prevent="DetailData('{{$pn->no_transaksi}}')"
                                                 class="text-success" data-bs-toggle="modal"
                                                 data-bs-target="#updateModal"><i
                                                     class="mdi mdi-pencil font-size-18"></i>
                                             </a>
 
                                             <a button class="text-danger"
-                                                wire:click="DetailData('{{$ds->id_cost}}')"
+                                                wire:click="DetailData('{{$pn->no_transaksi}}')"
                                                 data-bs-toggle="modal" data-bs-target="#deleteModal"><i
                                                     class="mdi mdi-delete font-size-18"></i>
                                             </a>
 
-                                            {{-- <a button class="text-secondary"
-                                            wire:click="DetailData('{{$cs->produk_kode}}')"
-                                            data-bs-toggle="modal" data-bs-target="#detailModal"><i
-                                                class="mdi-eye-outline font-size-18"></i>
-                                             </a> --}}
+                                          
 
 
                                         </div>

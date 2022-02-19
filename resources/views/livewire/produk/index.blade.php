@@ -138,13 +138,7 @@
                                 @error('jenis_produk_kode') <span class="error">{{ $message }}</span> @enderror
                             </div>
                         </div>
-                        <div class="mb-3 row">
-                            <label class="col-md-2 col-form-label">Harga Satuan</label>
-                            <div class="col-md-10">
-                                <input type="text" name="harga_satuan" wire:model="harga_satuan" class="form-control">
-                                @error('harga_satuan') <span class="error">{{ $message }}</span> @enderror
-                            </div>
-                        </div>
+                       
                         <div class="mb-3 row">
                             <div class="col-md-5">
                                 <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>

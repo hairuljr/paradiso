@@ -137,7 +137,12 @@
 
                             </ul>
                         </li>
-
+                        <li>
+                            <a href="/cost" class="waves-effect">
+                                <i class="bx bx-calendar"></i>
+                                <span key="t-calendar">Cost Of Good Sold</span>
+                            </a>
+                        </li>
                         <li>
                             <a href="#" class="has-arrow waves-effect">
                                 <i class="bx bx-store"></i>
@@ -146,21 +151,11 @@
                             <ul class="sub-menu" aria-expanded="false">
                                 <li><a href="/bahanbakumasuk" key="t-products">Bahan Baku Masuk</a></li>
                                 <li><a href="ecommerce-product-detail.html" key="t-product-detail">Bahan Baku Keluar</a>
-                                </li>
                                 <li><a href="/penjualan" key="t-orders">Penjualan</a></li>
-                                {{-- <li><a href="ecommerce-customers.html" key="t-customers">Customers</a></li>
-                                <li><a href="ecommerce-cart.html" key="t-cart">Cart</a></li>
-                                <li><a href="ecommerce-checkout.html" key="t-checkout">Checkout</a></li>
-                                <li><a href="ecommerce-shops.html" key="t-shops">Shops</a></li>
-                                <li><a href="ecommerce-add-product.html" key="t-add-product">Add Product</a></li> --}}
+                                </li>
                             </ul>
                         </li>
-                        <li>
-                            <a href="/cost" class="waves-effect">
-                                <i class="bx bx-calendar"></i>
-                                <span key="t-calendar">Cost Of Good Sold</span>
-                            </a>
-                        </li>
+                    
                         {{-- <li>
                             <a href="/detailcost" class="waves-effect">
                                 <i class="bx bx-calendar"></i>

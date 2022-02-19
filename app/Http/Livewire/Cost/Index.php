@@ -9,25 +9,25 @@ class Index extends Component
 {
     public function render()
     {
-        $detailcost =  DB::table('tb_Detailcost')->get();
-        $cost = DB::table('tb_cost')
+        $cost =  DB::table('tb_Cost')->get();
+        $detailcost = DB::table('tb_detailcost')
             ->join(
-                'tb_detailcost',
-                'tb_detailcost.id_cost',
+                'tb_cost',
+                'tb_cost.id_cost',
                 '=',
-                'tb_cost.cost_id'
+                'tb_detailcost.cost_id'
 
             )->join(
                 'tb_produk',
                 'tb_produk.kode_produk',
                 '=',
-                'tb_cost.produk_kode'
+                'tb_detailcost.produk_kode'
 
             )->join(
                 'tb_bahan_baku',
                 'tb_bahan_baku.kode_bahan_baku',
                 '=',
-                'tb_cost.bahan_baku_kode'
+                'tb_detailcost.bahan_baku_kode'
 
             )->get();
 

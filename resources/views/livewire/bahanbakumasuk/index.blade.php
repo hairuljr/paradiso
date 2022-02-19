@@ -125,10 +125,28 @@
                             </div>
                         </div>
                         <div class="mb-3 row">
-                            <label class="col-md-2 col-form-label">Stok</label>
+                            <label class="col-md-2 col-form-label">Jumlah</label>
                             <div class="col-md-10">
-                                <input type="text" name="jumlah" wire:model="jumlah" class="form-control">
+                                <input type="text" id="jumlah" wire:model="jumlah" class="form-control">
                                 @error('jumlah') <span class="error">{{ $message }}</span> @enderror
+
+                            </div>
+                        </div>
+                        <div class="mb-3 row">
+                            <label class="col-md-2 col-form-label">Isi Satuan</label>
+                            <div class="col-md-10">
+                                <input type="text" id="satuan_produk" wire:model="satuan_produk"  class="form-control" readonly>
+                                @error('stok_masuk') <span class="error">{{ $message }}</span> @enderror
+
+                            </div>
+                        </div>
+                        <div class="mb-3 row">
+                            <label class="col-md-2 col-form-label">Stok Masuk</label>
+                            <div class="col-md-10">
+                                <input type="hidden" id="stok_masuk" wire:model="stok_masuk">
+                                <input id="stok_masukan" type="text" class="form-control" readonly>
+                                @error('stok_masuk') <span class="error">{{ $message }}</span> @enderror
+
                             </div>
                         </div>
                         <div class="mb-3 row">
@@ -186,3 +204,19 @@
     </div>
 
 </div>
+<script type="text/javascript">
+    
+    $(document).ready(function () {
+     //Hitung pembelian Bahan Baku
+     $("#jumlah").keyup(function () {
+            let satuan_produk = $('#satuan_produk').val()
+            let jumlah = $('#jumlah').val()
+            $("#stok_masukan").val(jumlah * satuan_produk);
+            let stok = $("#stok_masukan").val()
+            $("#stok_masuk").val(stok);
+            
+            document.getElementById("stok_masuk").dispatchEvent(new Event('input'));
+        }); 
+
+    });
+    </script>

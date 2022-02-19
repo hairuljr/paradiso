@@ -14,22 +14,11 @@ class CreateTbCostTable extends Migration
     public function up()
     {
         Schema::create('tb_cost', function (Blueprint $table) {
-            $table->id();
-            $table->string('cost_id', 20);
-            $table->string('produk_kode', 20);
-            $table->string('bahan_baku_kode', 20);
-            $table->string('digunakan', 20);
-            $table->string('cost', 20);
+            $table->string('id_cost', 20)->primary();
+            $table->string('total_cgs', 20);
+            $table->string('harga_jual', 20);
+            $table->string('profit', 20);
             $table->timestamps();
-        });
-        Schema::table('tb_cost', function (Blueprint $table) {
-
-            $table->foreign('cost_id')->references('id_cost')->on('tb_detailcost')
-                ->onDelete('cascade')->onUpdate('cascade');
-            $table->foreign('produk_kode')->references('kode_produk')->on('tb_produk')
-                ->onDelete('cascade')->onUpdate('cascade');
-            $table->foreign('bahan_baku_kode')->references('kode_bahan_baku')->on('tb_bahan_baku')
-                ->onDelete('cascade')->onUpdate('cascade');
         });
     }
 

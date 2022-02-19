@@ -5,6 +5,7 @@ namespace App\Http\Livewire\Penjualan;
 use App\Models\BahanBaku;
 use App\Models\BahanBakuKeluar;
 use App\Models\Cost;
+use App\Models\DetailCost;
 use App\Models\DetailPenjualan;
 use App\Models\Penjualan;
 use App\Models\SementaraPenjualan;
@@ -14,6 +15,7 @@ use Illuminate\Support\Facades\DB;
 class Create extends Component
 {
     public $no_transaksi;
+    public $transaksi_no;
     public $tgl_transaksi;
     public $jumlah;
     public $sub_total;
@@ -43,12 +45,12 @@ class Create extends Component
     public function SelectData1($produk_kode)
     {
 
-        $datanya = Cost::with(['produk', 'detailCost'])->where('produk_kode', $produk_kode)->first();
+        $datanya = DetailCost::with(['produk', 'Cost'])->where('produk_kode', $produk_kode)->first();
         $this->kode_produk = $datanya->produk_kode;
         $this->nama_produk = $datanya->produk->nama_produk;
-        $this->harga_jual = $datanya->detailCost->harga_jual;
+        $this->harga_jual = $datanya->Cost->harga_jual;
 
-        $kode = Cost::with(['bahanBaku', 'produk'])->where('produk_kode', $produk_kode)
+        $kode = DetailCost::with(['bahanBaku', 'produk'])->where('produk_kode', $produk_kode)
             ->get();
 
         $merged = collect($kode)->map(function ($item) {
@@ -68,54 +70,6 @@ class Create extends Component
         $this->bahan_baku_kode = $merged;
     }
 
-
-    public function render()
-    {
-
-        $sementara = DB::table('tb_sementara');
-        $penjualan = DB::table('tb_penjualan')
-            ->join(
-                'tb_produk',
-                'tb_produk.kode_produk',
-                '=',
-                'tb_penjualan.produk_kode'
-
-            )->get();
-        $cost = DB::table('tb_cost')
-
-            ->join(
-                'tb_produk',
-                'tb_produk.kode_produk',
-                '=',
-                'tb_cost.produk_kode'
-
-            )->get();
-
-        // query join 3 tbl
-        $datanya = Cost::with(['produk', 'detailCost'])
-            ->groupBy('produk_kode')
-            ->get();
-        // $datanya->first()->bahan_baku_kode;
-        // $datanya->first()->produk->nama_produk;
-        // $datanya->first()->detailCost->harga_jual;
-
-        $temp = SementaraPenjualan::get();
-
-        return view(
-            'livewire.penjualan.create',
-            [
-                'penjualan' => $penjualan,
-                'sementara' => $sementara,
-                'cost' => $cost,
-                'produk' => $datanya,
-                'detailCost' => $datanya,
-                'temp' => $temp
-
-
-            ]
-        )->extends('template.app');
-    }
-
     public function keranjang()
     {
         $data = collect($this->bahan_baku_kode)->map(function ($item) {
@@ -124,7 +78,6 @@ class Create extends Component
             ];
         });
         SementaraPenjualan::create([
-            'no_trf' => 'TRF-' . rand(10, 100),
             'produk_kode' => $this->kode_produk,
             'nama_produk' => $this->nama_produk,
             'jumlah' => $this->jumlah,
@@ -135,23 +88,46 @@ class Create extends Component
         session()->flash('pesan', 'Produk berhasil ditambahkan');
         return redirect('/penjualan/create');
     }
+    public function DetailDataKeranjang($produk_kode)
+    {
+        $temp = SementaraPenjualan::where('produk_kode', $produk_kode)->first();
+        $this->produk_kode = $temp->produk_kode;
+        $this->nama_produk = $temp->nama_produk;
+        $this->jumlah = $temp->jumlah;
+        $this->total = $temp->total;
+        $this->bahan_baku = $temp->bahan_baku;
+    }
+
+    public function DeleteKeranjang()
+    {
+
+        SementaraPenjualan::where('produk_kode', $this->produk_kode)->delete();
+        $this->emit('deleteModal');
+    }
 
     public function save()
     {
         $sementara = SementaraPenjualan::get();
-        $subTotal = array_sum($sementara->pluck('total')->toArray());
-        foreach ($sementara as $value) {
-            DetailPenjualan::create([
-                'no_transaksi' => $value->no_trf,
-                'tgl_transaksi' => now(),
-                'sub_total' => $subTotal
-            ]);
+        // $subTotal = array_sum($sementara->pluck('total')->toArray());
+        Penjualan::create([
 
-            Penjualan::create([
-                'transaksi_no' => $value->no_trf,
+            'no_transaksi' => $this->no_transaksi,
+            'tgl_transaksi' => now(),
+            'sub_total' => $this->sub_total,
+
+        ]);
+        foreach ($sementara as $value) {
+            // DetailPenjualan::create([
+            //     'no_transaksi' => $value->no_trf,
+            //     'tgl_transaksi' => now(),
+            //     'sub_total' => $subTotal
+            // ]);
+
+            DetailPenjualan::create([
+                'transaksi_no' => $this->transaksi_no,
                 'produk_kode' => $value->produk_kode,
                 'jumlah' => $value->jumlah,
-                'sub_total' => $value->total
+                'total' => $value->total
             ]);
 
             // mengupdate bahan baku
@@ -174,5 +150,53 @@ class Create extends Component
 
         // Kosongkan Tbl Sementara Penjualan
         SementaraPenjualan::truncate();
+    }
+    public function render()
+    {
+
+        $sementara = DB::table('tb_sementara');
+        $penjualan = Penjualan::kode();
+        $detailPenjualan = DB::table('tb_detail_penjualan')
+            ->join(
+                'tb_produk',
+                'tb_produk.kode_produk',
+                '=',
+                'tb_detail_penjualan.produk_kode'
+
+            )->get();
+        $detailcost = DB::table('tb_detailcost')
+
+            ->join(
+                'tb_produk',
+                'tb_produk.kode_produk',
+                '=',
+                'tb_detailcost.produk_kode'
+
+            )->get();
+
+        // query join 3 tbl
+        $datanya = DetailCost::with(['produk', 'cost'])
+            ->groupBy('produk_kode')
+            ->get();
+        // $datanya->first()->bahan_baku_kode;
+        // $datanya->first()->produk->nama_produk;
+        // $datanya->first()->detailCost->harga_jual;
+
+        $temp = SementaraPenjualan::get();
+
+        return view(
+            'livewire.penjualan.create',
+            [
+                'penjualan' => $penjualan,
+                'detailpenjulan' =>  $detailPenjualan,
+                'sementara' => $sementara,
+                'detailcost' => $detailcost,
+                'produk' => $datanya,
+                'detailCost' => $datanya,
+                'temp' => $temp
+
+
+            ]
+        )->extends('template.app');
     }
 }

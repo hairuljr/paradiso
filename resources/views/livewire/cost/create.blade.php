@@ -190,7 +190,7 @@
                                             @endphp
                                             @foreach ($sementara as $sa)
                                             <tr>
-
+                                                
                                                 <td>{{ $sa->produk_kode}}</td>
                                                 <td>{{ $sa->nama_produk}}</td>
                                                 <td>{{ $sa->bahan_baku_kode}}</td>
@@ -201,7 +201,7 @@
 
             
                                                         <a button class="text-danger"
-                                                            wire:click="DetailDataKeranjang('{{$sa->produk_kode}}')"
+                                                            wire:click="DetailDataKeranjang('{{$sa->bahan_baku_kode}}')"
                                                             data-bs-toggle="modal" data-bs-target="#deleteModal"><i
                                                                 class="mdi mdi-delete font-size-18"></i></a>
             

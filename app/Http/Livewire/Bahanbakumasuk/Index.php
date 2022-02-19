@@ -15,7 +15,7 @@ class Index extends Component
     public $jumlah;
     public $harga;
     public $satuan;
-
+    public $stok_masuk;
 
     protected $rules = [
         'bahan_baku_kode' => 'required',
@@ -50,8 +50,9 @@ class Index extends Component
 
         $this->bahan_baku_kode = $bahanbakumasuk->bahan_baku_kode;
         $this->nama_bahan_baku = $bahanbakumasuk->nama_bahan_baku;
-        $this->jumlah = $bahanbakumasuk->jumlah;
+        $this->satuan_produk = $bahanbakumasuk->satuan_produk;
         $this->satuan = $bahanbakumasuk->satuan;
+        $this->stok_masuk = $bahanbakumasuk->stok_masuk;
         $this->harga = $bahanbakumasuk->harga;
     }
 
@@ -61,7 +62,7 @@ class Index extends Component
         $bahanbakumasuk = [
 
             'bahan_baku_kode' => $this->bahan_baku_kode,
-            'jumlah' => $this->jumlah,
+            'stok_masuk' => $this->stok_masuk,
             'harga' => $this->harga,
 
         ];
