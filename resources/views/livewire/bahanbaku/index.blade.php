@@ -57,7 +57,7 @@
                                     <th class="align-middle">Persediaan</th>
                                     <th class="align-middle">Isi Satuan</th>
                                     <th class="align-middle">Satuan</th>
-                                    <th class="align-middle">Harga</th>
+                                    {{-- <th class="align-middle">Harga</th> --}}
                                     <th class="align-middle">Actions</th>
 
                                 </tr>
@@ -74,7 +74,7 @@
                                     <td>{{ $bb->persediaan}}</td>
                                     <td>{{ $bb->satuan_produk}}</td>
                                     <td>{{ $bb->satuan}}</td>
-                                    <td>{{ rupiah($bb->harga) }}</td>
+                                    {{-- <td>{{ rupiah($bb->harga) }}</td> --}}
                                     <td>
                                         <div class="d-flex gap-3 cursor">
                                             <a wire:click.prevent="DetailData('{{$bb->kode_bahan_baku}}')"

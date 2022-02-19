@@ -12,7 +12,7 @@ class Create extends Component
     public $persediaan = 0;
     public $satuan;
     public $satuan_produk;
-    public $harga;
+    // public $harga;
 
 
 
@@ -22,7 +22,7 @@ class Create extends Component
         'persediaan' => 'required',
         'satuan' => 'required',
         'satuan_produk' => 'required',
-        'harga' => 'required'
+        // 'harga' => 'required'
     ];
     protected $messages = [
         'kode_bahan_baku.required' => 'Barcode tidak boleh kosong.',
@@ -30,7 +30,7 @@ class Create extends Component
         'persediaan.required' => 'Persediaan tidak boleh kosong.',
         'satuan.required' => 'Satuan tidak boleh kosong.',
         'satuan_produk.required' => 'Isi Satuan tidak boleh kosong.',
-        'harga.required' => 'Harga tidak boleh kosong.',
+        // 'harga.required' => 'Harga tidak boleh kosong.',
 
     ];
 
@@ -45,7 +45,7 @@ class Create extends Component
             'persediaan' => $this->persediaan,
             'satuan_produk' => $this->satuan_produk,
             'satuan' => $this->satuan,
-            'harga' => $this->harga
+            // 'harga' => $this->harga
         ]);
         session()->flash('pesan', 'Data berhasil ditambah');
         return redirect('bahanbaku');

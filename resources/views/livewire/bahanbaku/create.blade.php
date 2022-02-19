@@ -58,6 +58,7 @@
                             </div>
                         </div>
                       
+                       
                         <div class="mb-3 row">
                             <label class="col-md-2 col-form-label">Satuan</label>
                             <div class="col-md-5">
@@ -70,19 +71,12 @@
                                     
                                 </select>
                                 @error('satuan') <span class="error">{{ $message }}</span> @enderror
+                                <br>
+                                <div class="col-md-5">
+                                    <button type="submit" class="btn btn-success" type="button">Finish</button>
+                                </div>
                             </div>
-                          
-                           
-                        </div>
-                        <div class="mb-3 row">
-                            <label class="col-md-2 col-form-label">Harga</label>
-                            <div class="col-md-5">
-                                <input type="text" name="harga" wire:model="harga" class="form-control">
-                                @error('harga') <span class="error">{{ $message }}</span> @enderror
-                            </div>
-                            <div class="col-md-5">
-                                <button type="submit" class="btn btn-success" type="button">Finish</button>
-                            </div>
+                         
                         </div>
                     </form>
 

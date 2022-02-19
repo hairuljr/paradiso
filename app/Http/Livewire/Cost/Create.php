@@ -5,6 +5,7 @@ namespace App\Http\Livewire\Cost;
 use App\Models\Produk;
 use Livewire\Component;
 use App\Models\BahanBaku;
+use App\Models\BahanBakuMasuk;
 use App\Models\Cost;
 use App\Models\DetailCost;
 use App\Models\Sementara;
@@ -95,15 +96,24 @@ class Create extends Component
         $this->bahan_baku_kode = '';
         $this->nama_bahan_baku = '';
     }
-    public function SelectData($kode_bahan_baku)
+    public function SelectData($bahan_baku_kode)
     {
-        $bahanbaku = BahanBaku::where('kode_bahan_baku', $kode_bahan_baku)->first();
-        $this->bahan_baku_kode = $bahanbaku->kode_bahan_baku;
-        $this->nama_bahan_baku = $bahanbaku->nama_bahan_baku;
-        $this->persediaan = $bahanbaku->persediaan;
-        $this->satuan = $bahanbaku->satuan;
-        $this->satuan_produk = $bahanbaku->satuan_produk;
-        $this->harga = $bahanbaku->harga;
+
+        $datanya = BahanBakuMasuk::with(['bahanbaku'])->where('bahan_baku_kode', $bahan_baku_kode)->first();
+        $this->bahan_baku_kode = $datanya->bahan_baku_kode;
+        $this->nama_bahan_baku = $datanya->bahanbaku->nama_bahan_baku;
+        $this->satuan_produk = $datanya->bahanbaku->satuan_produk;
+        $this->satuan = $datanya->bahanbaku->satuan;
+        $this->harga = $datanya->harga;
+
+
+        // $bahanbaku = BahanBaku::where('kode_bahan_baku', $kode_bahan_baku)->first();
+        // $this->bahan_baku_kode = $bahanbaku->kode_bahan_baku;
+        // $this->nama_bahan_baku = $bahanbaku->nama_bahan_baku;
+        // $this->persediaan = $bahanbaku->persediaan;
+        // $this->satuan = $bahanbaku->satuan;
+        // $this->satuan_produk = $bahanbaku->satuan_produk;
+        // $this->harga = $bahanbaku->harga;
     }
 
     public function SelectData1($kode_produk)
@@ -138,8 +148,6 @@ class Create extends Component
     public function keranjang()
     {
         $validasi = $this->validate();
-
-
 
         Sementara::create($validasi, [
 
@@ -190,6 +198,10 @@ class Create extends Component
 
         $detailcost = Cost::kode();
 
+        $datanya = BahanBakuMasuk::with(['bahanbaku'])
+            ->groupBy('bahan_baku_kode')
+            ->get();
+
         $produk  = DB::table('tb_produk')->join(
             'tb_jenis_produk',
             'tb_jenis_produk.kode_jenis_produk',
@@ -197,7 +209,7 @@ class Create extends Component
             'tb_produk.jenis_produk_kode'
         )->get();
 
-        $bahanbaku = BahanBaku::all();
+        // $bahanbaku = BahanBaku::all();
         $sementara = Sementara::all();
         $cost = DB::table('tb_detailcost')
 
@@ -230,7 +242,8 @@ class Create extends Component
             [
 
                 'produk' => $produk,
-                'bahanbaku' => $bahanbaku,
+                'bahanbaku' => $datanya,
+                'bahanbakumasuk' => $datanya,
                 'sementara' => $sementara,
                 'detailcost' => $detailcost,
                 'cost' => $cost,

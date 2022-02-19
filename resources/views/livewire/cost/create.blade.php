@@ -77,8 +77,7 @@
                                     </div>
                                 </div>
                                 <div class="row mb-3">
-                                    <label class="col-sm-3 col-form-label"
-                                        title="harga didapat dari harga beli bahan baku">Harga </label>
+                                    <label class="col-sm-3 col-form-label">Harga </label>
                                     <div class="col-sm-9">
                                         <input id="harga" type="number" class="form-control" wire:model="harga" autofocus
                                             readonly>
@@ -330,20 +329,20 @@
 
                                     <tbody>
                                         @php $no = 1; @endphp
-                                        @foreach ($bahanbaku as $bb)
+                                        @foreach ($bahanbaku as $dt)
                                         <tr>
 
 
                                             <td>{{ $no++ }}</td>
-                                            <td>{{ $bb->kode_bahan_baku}}</td>
-                                            <td>{{ $bb->nama_bahan_baku}}</td>
-                                            <td>{{ $bb->persediaan}}</td>
-                                            <td>{{ $bb->satuan_produk}}</td>
-                                            <td>{{ $bb->satuan}}</td>
-                                            <td>{{ $bb->harga}}</td>
+                                            <td>{{ $dt->bahan_baku_kode}}</td>
+                                            <td>{{ $dt->bahanbaku->nama_bahan_baku}}</td>
+                                            <td>{{ $dt->bahanbaku->persediaan}}</td>
+                                            <td>{{ $dt->bahanbaku->satuan_produk}}</td>
+                                            <td>{{ $dt->bahanbaku->satuan}}</td>
+                                            <td>{{ $dt->harga}}</td>
 
                                             <td>
-                                                <button wire:click.prevent="SelectData('{{$bb->kode_bahan_baku}}')"
+                                                <button wire:click.prevent="SelectData('{{$dt->bahan_baku_kode}}')"
                                                     class="btn btn-xs btn-info" id="select">
                                                     <i class="fa fa-check"></i> Select
 

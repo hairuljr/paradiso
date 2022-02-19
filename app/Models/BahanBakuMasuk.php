@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\BahanBaku;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class BahanBakuMasuk extends Model
 {
@@ -11,4 +12,9 @@ class BahanBakuMasuk extends Model
     protected $table = 'tb_bahan_baku_masuk';
     protected $primaryKey = 'id';
     protected $fillable = ['bahan_baku_kode', 'stok_masuk', 'harga'];
+
+    public function bahanbaku()
+    {
+        return $this->hasOne(BahanBaku::class, 'kode_bahan_baku', 'bahan_baku_kode');
+    }
 }

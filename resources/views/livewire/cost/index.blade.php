@@ -51,7 +51,7 @@
                             <thead class="table-light">
                                 <tr>
                                     <th class="align-middle">No</th>
-                                    <th class="align-middle">Barcode Produk</th>
+                                    <th class="align-middle">No Cost</th>
                                     {{-- <th class="align-middle">Nama</th> --}}
                                     <th class="align-middle">Total Cgs</th>
                                     <th class="align-middle">Harga Jual</th>

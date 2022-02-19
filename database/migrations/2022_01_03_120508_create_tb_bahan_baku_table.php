@@ -19,7 +19,6 @@ class CreateTbBahanBakuTable extends Migration
             $table->integer('persediaan')->unsigned();
             $table->integer('satuan_produk')->unsigned();
             $table->string('satuan', 15);
-            $table->string('harga', 15);
             $table->timestamps();
         });
     }
