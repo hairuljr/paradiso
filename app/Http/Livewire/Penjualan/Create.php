@@ -117,11 +117,7 @@ class Create extends Component
 
         ]);
         foreach ($sementara as $value) {
-            // DetailPenjualan::create([
-            //     'no_transaksi' => $value->no_trf,
-            //     'tgl_transaksi' => now(),
-            //     'sub_total' => $subTotal
-            // ]);
+
 
             DetailPenjualan::create([
                 'transaksi_no' => $this->transaksi_no,

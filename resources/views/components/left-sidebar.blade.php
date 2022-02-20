@@ -40,7 +40,7 @@
           </a>
           <ul class="sub-menu" aria-expanded="false">
             <li><a href="/bahanbakumasuk" key="t-products">Bahan Baku Masuk</a></li>
-            <li><a href="ecommerce-product-detail.html" key="t-product-detail">Bahan Baku Keluar</a>
+            <li><a href="/bahanbakukeluar" key="t-product-detail">Bahan Baku Keluar</a>
             <li><a href="/penjualan" key="t-orders">Penjualan</a></li>
             </li>
         </ul>

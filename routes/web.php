@@ -31,6 +31,9 @@ Route::get('/cost/create', \App\Http\Livewire\Cost\Create::class)->middleware('a
 Route::get('/penjualan', \App\Http\Livewire\Penjualan\Index::class)->middleware('auth')->name('penjualan.index');
 Route::get('/penjualan/create', \App\Http\Livewire\Penjualan\Create::class)->middleware('auth')->name('penjualan.create');
 
+Route::get('/bahanbakukeluar', \App\Http\Livewire\Bahanbakukeluar\Index::class)->middleware('auth')->name('bahanbakukeluar.index');
+
+
 
 
 
