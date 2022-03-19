@@ -130,6 +130,7 @@
                                 <span key="t-ecommerce">Data Master</span>
                             </a>
                             <ul class="sub-menu" aria-expanded="false">
+                                <li><a href="/user" key="t-orders">Data User</a></li>
                                 <li><a href="/jenisproduk" key="t-orders">Jenis Produk</a></li>
                                 <li><a href="/produk" key="t-product-detail">Produk</a></li>
                                 <li><a href="/bahanbaku" key="t-products">Bahan Baku</a></li>
@@ -155,13 +156,17 @@
                                 </li>
                             </ul>
                         </li>
-                    
-                        {{-- <li>
-                            <a href="/detailcost" class="waves-effect">
-                                <i class="bx bx-calendar"></i>
-                                <span key="t-calendar">Detail Cost</span>
+                        <li>
+                            <a href="#" class="has-arrow waves-effect">
+                                <i class="bx bx-store"></i>
+                                <span key="t-ecommerce">Laporan</span>
                             </a>
-                        </li> --}}
+                            <ul class="sub-menu" aria-expanded="false">
+                              <li><a href="/laporanbahanbakumasuk" key="t-products">Laporan Bahan Baku Masuk</a></li>
+                              <li><a href="/laporanpenjualan" key="t-product-detail">Laporan Penjualan</a>
+                              <li><a href="/laporanbahanbakukeluar" key="t-orders">Laporan Bahan Baku Keluar</a></li>
+                              </li>
+                          </ul>
                     </ul>
                 </div>
                 <!-- Sidebar -->

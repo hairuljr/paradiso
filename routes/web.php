@@ -33,6 +33,10 @@ Route::get('/penjualan/create', \App\Http\Livewire\Penjualan\Create::class)->mid
 
 Route::get('/bahanbakukeluar', \App\Http\Livewire\Bahanbakukeluar\Index::class)->middleware('auth')->name('bahanbakukeluar.index');
 
+Route::get('/laporanbahanbakumasuk', \App\Http\Livewire\Laporanbahanbakumasuk\Index::class)->middleware('auth')->name('Laporanbahanbakumasuk.index');
+Route::get('/laporanpenjualan', \App\Http\Livewire\Laporanpenjualan\Index::class)->middleware('auth')->name('laporanpenjualan.index');
+Route::get('/laporanbahanbakukeluar', \App\Http\Livewire\Laporanbahanbakukeluar\Index::class)->middleware('auth')->name('Laporanbahanbakukeluar.index');
+
 
 
 

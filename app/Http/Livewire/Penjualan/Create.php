@@ -132,7 +132,7 @@ class Create extends Component
                 $digunakan = $item['bahan_baku']['digunakan'];
                 BahanBakuKeluar::create([
                     'bahan_baku_kode' => $kode,
-                    'jumlah' => $digunakan,
+                    'jumlah' => $digunakan * $value->jumlah,
                 ]);
                 // Mengurangi persediaan bahan baku
                 $bahanBaku = BahanBaku::where('kode_bahan_baku', $kode)->first();

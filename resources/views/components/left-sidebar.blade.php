@@ -45,6 +45,18 @@
             </li>
         </ul>
       </li>
+      <li>
+        <a href="#" class="has-arrow waves-effect">
+            <i class="bx bx-store"></i>
+            <span key="t-ecommerce">Laporan</span>
+        </a>
+        <ul class="sub-menu" aria-expanded="false">
+          <li><a href="/laporanbahanbakumasuk" key="t-products">Laporan Bahan Baku Masuk</a></li>
+          <li><a href="/laporanpenjualan" key="t-product-detail">Laporan Penjualan</a>
+          <li><a href="/laporanbahanbakukeluar" key="t-orders">Laporan Bahan Baku Keluar</a></li>
+          </li>
+      </ul>
+    </li>
      
       </li>
 
