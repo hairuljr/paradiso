@@ -3,8 +3,15 @@
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
-
-
+// Routing Manajemen Role & Permission
+Route::group(['middleware' => ['auth', 'role:admin']], function () {
+    Route::get('/roles', \App\Http\Livewire\Roles\Index::class)->name('roles.index');
+    Route::get('/roles/create', \App\Http\Livewire\Roles\Create::class)->name('roles.create');
+    Route::get('/roles/edit/{id}', \App\Http\Livewire\Roles\Edit::class)->name('roles.edit');
+    Route::get('/permissions', \App\Http\Livewire\Permissions\Index::class)->name('permissions.index');
+    Route::get('/permissions/create', \App\Http\Livewire\Permissions\Create::class)->name('permissions.create');
+    Route::get('/permissions/edit/{id}', \App\Http\Livewire\Permissions\Edit::class)->name('permissions.edit');
+});
 Route::get('/', function () {
     return redirect()->route('login');
 });

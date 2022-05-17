@@ -75,7 +75,8 @@
                             data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <img class="rounded-circle header-profile-user"
                                 src="{{ asset('assets/skote/images/users/avatar-1') }}.jpg" alt="Header Avatar">
-                            <span class="d-none d-xl-inline-block ms-1" key="t-henry">{{ auth()->user()->name }}</span>
+                            <span class="d-none d-xl-inline-block ms-1"
+                                key="t-henry">{{ auth()->user()->name }}</span>
                             <i class="mdi mdi-chevron-down d-none d-xl-inline-block"></i>
                         </button>
                         <div class="dropdown-menu dropdown-menu-end">
@@ -123,19 +124,36 @@
                                 <span key="t-dashboards">Dashboard</span>
                             </a>
                         </li>
-
+                        @can('manage-role-permission')
+                            <li>
+                                <a href="#" class="has-arrow waves-effect">
+                                    <i class="bx bx-archive"></i>
+                                    <span key="t-ecommerce">Role & Permission</span>
+                                </a>
+                                <ul class="sub-menu" aria-expanded="false">
+                                    <li><a href="/permissions" key="t-product-detail">Hak Akses</a></li>
+                                    <li><a href="/roles" key="t-orders">Roles</a></li>
+                                </ul>
+                            </li>
+                        @endcan
                         <li>
                             <a href="#" class="has-arrow waves-effect">
                                 <i class="bx bx-archive"></i>
                                 <span key="t-ecommerce">Data Master</span>
                             </a>
                             <ul class="sub-menu" aria-expanded="false">
-                                <li><a href="/user" key="t-orders">Data User</a></li>
-                                <li><a href="/jenisproduk" key="t-orders">Jenis Produk</a></li>
-                                <li><a href="/produk" key="t-product-detail">Produk</a></li>
-                                <li><a href="/bahanbaku" key="t-products">Bahan Baku</a></li>
-
-
+                                @can('view pengguna')
+                                    <li><a href="/user" key="t-orders">Data User</a></li>
+                                @endcan
+                                @can('view jenis-produk')
+                                    <li><a href="/jenisproduk" key="t-orders">Jenis Produk</a></li>
+                                @endcan
+                                @can('view produk')
+                                    <li><a href="/produk" key="t-product-detail">Produk</a></li>
+                                @endcan
+                                @can('view bahan-baku')
+                                    <li><a href="/bahanbaku" key="t-products">Bahan Baku</a></li>
+                                @endcan
                             </ul>
                         </li>
                         <li>
@@ -153,20 +171,20 @@
                                 <li><a href="/bahanbakumasuk" key="t-products">Bahan Baku Masuk</a></li>
                                 <li><a href="/bahanbakukeluar" key="t-product-detail">Bahan Baku Keluar</a>
                                 <li><a href="/penjualan" key="t-orders">Penjualan</a></li>
-                                </li>
-                            </ul>
                         </li>
-                        <li>
-                            <a href="#" class="has-arrow waves-effect">
-                                <i class="bx bx-store"></i>
-                                <span key="t-ecommerce">Laporan</span>
-                            </a>
-                            <ul class="sub-menu" aria-expanded="false">
-                              <li><a href="/laporanbahanbakumasuk" key="t-products">Laporan Bahan Baku Masuk</a></li>
-                              <li><a href="/laporanpenjualan" key="t-product-detail">Laporan Penjualan</a>
-                              <li><a href="/laporanbahanbakukeluar" key="t-orders">Laporan Bahan Baku Keluar</a></li>
-                              </li>
-                          </ul>
+                    </ul>
+                    </li>
+                    <li>
+                        <a href="#" class="has-arrow waves-effect">
+                            <i class="bx bx-store"></i>
+                            <span key="t-ecommerce">Laporan</span>
+                        </a>
+                        <ul class="sub-menu" aria-expanded="false">
+                            <li><a href="/laporanbahanbakumasuk" key="t-products">Laporan Bahan Baku Masuk</a></li>
+                            <li><a href="/laporanpenjualan" key="t-product-detail">Laporan Penjualan</a>
+                            <li><a href="/laporanbahanbakukeluar" key="t-orders">Laporan Bahan Baku Keluar</a></li>
+                    </li>
+                    </ul>
                     </ul>
                 </div>
                 <!-- Sidebar -->
@@ -240,15 +258,15 @@
     <script src="{{ asset('assets/skote/libs/metismenu/metisMenu.min.js') }}"></script>
     <script src="{{ asset('assets/skote/libs/simplebar/simplebar.min.js') }}"></script>
     <script src="{{ asset('assets/skote/libs/node-waves/waves.min.js') }}"></script>
-    <script src="{{ asset('assets/skote/libs/select2/js/select2.min.js')}}"></script>
+    <script src="{{ asset('assets/skote/libs/select2/js/select2.min.js') }}"></script>
     <!-- App js -->
     <script src="{{ asset('assets/skote/js/app.js') }}"></script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
     <script>
-        $(document).ready(function () {
-            $(".keluar").on("click", function (e) {
+        $(document).ready(function() {
+            $(".keluar").on("click", function(e) {
                 e.preventDefault();
                 let CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
                 Swal.fire({
@@ -287,48 +305,56 @@
 
             });
         })
-
     </script>
 
     <script>
         window.livewire.on('updateModal', () => {
             $('#updateModal').modal('hide');
         });
-
     </script>
-    
+
     <script>
         window.livewire.on('deleteModal', () => {
             $('#deleteModal').modal('hide');
         });
-
     </script>
-   
+
 
     <script>
-        $(document).ready(function () {
-            $(document).on('click', '#select', function () {
-
+        $(document).ready(function() {
+            $(document).on('click', '#select', function() {
                 $('#modal-item').modal('hide');
             })
         })
-
     </script>
 
     <script>
-        $(document).ready(function () {
-            $(document).on('click', '#select1', function () {
-
+        $(document).ready(function() {
+            $(document).on('click', '#select1', function() {
                 $('#modal-item1').modal('hide');
             })
         })
+    </script>
 
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('[name="all_permission"]').on('click', function() {
+                if ($(this).is(':checked')) {
+                    $.each($('.permission'), function() {
+                        $(this).prop('checked', true);
+                    });
+                } else {
+                    $.each($('.permission'), function() {
+                        $(this).prop('checked', false);
+                    });
+                }
+            });
+        });
     </script>
 
 
 
 
-   
 
 </body>
 

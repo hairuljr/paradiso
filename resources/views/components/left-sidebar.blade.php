@@ -16,12 +16,27 @@
                         </a>
                     </li>
                 @endcan
+                @can('manage-role-permission')
+                    <li>
+                        <a href="#" class="has-arrow waves-effect">
+                            <i class="bx bx-archive"></i>
+                            <span key="t-ecommerce">Role & Permission</span>
+                        </a>
+                        <ul class="sub-menu" aria-expanded="false">
+                            <li><a href="/permissions" key="t-product-detail">Hak Akses</a></li>
+                            <li><a href="/roles" key="t-orders">Roles</a></li>
+                        </ul>
+                    </li>
+                @endcan
                 <li>
                     <a href="#" class="has-arrow waves-effect">
                         <i class="bx bx-archive"></i>
                         <span key="t-ecommerce">Data Masters</span>
                     </a>
                     <ul class="sub-menu" aria-expanded="false">
+                        @can('view pengguna')
+                            <li><a href="/user" key="t-orders">Data User</a></li>
+                        @endcan
                         @can('view jenis-produk')
                             <li><a href="/jenisproduk" key="t-orders">Jenis Produk</a></li>
                         @endcan

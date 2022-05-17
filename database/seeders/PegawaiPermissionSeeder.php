@@ -26,6 +26,10 @@ class PegawaiPermissionSeeder extends Seeder
         $pegawaiRole->givePermissionTo('create produk');
         $pegawaiRole->givePermissionTo('update produk');
         $pegawaiRole->givePermissionTo('delete produk');
+        $pegawaiRole->givePermissionTo('view bahan-baku');
+        $pegawaiRole->givePermissionTo('create bahan-baku');
+        $pegawaiRole->givePermissionTo('update bahan-baku');
+        $pegawaiRole->givePermissionTo('delete bahan-baku');
         $pegawaiRole->givePermissionTo('view cgs');
         $pegawaiRole->givePermissionTo('create cgs');
         $pegawaiRole->givePermissionTo('update cgs');
@@ -38,6 +42,10 @@ class PegawaiPermissionSeeder extends Seeder
         $pegawaiRole->givePermissionTo('create bahan-baku-keluar');
         $pegawaiRole->givePermissionTo('update bahan-baku-keluar');
         $pegawaiRole->givePermissionTo('delete bahan-baku-keluar');
+        $pegawaiRole->givePermissionTo('view penjualan');
+        $pegawaiRole->givePermissionTo('create penjualan');
+        $pegawaiRole->givePermissionTo('update penjualan');
+        $pegawaiRole->givePermissionTo('delete penjualan');
         $pegawaiRole->givePermissionTo('view laporan-bahan-baku-masuk');
         $pegawaiRole->givePermissionTo('view laporan-bahan-baku-keluar');
         $pegawaiRole->givePermissionTo('view laporan-penjualan');
