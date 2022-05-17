@@ -9,7 +9,7 @@ class Index extends Component
 {
     public function render()
     {
-        $cost =  DB::table('tb_Cost')->get();
+        $cost =  DB::table('tb_cost')->get();
         $detailcost = DB::table('tb_detailcost')
             ->join(
                 'tb_cost',

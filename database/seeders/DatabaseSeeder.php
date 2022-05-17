@@ -6,6 +6,8 @@ use Illuminate\Database\Seeder;
 use App\Models\JenisProduk;
 use App\Models\Produk;
 use App\Models\BahanBaku;
+use App\Models\User;
+use Spatie\Permission\Models\Role;
 
 class DatabaseSeeder extends Seeder
 {
@@ -16,8 +18,18 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        \App\Models\User::factory(1)->create();
+        $this->call(PermissionDataSeeder::class);
+        $this->call(KasirPermissionSeeder::class);
+        $this->call(PegawaiPermissionSeeder::class);
 
+        $adminRole = Role::create(['name' => 'admin']);
+        $user = User::factory()->create([
+            'name' => 'Adminku',
+            'username' => 'admin',
+            'email' => 'admin@paradiso.com',
+            'password' => bcrypt('password')
+        ]);
+        $user->assignRole($adminRole);
         // JenisProduk::create([
 
         //     'kode_jenis_produk' => 'JS-001',
