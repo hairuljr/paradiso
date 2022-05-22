@@ -35,7 +35,7 @@
                     </a>
                     <ul class="sub-menu" aria-expanded="false">
                         @can('view pengguna')
-                            <li><a href="/user" key="t-orders">Data User</a></li>
+                            <li><a href="/users" key="t-orders">Data User</a></li>
                         @endcan
                         @can('view jenis-produk')
                             <li><a href="/jenisproduk" key="t-orders">Jenis Produk</a></li>

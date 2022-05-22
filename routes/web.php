@@ -12,6 +12,14 @@ Route::group(['middleware' => ['auth', 'role:admin']], function () {
     Route::get('/permissions/create', \App\Http\Livewire\Permissions\Create::class)->name('permissions.create');
     Route::get('/permissions/edit/{id}', \App\Http\Livewire\Permissions\Edit::class)->name('permissions.edit');
 });
+
+// data master users
+Route::group(['middleware' => ['auth', 'role:admin']], function () {
+    Route::get('/users', \App\Http\Livewire\Users\Index::class)->name('users.index');
+    Route::get('/users/create', \App\Http\Livewire\Users\Create::class)->name('users.create');
+    Route::get('/users/edit/{id}', \App\Http\Livewire\Users\Edit::class)->name('users.edit');
+});
+
 Route::get('/', function () {
     return redirect()->route('login');
 });
