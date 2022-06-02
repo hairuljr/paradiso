@@ -18,8 +18,9 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+        $this->call([DataSeeder::class]);
         $this->call(PermissionDataSeeder::class);
-        $this->call(KasirPermissionSeeder::class);
+        $this->call(PemilikPermissionSeeder::class);
         $this->call(PegawaiPermissionSeeder::class);
 
         $adminRole = Role::create(['name' => 'admin']);

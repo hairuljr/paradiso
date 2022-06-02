@@ -52,7 +52,7 @@
                     <li>
                         <a href="/cost" class="waves-effect">
                             <i class="bx bx-calendar"></i>
-                            <span key="t-calendar">Cost Of Good Sold</span>
+                            <span key="t-calendar">Cost </span>
                         </a>
                     </li>
                 @endcan
@@ -67,14 +67,15 @@
                                 <a href="/bahanbakumasuk" key="t-products">Bahan Baku Masuk</a>
                             </li>
                         @endcan
+                        @can('view penjualan')
+                        <li><a href="/penjualan" key="t-orders">Penjualan</a></li>
+                        @endcan
                         @can('view bahan-baku-keluar')
                             <li>
                                 <a href="/bahanbakukeluar" key="t-product-detail">Bahan Baku Keluar</a>
                             </li>
                         @endcan
-                        @can('view penjualan')
-                            <li><a href="/penjualan" key="t-orders">Penjualan</a></li>
-                        @endcan
+                     
                     </ul>
                 </li>
                 <li>
