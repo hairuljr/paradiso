@@ -84,14 +84,14 @@ class DataSeeder extends Seeder
 
         $produk = [
             [
-                'kode_produk' => "BK-001",
+                'kode_produk' => str_random(20),
                 'nama_produk' => 'Lemon Tea',
                 'jenis_produk_kode' => 'JP-001',
                 'created_at' => new \DateTime,
                 'updated_at' => null,
             ],
             [
-                'kode_produk' => "JP-002",
+                'kode_produk' => str_random(20),
                 'nama_produk' => 'Milo',
                 'jenis_produk_kode' => 'JP-001',
                 'created_at' => new \DateTime,

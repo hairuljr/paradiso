@@ -66,6 +66,10 @@ class Create extends Component
             'stok_masuk' => $this->stok_masuk,
             'harga' => $this->harga,
         ]);
+
+
+
+
         session()->flash('pesan', 'Data berhasil ditambah');
         return redirect('bahanbakumasuk');
     }

@@ -96,6 +96,43 @@
         </div> <!-- end col -->
     </div>
 
+    <div wire:ignore.self id="updateModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="updateModal"
+    aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="updateModal">Large modal</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="table-responsive">
+                <table id="example" class="table align-middle table-nowrap table-check">
+                    <thead class="table-light">
+                        <tr>
+                            <th class="align-middle">No</th>
+                        
+                            <th class="align-middle">Nama Produk</th>
+                            <th class="align-middle">Jumlah</th>
+                            <th class="align-middle">Total</th>
+                            <th class="align-middle">Action</th>
+                        </tr>
+                    </thead>
 
+
+                    <tbody>
+                        @php $no = 1; @endphp
+                        @foreach ($detailTransaksi as $di)
+                        <tr>
+                            <td>{{ $no++ }}</td>
+                         
+                             
+                            </td>
+                        </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
    
 </div>

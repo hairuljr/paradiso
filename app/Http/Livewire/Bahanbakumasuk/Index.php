@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\DB;
 
 class Index extends Component
 {
-
+    public $DetailData = '';
     public $bahan_baku_kode;
     public $kode_bahan_baku;
     public $nama_bahan_baku;
@@ -37,7 +37,13 @@ class Index extends Component
         $this->harga = '';
     }
 
-    public function DetailData($bahan_baku_kode)
+    public function DetailData($id)
+    {
+
+        $this->DetailData = $id;
+    }
+
+    public function DetailData1($bahan_baku_kode)
     {
         $bahanbakumasuk = DB::table('tb_bahan_baku_masuk')
             ->join(
@@ -55,7 +61,6 @@ class Index extends Component
         $this->stok_masuk = $bahanbakumasuk->stok_masuk;
         $this->harga = $bahanbakumasuk->harga;
     }
-
     public function Update()
     {
         $validasi = $this->validate();
@@ -76,7 +81,7 @@ class Index extends Component
     public function delete()
     {
 
-        BahanBakuMasuk::where('bahan_baku_kode', $this->bahan_baku_kode)->delete();
+        BahanBakuMasuk::find($this->DetailData)->delete();
         //flash message
         session()->flash('hapus', 'Data Berhasil Dihapus.');
         $this->emit('deleteModal');

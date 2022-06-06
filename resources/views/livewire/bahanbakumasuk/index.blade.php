@@ -65,20 +65,21 @@
                                 @foreach ($bahanbakumasuk as $bbm)
                                 <tr>
                                     <td>{{ $no++ }}</td>
+                              
                                     <td>{{ $bbm->bahan_baku_kode}}</td>
                                     <td>{{ $bbm->nama_bahan_baku}}</td>
                                     <td>{{ $bbm->stok_masuk}}</td>
                                     <td>{{ rupiah($bbm->harga) }}</td>
                                     <td>
                                         <div class="d-flex gap-3 cursor">
-                                            <a wire:click.prevent="DetailData('{{$bbm->bahan_baku_kode}}')"
+                                            <a wire:click.prevent="DetailData1('{{$bbm->bahan_baku_kode}}')"
                                                 class="text-success" data-bs-toggle="modal"
                                                 data-bs-target="#updateModal"><i
                                                     class="mdi mdi-pencil font-size-18"></i>
                                             </a>
 
                                             <a button class="text-danger"
-                                                wire:click="DetailData('{{$bbm->bahan_baku_kode}}')"
+                                                wire:click="DetailData('{{$bbm->id}}')"
                                                 data-bs-toggle="modal" data-bs-target="#deleteModal"><i
                                                     class="mdi mdi-delete font-size-18"></i></a>
 
