@@ -11,4 +11,9 @@ class DetailPenjualan extends Model
 
     protected $table = 'tb_detail_penjualan';
     protected $guarded = [];
+
+    public function penjualan()
+    {
+        return $this->belongsTo(Penjualan::class, 'produk_kode', 'kode_produk');
+    }
 }

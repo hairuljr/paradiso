@@ -5,7 +5,7 @@
                 <h4 class="mb-sm-0 font-size-18">Data Penjualan</h4>
                 <div class="page-title-right">
                     <ol class="breadcrumb m-0">
-                        <a href="{{route('penjualan.create')}}" type="button" class="btn btn-success "><i
+                        <a href="{{ route('penjualan.create') }}" type="button" class="btn btn-success "><i
                                 class="mdi mdi-plus me-1"></i> Penjualan </a>
                     </ol>
                 </div>
@@ -24,25 +24,25 @@
                     <div class="row mb-2">
                         <div class="col-sm-4">
                             @if (session('pesan'))
-                            <div class="alert alert-primary alert-dismissible fade show" role="alert">
-                                {{ session('pesan')}}
-                                <button type="button" class="btn-close" data-bs-dismiss="alert"
-                                    aria-label="Close"></button>
-                            </div>
+                                <div class="alert alert-primary alert-dismissible fade show" role="alert">
+                                    {{ session('pesan') }}
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                        aria-label="Close"></button>
+                                </div>
                             @endif
                             @if (session('pesan1'))
-                            <div class="alert alert-primary alert-dismissible fade show" role="alert">
-                                {{ session('pesan1')}}
-                                <button type="button" class="btn-close" data-bs-dismiss="alert"
-                                    aria-label="Close"></button>
-                            </div>
+                                <div class="alert alert-primary alert-dismissible fade show" role="alert">
+                                    {{ session('pesan1') }}
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                        aria-label="Close"></button>
+                                </div>
                             @endif
                             @if (session('hapus'))
-                            <div class="alert alert-primary alert-dismissible fade show" role="alert">
-                                {{ session('hapus')}}
-                                <button type="button" class="btn-close" data-bs-dismiss="alert"
-                                    aria-label="Close"></button>
-                            </div>
+                                <div class="alert alert-primary alert-dismissible fade show" role="alert">
+                                    {{ session('hapus') }}
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                        aria-label="Close"></button>
+                                </div>
                             @endif
                         </div>
                     </div>
@@ -62,31 +62,31 @@
                             <tbody>
                                 @php $no = 1; @endphp
                                 @foreach ($penjualan as $pn)
-                                <tr>
-                                    <td>{{ $no++ }}</td>
-                                    <td>{{ $pn->no_transaksi}}</td>
-                                    <td>{{ $pn->tgl_transaksi}}</td>
-                                    <td>{{ rupiah($pn->sub_total)}}</td>
-                                    <td>
-                                        <div class="d-flex gap-3 cursor">
-                                            <a wire:click.prevent="DetailData('{{$pn->no_transaksi}}')"
-                                                class="text-success" data-bs-toggle="modal"
-                                                data-bs-target="#updateModal"><i
-                                                    class="mdi mdi-pencil font-size-18"></i>
-                                            </a>
+                                    <tr>
+                                        <td>{{ $no++ }}</td>
+                                        <td>{{ $pn->no_transaksi }}</td>
+                                        <td>{{ $pn->tgl_transaksi }}</td>
+                                        <td>{{ rupiah($pn->sub_total) }}</td>
+                                        <td>
+                                            <div class="d-flex gap-3 cursor">
+                                                <a wire:click.prevent="DetailData('{{ $pn->no_transaksi }}')"
+                                                    class="text-success" data-bs-toggle="modal"
+                                                    data-bs-target="#updateModal"><i
+                                                        class="mdi mdi-pencil font-size-18"></i>
+                                                </a>
 
-                                            <a button class="text-danger"
-                                                wire:click="DetailData('{{$pn->no_transaksi}}')"
-                                                data-bs-toggle="modal" data-bs-target="#deleteModal"><i
-                                                    class="mdi mdi-delete font-size-18"></i>
-                                            </a>
-
-                                          
+                                                <a button class="text-danger"
+                                                    wire:click="DetailData('{{ $pn->no_transaksi }}')"
+                                                    data-bs-toggle="modal" data-bs-target="#deleteModal"><i
+                                                        class="mdi mdi-delete font-size-18"></i>
+                                                </a>
 
 
-                                        </div>
-                                    </td>
-                                </tr>
+
+
+                                            </div>
+                                        </td>
+                                    </tr>
                                 @endforeach
                             </tbody>
                         </table>
@@ -96,43 +96,41 @@
         </div> <!-- end col -->
     </div>
 
-    <div wire:ignore.self id="updateModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="updateModal"
-    aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="updateModal">Large modal</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="table-responsive">
-                <table id="example" class="table align-middle table-nowrap table-check">
-                    <thead class="table-light">
-                        <tr>
-                            <th class="align-middle">No</th>
-                        
-                            <th class="align-middle">Nama Produk</th>
-                            <th class="align-middle">Jumlah</th>
-                            <th class="align-middle">Total</th>
-                            <th class="align-middle">Action</th>
-                        </tr>
-                    </thead>
+    <div wire:ignore.self id="updateModal" class="modal fade" tabindex="-1" role="dialog"
+        aria-labelledby="updateModal" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="updateModal">Large modal</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="table-responsive">
+                    <table id="example" class="table align-middle table-nowrap table-check">
+                        <thead class="table-light">
+                            <tr>
+                                <th class="align-middle">No</th>
+                                <th class="align-middle">Nama Produk</th>
+                                <th class="align-middle">Jumlah</th>
+                                <th class="align-middle">Total</th>
+                                <th class="align-middle">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @forelse ($detailTransaksi as $di)
+                                <tr>
+                                    <td>{{ $loop->iteration }}</td>
+                                    <td>{{ $di->penjualan->nama_produk ?? '-' }}</td>
+                                </tr>
+                            @empty
+                                <tr>
+                                    <td colspan="5">Data kosong</td>
+                                </tr>
+                            @endforelse
+                        </tbody>
+                    </table>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
 
-
-                    <tbody>
-                        @php $no = 1; @endphp
-                        @foreach ($detailTransaksi as $di)
-                        <tr>
-                            <td>{{ $no++ }}</td>
-                         
-                             
-                            </td>
-                        </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-            </div>
-        </div><!-- /.modal-content -->
-    </div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
-   
 </div>
