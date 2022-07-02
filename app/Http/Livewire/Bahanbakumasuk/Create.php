@@ -18,6 +18,7 @@ class Create extends Component
     public $harga;
     public $satuan_produk;
     public $satuan;
+    public $persediaan;
 
     protected $rules = [
         'bahan_baku_kode' => 'required',
@@ -30,6 +31,8 @@ class Create extends Component
 
     ];
 
+
+
     protected $messages = [
         'bahan_baku_kode.required' => 'Barcode tidak boleh kosong.',
         'nama_bahan_baku.required' => 'Nama Bahan Baku tidak boleh kosong.',
@@ -41,7 +44,6 @@ class Create extends Component
 
 
     ];
-
 
     public function SelectData($kode_bahan_baku)
     {
@@ -60,15 +62,26 @@ class Create extends Component
     {
         $validasi = $this->validate();
 
-        BahanBakuMasuk::create($validasi, [
+        BahanBakuMasuk::create([
 
             'bahan_baku_kode' => $this->bahan_baku_kode,
+            'tgl_transaksi' => now(),
+            'user_id' => auth()->id(),
             'stok_masuk' => $this->stok_masuk,
             'harga' => $this->harga,
         ]);
 
+        // $bahan_baku_kode = BahanBakuMasuk::where('bahan_baku_kode')->get();
+        $kode = $this->bahan_baku_kode;
+        $bahanBaku = BahanBaku::where('kode_bahan_baku', $kode)->first();
 
+        if ($bahanBaku) {
 
+            $bahanBaku->update([
+                'persediaan' => $bahanBaku->persediaan + $this->stok_masuk
+            ]);
+        }
+        // dd($bahanBaku);
 
         session()->flash('pesan', 'Data berhasil ditambah');
         return redirect('bahanbakumasuk');

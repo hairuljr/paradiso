@@ -24,6 +24,14 @@
 
                     <form method="POST" wire:submit.prevent="save">
                         <div class="mb-3 row">
+                            <label class="col-md-2 col-form-label">Tanggal</label>
+                            <div class="col-md-2">
+                                <input id="tgl_transaksi" type="date" class="form-control"
+                                wire:model="tgl_transaksi" >
+                                @error('tgl_transaksi') <span class="error">{{ $message }}</span> @enderror
+                            </div>
+                        </div>
+                        <div class="mb-3 row">
                             <label class="col-md-2 col-form-label">Barcode</label>
                             <div class="col-md-5">
                                 <input type="text" wire:model="bahan_baku_kode" 

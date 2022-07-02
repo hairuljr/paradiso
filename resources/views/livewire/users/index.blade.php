@@ -2,7 +2,7 @@
     <div class="row">
         <div class="col-12">
             <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-                <h4 class="mb-sm-0 font-size-18">Users</h4>
+                <h4 class="mb-sm-0 font-size-18">DATA USERS</h4>
                 <div class="page-title-right">
                     <ol class="breadcrumb m-0">
                         <a href="{{ route('users.create') }}" type="button" class="btn btn-success "><i
@@ -50,8 +50,8 @@
                                 <tr>
                                     <th class="align-middle">No</th>
                                     <th class="align-middle">Nama</th>
-                                    <th class="align-middle">Email</th>
                                     <th class="align-middle">Username</th>
+                                    <th class="align-middle">Role</th>
                                     <th class="align-middle">Actions</th>
 
                                 </tr>
@@ -61,8 +61,8 @@
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
                                         <td>{{ $jk->name }}</td>
-                                        <td>{{ $jk->email }}</td>
                                         <td>{{ $jk->username }}</td>
+                                        <td>{{ $jk->roles->first()->name??'-' }}</td>
                                         <td>
                                             <div class="d-flex gap-3 cursor">
                                                 <a href="{{ route('users.edit', $jk->id) }}" class="text-success"><i

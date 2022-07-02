@@ -53,7 +53,10 @@
                                     <th class="align-middle">No</th>
                                     <th class="align-middle">Barcode</th>
                                     <th class="align-middle">Nama</th>
+                                    <th class="align-middle">Tanggal</th>
+                                    <th class="align-middle">Kasir</th>
                                     <th class="align-middle">Stok Masuk</th>
+                                    <th class="align-middle">Satuan</th>
                                     <th class="align-middle">Harga</th>
                                     <th class="align-middle">Action</th>
                                 </tr>
@@ -68,7 +71,10 @@
                               
                                     <td>{{ $bbm->bahan_baku_kode}}</td>
                                     <td>{{ $bbm->nama_bahan_baku}}</td>
+                                    <td>{{ $bbm->tgl_transaksi}}</td>
+                                    <td>{{ $bbm->user->name}}</td>
                                     <td>{{ $bbm->stok_masuk}}</td>
+                                    <td>{{ $bbm->satuan}}</td>
                                     <td>{{ rupiah($bbm->harga) }}</td>
                                     <td>
                                         <div class="d-flex gap-3 cursor">

@@ -3,7 +3,7 @@
                 <div class="row">
                     <div class="col-12">
                         <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-                            <h4 class="mb-sm-0 font-size-18">Cost Of Good Sold</h4>
+                            <h4 class="mb-sm-0 font-size-18">MENGHITUNG HARGA JUAL</h4>
                             <div class="page-title-right">
                                 <ol class="breadcrumb m-0">
                                     <a href="/cost" type="submit" class="btn btn-secondary waves-effect waves-light">Back</a>
@@ -14,15 +14,45 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-body">
-
+                                
+                                <div class="row mb-2">
+                                    <div class="col-sm-4">
+                                        @if (session('pesan'))
+                                        <div class="alert alert-primary alert-dismissible fade show" role="alert">
+                                            {{ session('pesan')}}
+                                            <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                                aria-label="Close"></button>
+                                        </div>
+                                        @endif
+                                        @if (session('pesan1'))
+                                        <div class="alert alert-primary alert-dismissible fade show" role="alert">
+                                            {{ session('pesan1')}}
+                                            <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                                aria-label="Close"></button>
+                                        </div>
+                                        @endif
+                                        @if (session('hapus'))
+                                        <div class="alert alert-primary alert-dismissible fade show" role="alert">
+                                            {{ session('hapus')}}
+                                            <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                                aria-label="Close"></button>
+                                        </div>
+                                        @endif
+                                    </div>
+                                </div>
+                             
+                             
                                 <div class="row">
                                     {{-- <input id="id_cost" type="text" wire:model="id_cost" class="form-control" value="{{ $id_cost }}" readonly> --}}
                                     <div class="col-sm-6">
                                         <label>Barcode </label>
                                         <div class="input-group mb-3">
                                             <input id="produk_kode" type="text" class="form-control" wire:model="produk_kode"
-                                                readonly>
+                                                readonly >
+                                            <input id="old" type="hidden" class="form-control" 
+                                                readonly value="{{$this->produk_kode}}">
                                             @error('produk_kode') <span class="error">{{ $message }}</span> @enderror
+
                                             <div class="input-group-append">
                                                 <button type="button" class="btn btn-primary waves-effect waves-light"
                                                     data-bs-toggle="modal" data-bs-target=".ProdukModal">Cari</button>
@@ -35,12 +65,16 @@
                                             <div class="input-group mb-3">
                                                 <input id="nama_produk" type="text" class="form-control"
                                                     wire:model="nama_produk" readonly>
+                                                <input id="old1" type="hidden" class="form-control" 
+                                                    readonly value=" {{$this->nama_produk}}  ">
                                                 @error('nama_produk') <span class="error">{{ $message }}</span> @enderror
                                             </div>
                                         </div>
 
                                     </div>
                                 </div>
+                                
+                             
                                 {{-- </form> --}}
 
 
@@ -172,9 +206,8 @@
                                         <thead class="table-light">
                                             <tr>
 
-                                                <th class="align-middle">Barcode Produk</th>
-                                                <th class="align-middle">Nama Produk</th>
-                                                <th class="align-middle">Barcode BB</th>
+                                              
+                                                <th class="align-middle">Barcode</th>
                                                 <th class="align-middle">Nama Bahan Baku</th>
                                                 <th class="align-middle">Cost</th>
                                                 <th class="align-middle">Actions</th>
@@ -190,8 +223,8 @@
                                             @foreach ($sementara as $sa)
                                             <tr>
                                                 
-                                                <td>{{ $sa->produk_kode}}</td>
-                                                <td>{{ $sa->nama_produk}}</td>
+                                                {{-- <input type"hidden" value="{{ $sa->produk_kode}}">
+                                                <input type"hidden" value="{{ $sa->nama_produk}}"> --}}
                                                 <td>{{ $sa->bahan_baku_kode}}</td>
                                                 <td>{{ $sa->nama_bahan_baku}}</td>
                                                
@@ -474,11 +507,17 @@
 
 
             // ---------------------------------------------------------------------
+            let produk_kode = $("#old").val()
+            $("#produk_kode").val(produk_kode);
+            let nama_produk = $("#old1").val()
+            $("#nama_produk").val(nama_produk);
             let cost_id = $("#cost_id_masukan").val()
             $("#cost_id").val(cost_id);
             let id_cost = $("#id_cost_masukan").val()
             $("#id_cost").val(id_cost);
 
+            document.getElementById("produk_kode").dispatchEvent(new Event('input'));
+            document.getElementById("nama_produk").dispatchEvent(new Event('input'));
             document.getElementById("cost_id").dispatchEvent(new Event('input'));
             document.getElementById("id_cost").dispatchEvent(new Event('input'));
             // ---------------------------------------------------------------------
@@ -500,6 +539,12 @@
 
          
         });
+
+        function old_function (latest_value , default_Value) {
+
+            (default_alue);
+
+        }
 
           
     });

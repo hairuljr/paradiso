@@ -2,8 +2,10 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Produk;
+use App\Models\Penjualan;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class DetailPenjualan extends Model
 {
@@ -12,8 +14,8 @@ class DetailPenjualan extends Model
     protected $table = 'tb_detail_penjualan';
     protected $guarded = [];
 
-    public function penjualan()
+    public function produk()
     {
-        return $this->belongsTo(Penjualan::class, 'produk_kode', 'kode_produk');
+        return $this->belongsTo(Produk::class, 'produk_kode', 'kode_produk');
     }
 }

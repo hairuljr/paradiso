@@ -16,6 +16,9 @@ class CreateTbBahanBakuMasukTable extends Migration
         Schema::create('tb_bahan_baku_masuk', function (Blueprint $table) {
             $table->id();
             $table->string('bahan_baku_kode', 15);
+            $table->date('tgl_transaksi');
+            $table->bigInteger('user_id')->unsigned(); // this is working
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->integer('stok_masuk')->unsigned();
             $table->string('harga', 20);
             $table->timestamps();

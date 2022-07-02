@@ -2,15 +2,31 @@
 
 namespace App\Http\Livewire\Cost;
 
+use App\Models\Cost;
 use Livewire\Component;
+use App\Models\DetailCost;
 use Illuminate\Support\Facades\DB;
 
 class Index extends Component
 {
-    public function render()
+
+    public $cost_id;
+    public $total_cgs;
+    public $harga_jual;
+    public $profit;
+    public $id_cost;
+    public $detailCosts = [];
+
+    public function DetailData($id_cost)
     {
-        $cost =  DB::table('tb_cost')->get();
-        $detailcost = DB::table('tb_detailcost')
+        $cost = DetailCost::with('bahanbaku')->where('cost_id', $id_cost)->get();
+        $this->detailCosts = $cost;
+    }
+
+    public function DetailData1($id_cost)
+    {
+
+        $cost = DB::table('tb_detailcost')
             ->join(
                 'tb_cost',
                 'tb_cost.id_cost',
@@ -29,13 +45,33 @@ class Index extends Component
                 '=',
                 'tb_detailcost.bahan_baku_kode'
 
-            )->get();
+            )->where('id_Cost', $id_cost)->first();
 
+        $this->id_cost = $cost->id_cost;
+        $this->total_cgs = $cost->total_cgs;
+        $this->harga_jual = $cost->harga_jual;
+        $this->profit = $cost->profit;
+    }
+
+    public function delete()
+    {
+
+        Cost::where('id_cost', $this->id_cost)->delete();
+        //flash message
+        session()->flash('hapus', 'Data Berhasil Dihapus.');
+        $this->emit('deleteModal');
+    }
+    public function render()
+    {
+
+
+        $cost = DetailCost::with(['produk', 'Cost'])
+            ->groupBy('cost_id')
+            ->get();
 
         return view('livewire.cost.index', [
 
             'cost' => $cost,
-            'detailcost' => $detailcost
         ])
             ->extends('template.app');
     }

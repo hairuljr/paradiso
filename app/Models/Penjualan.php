@@ -33,4 +33,9 @@ class Penjualan extends Model
         $kodeBaru = "JP-" . $addNol . $incrementKode;
         return $kodeBaru;
     }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

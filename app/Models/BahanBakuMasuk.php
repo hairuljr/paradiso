@@ -10,11 +10,14 @@ class BahanBakuMasuk extends Model
 {
     use HasFactory;
     protected $table = 'tb_bahan_baku_masuk';
-    protected $primaryKey = 'id';
-    protected $fillable = ['bahan_baku_kode', 'stok_masuk', 'harga'];
+    protected $guarded = [];
 
     public function bahanbaku()
     {
         return $this->hasOne(BahanBaku::class, 'kode_bahan_baku', 'bahan_baku_kode');
+    }
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Produk;
+use App\Models\Sementara;
 use App\Models\DetailCost;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Model;
@@ -36,5 +37,16 @@ class Cost extends Model
 
         $kodeBaru = "CS-" . $addNol . $incrementKode;
         return $kodeBaru;
+    }
+
+    public function old()
+    {
+        $old  = Sementara::all();
+        $old->produk_kode;
+    }
+
+    public function DetailCost()
+    {
+        return $this->hasOne(DetailCost::class, 'cost_id', 'id_cost');
     }
 }

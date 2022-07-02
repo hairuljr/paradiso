@@ -32,8 +32,8 @@ class PemilikPermissionSeeder extends Seeder
 
         // buat/berikan user akses dengan role Pemilik
         $user = User::factory()->create([
-            'name' => 'Pemilikku',
-            'username' => 'pemilik',
+            'name' => 'Asih',
+            'username' => 'asih',
             'email' => 'pemilik@paradiso.com',
             'password' => bcrypt('password')
         ]);

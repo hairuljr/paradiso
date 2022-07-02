@@ -36,10 +36,31 @@ class Create extends Component
     public $satuan_produk;
     public $harga;
     public $bahan_baku_kode;
+
     public $digunakan;
     public $kode_bahan_baku;
     public $gunakan;
     public $total;
+
+
+    protected $rules = [
+
+        'nama_produk' => 'required',
+        'jumlah' => 'required',
+        'total' => 'required',
+
+    ];
+
+
+
+    protected $messages = [
+        'nama_produk.required' => 'Nama Produk tidak boleh kosong.',
+        'jumlah.required' => 'Jumlah tidak boleh kosong.',
+        'total.required' => 'Total tidak boleh kosong.',
+
+
+    ];
+
 
 
     public function SelectData1($produk_kode)
@@ -77,6 +98,7 @@ class Create extends Component
                 'bahan_baku' => $item,
             ];
         });
+        $validasi = $this->validate();
         SementaraPenjualan::create([
             'produk_kode' => $this->kode_produk,
             'nama_produk' => $this->nama_produk,
@@ -109,9 +131,11 @@ class Create extends Component
     {
         $sementara = SementaraPenjualan::get();
         // $subTotal = array_sum($sementara->pluck('total')->toArray());
+
         Penjualan::create([
 
             'no_transaksi' => $this->no_transaksi,
+            'user_id' => auth()->id(),
             'tgl_transaksi' => now(),
             'sub_total' => $this->sub_total,
 
@@ -131,6 +155,7 @@ class Create extends Component
                 $kode = $item['bahan_baku']['kode_bahan_baku'];
                 $digunakan = $item['bahan_baku']['digunakan'];
                 BahanBakuKeluar::create([
+                    'transaksi_no' => $this->transaksi_no,
                     'bahan_baku_kode' => $kode,
                     'jumlah' => $digunakan * $value->jumlah,
                 ]);
@@ -138,7 +163,7 @@ class Create extends Component
                 $bahanBaku = BahanBaku::where('kode_bahan_baku', $kode)->first();
                 if ($bahanBaku) {
                     $bahanBaku->update([
-                        'persediaan' => $bahanBaku->persediaan - $digunakan
+                        'persediaan' => $bahanBaku->persediaan - $digunakan * $value->jumlah
                     ]);
                 }
             }
@@ -146,6 +171,8 @@ class Create extends Component
 
         // Kosongkan Tbl Sementara Penjualan
         SementaraPenjualan::truncate();
+        session()->flash('pesan', 'Data berhasil ditambah');
+        return redirect('penjualan');
     }
     public function render()
     {

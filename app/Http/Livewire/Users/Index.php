@@ -10,18 +10,22 @@ class Index extends Component
     public $name;
     public $email;
     public $username;
+    public $role;
 
     protected $rules = [
         'name' => 'required',
         'email' => 'required|email:rfc,dns|unique:users,email',
         'username' => 'required|unique:users,username',
+
     ];
+
 
     public function ClearForm()
     {
         $this->name = '';
         $this->email = '';
         $this->username = '';
+        $this->role = '';
     }
 
 
@@ -41,7 +45,8 @@ class Index extends Component
 
     public function render()
     {
-        $users = User::orderBy('id', 'DESC')->get();
+        $users = User::with('roles')->orderBy('id', 'DESC')->get();
+
         return view('livewire.users.index', ['users' => $users])->extends('template.app');
     }
 }

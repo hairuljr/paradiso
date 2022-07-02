@@ -15,6 +15,7 @@ class CreateTbBahanBakuKeluarTable extends Migration
     {
         Schema::create('tb_bahan_baku_keluar', function (Blueprint $table) {
             $table->id();
+            $table->string('transaksi_no', 15);
             $table->string('bahan_baku_kode', 15);
             $table->string('jumlah', 15);
             $table->timestamps();
@@ -22,7 +23,8 @@ class CreateTbBahanBakuKeluarTable extends Migration
         Schema::table('tb_bahan_baku_keluar', function (Blueprint $table) {
 
 
-
+            $table->foreign('transaksi_no')->references('no_transaksi')->on('tb_penjualan')
+                ->onDelete('cascade')->onUpdate('cascade');
 
             $table->foreign('bahan_baku_kode')->references('kode_bahan_baku')->on('tb_bahan_baku')
                 ->onDelete('cascade')->onUpdate('cascade');

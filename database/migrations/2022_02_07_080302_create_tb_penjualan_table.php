@@ -15,11 +15,14 @@ class CreateTbPenjualanTable extends Migration
     {
         Schema::create('tb_penjualan', function (Blueprint $table) {
             $table->string('no_transaksi', 15)->primary();
+            $table->bigInteger('user_id')->unsigned(); // this is working
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->date('tgl_transaksi');
             $table->string('sub_total', 15);
             $table->timestamps();
         });
     }
+
 
     /**
      * Reverse the migrations.

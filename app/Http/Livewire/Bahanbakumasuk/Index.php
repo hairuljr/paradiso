@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\Bahanbakumasuk;
 
 use Livewire\Component;
+use App\Models\BahanBaku;
 use App\Models\BahanBakuMasuk;
 use Illuminate\Support\Facades\DB;
 
@@ -16,6 +17,7 @@ class Index extends Component
     public $harga;
     public $satuan;
     public $stok_masuk;
+    public $tgl_transaksi;
 
     protected $rules = [
         'bahan_baku_kode' => 'required',
@@ -71,7 +73,18 @@ class Index extends Component
             'harga' => $this->harga,
 
         ];
-        BahanBakuMasuk::where('bahan_baku_kode', $this->bahan_baku_kode)->Update($bahanbakumasuk);
+        $bahanbakumasuk1 = BahanBakuMasuk::where('bahan_baku_kode', $this->bahan_baku_kode)->first();
+        $bahanbaku = BahanBaku::where('kode_bahan_baku', $bahanbakumasuk1->bahan_baku_kode)->first();
+        if ($bahanbaku) {
+
+            $bahanbaku->update([
+                'persediaan' => $bahanbaku->persediaan - $bahanbakumasuk1->stok_masuk
+            ]);
+            $bahanbaku->update([
+                'persediaan' => $bahanbaku->persediaan + $this->stok_masuk
+            ]);
+        }
+        $bahanbakumasuk1->update($bahanbakumasuk);
 
         session()->flash('pesan1', 'Data berhasil di edit');
         $this->Clearform();
@@ -81,7 +94,17 @@ class Index extends Component
     public function delete()
     {
 
-        BahanBakuMasuk::find($this->DetailData)->delete();
+        $bahanbakumasuk = BahanBakuMasuk::find($this->DetailData);
+        $bahanbaku = BahanBaku::where('kode_bahan_baku', $bahanbakumasuk->bahan_baku_kode)->first();
+        if ($bahanbaku) {
+
+            $bahanbaku->update([
+                'persediaan' => $bahanbaku->persediaan - $bahanbakumasuk->stok_masuk
+            ]);
+        }
+        $bahanbakumasuk->delete();
+
+
         //flash message
         session()->flash('hapus', 'Data Berhasil Dihapus.');
         $this->emit('deleteModal');
@@ -91,14 +114,13 @@ class Index extends Component
     {
 
 
-        $bahanbakumasuk = DB::table('tb_bahan_baku_masuk')
-            ->join(
-                'tb_bahan_baku',
-                'tb_bahan_baku.kode_bahan_baku',
-                '=',
-                'tb_bahan_baku_masuk.bahan_baku_kode'
-            )
-            ->get();
+        $bahanbakumasuk = BahanBakuMasuk::join(
+            'tb_bahan_baku',
+            'tb_bahan_baku.kode_bahan_baku',
+            '=',
+            'tb_bahan_baku_masuk.bahan_baku_kode'
+        )->with('user')->get();
+
         return view('livewire.bahanbakumasuk.index', ['bahanbakumasuk' => $bahanbakumasuk])->extends('template.app');
     }
 }

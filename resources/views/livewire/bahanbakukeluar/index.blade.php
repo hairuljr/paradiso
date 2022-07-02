@@ -2,7 +2,7 @@
     <div class="row">
         <div class="col-12">
             <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-                <h4 class="mb-sm-0 font-size-18">Jenis Produk</h4>
+                <h4 class="mb-sm-0 font-size-18">DATA BAHAN BAKU KELUAR</h4>
                 <div class="page-title-right">
                     <ol class="breadcrumb m-0">
                       
@@ -50,10 +50,12 @@
                             <thead class="table-light">
                                 <tr>
                                     <th class="align-middle">No</th>
+                                    <th class="align-middle">Tanggal</th>
                                     <th class="align-middle">Barcode</th>
                                     <th class="align-middle">Nama Bahan Baku</th>
-                                    <th class="align-middle">Jumlah</th>
-                                    <th class="align-middle">Action</th>
+                                    <th class="align-middle">Jumlah Keluar</th>
+                                    <th class="align-middle">Satuan</th>
+                                 
 
                                 </tr>
                             </thead>
@@ -64,27 +66,12 @@
                                 @foreach ($bahanbakukeluar as $br)
                                 <tr>
                                     <td>{{ $no++ }}</td>
+                                    <td>{{ $br->tgl_transaksi}}</td>
                                     <td>{{ $br->bahan_baku_kode}}</td>
                                     <td>{{ $br->nama_bahan_baku}}</td>
                                     <td>{{ $br->jumlah}}</td>
-                                    <td>
-                                        <div class="d-flex gap-3 cursor">
-                                            <a wire:click.prevent="DetailData('{{$br->bahan_baku_kode}}')"
-                                                class="text-success" data-bs-toggle="modal"
-                                                data-bs-target="#updateModal"><i
-                                                    class="mdi mdi-pencil font-size-18"></i>
-                                            </a>
-
-
-                                            <a button class="text-danger"
-                                                wire:click="DetailData('{{$br->bahan_baku_kode}}')"
-                                                data-bs-toggle="modal" data-bs-target="#deleteModal"><i
-                                                    class="mdi mdi-delete font-size-18"></i></a>
-
-
-
-                                        </div>
-                                    </td>
+                                    <td>{{ $br->satuan}}</td>
+                                   
                                 </tr>
                                 @endforeach
                             </tbody>

@@ -89,6 +89,8 @@ class Create extends Component
 
     ];
 
+
+
     public function ClearForm()
     {
         $this->produk_kode = '';
@@ -187,7 +189,7 @@ class Create extends Component
             $sa->delete();
         }
 
-
+        session()->flash('pesan', 'Data berhasil ditambah');
         return redirect('cost');
     }
 
@@ -211,6 +213,7 @@ class Create extends Component
 
         // $bahanbaku = BahanBaku::all();
         $sementara = Sementara::all();
+        $sementaras = Sementara::find(1);
         $cost = DB::table('tb_detailcost')
 
             ->join(
@@ -244,7 +247,7 @@ class Create extends Component
                 'produk' => $produk,
                 'bahanbaku' => $datanya,
                 'bahanbakumasuk' => $datanya,
-                'sementara' => $sementara,
+                'sementara' => $sementara, $sementaras,
                 'detailcost' => $detailcost,
                 'cost' => $cost,
 

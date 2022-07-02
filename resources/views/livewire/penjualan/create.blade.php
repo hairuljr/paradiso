@@ -14,6 +14,31 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-body">
+                        <div class="row mb-2">
+                            <div class="col-sm-4">
+                                @if (session('pesan'))
+                                <div class="alert alert-primary alert-dismissible fade show" role="alert">
+                                    {{ session('pesan')}}
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                        aria-label="Close"></button>
+                                </div>
+                                @endif
+                                @if (session('pesan1'))
+                                <div class="alert alert-primary alert-dismissible fade show" role="alert">
+                                    {{ session('pesan1')}}
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                        aria-label="Close"></button>
+                                </div>
+                                @endif
+                                @if (session('hapus'))
+                                <div class="alert alert-primary alert-dismissible fade show" role="alert">
+                                    {{ session('hapus')}}
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                        aria-label="Close"></button>
+                                </div>
+                                @endif
+                            </div>
+                        </div>
                         <div class="row">
                             <div class="col-sm-6">
                                 <label>No Transaksi </label>
@@ -21,6 +46,7 @@
                                     <div class="col-sm-9">
                                         <input type="hidden" id="no_transaksi" wire:model="no_transaksi">
                                         <input type="text" id="no_transaksi_masukan" class="form-control" value="{{$penjualan}}" readonly>
+                                        {{-- <input type="text"wire:model="no_transaksi" class="form-control" value="{{$penjualan}}" readonly> --}}
                                     </div>
                                    
                                 </div>
@@ -31,7 +57,7 @@
                                     <div class="input-group mb-3">
                                         <input id="tgl_transaksi" type="date" class="form-control"
                                             wire:model="tgl_transaksi" >
-                                        {{-- @error('nama_produk') <span class="error">{{ $message }}</span> @enderror --}}
+                                        @error('tgl_transaksi') <span class="error">{{ $message }}</span> @enderror
                                     </div>
                                 </div>
 
@@ -51,7 +77,7 @@
                             <div class="col-md-5">
                                 <input id="produk_kode" type="text" wire:model="kode_produk"
                                     class="form-control" readonly>
-                                @error('kode_produk') <span class="error">{{ $message }}</span> @enderror
+                                @error('produk_kode') <span class="error">{{ $message }}</span> @enderror
                             </div>
                             <div class="col-md-2">
                                 <div class="col-md-2 col-4">
@@ -65,7 +91,7 @@
                             <div class="col-sm-9">
                                 <input id="nama_produk" type="text" class="form-control"
                                     wire:model="nama_produk" readonly>
-                                @error('nama_bahan_baku') <span class="error">{{ $message }}</span> @enderror
+                                @error('nama_produk') <span class="error">{{ $message }}</span> @enderror
                             </div>
                         </div>
                         <div class="row mb-3">
@@ -90,7 +116,7 @@
                             <div class="col-sm-9">
                                 <input id="harga_jual" type="text" class="form-control"
                                     wire:model="harga_jual" readonly>
-                                @error('nama_bahan_baku') <span class="error">{{ $message }}</span> @enderror
+
                             </div>
                         </div>
                         <div class="row mb-3">
@@ -99,7 +125,7 @@
                                     <input type="hidden" id="total" wire:model="total">
                                     <input id="total_masukan" type="text" class="form-control" readonly>
                             
-                                    @error('cost') <span class="error">{{ $message }}</span> @enderror
+                                    @error('total') <span class="error">{{ $message }}</span> @enderror
                                 </div>
                         </div>
                         <div class="row mb-1">
