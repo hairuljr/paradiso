@@ -33,7 +33,7 @@
 
 </head>
 
-<body data-sidebar="dark">
+<body data-sidebar="dark" data-keep-enlarged="true" class="vertical-collpsed">
     <div id="layout-wrapper">
         <header id="page-topbar">
             <div class="navbar-header">
@@ -390,7 +390,7 @@
     </script>
 
 
-
+<div class="rightbar-overlay"></div>
 
 
 </body>

@@ -11,7 +11,7 @@
               <div class="col-7">
                 <div class="text-primary p-4">
                   <h5 class="text-primary">Selamat Datang!</h5>
-                  <p>Silakan login untuk masuk ke dashboard {{ config('app.name') }}.</p>
+                  <p>Silakan login untuk masuk ke dashboard .</p>
                 </div>
               </div>
               <div class="col-5 align-self-end">
@@ -64,20 +64,18 @@
                   </div>
                 </div>
 
-                <div class="form-check">
+                {{-- <div class="form-check">
                   <input class="form-check-input" type="checkbox" id="remember-check">
                   <label class="form-check-label" for="remember-check">
                     Remember me
                   </label>
-                </div>
+                </div> --}}
 
                 <div class="mt-3 d-grid">
                   <button class="btn btn-primary waves-effect waves-light" type="submit">Log In</button>
                 </div>
 
-                <div class="mt-4 text-center">
-                  <a href="#" class="text-muted"><i class="mdi mdi-lock me-1"></i> Lupa Password?</a>
-                </div>
+               
               </form>
             </div>
 

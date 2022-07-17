@@ -34,7 +34,7 @@ class PemilikPermissionSeeder extends Seeder
         $user = User::factory()->create([
             'name' => 'Asih',
             'username' => 'asih',
-            'email' => 'pemilik@paradiso.com',
+            // 'email' => 'pemilik@paradiso.com',
             'password' => bcrypt('password')
         ]);
         $user->assignRole($pemilikRole);

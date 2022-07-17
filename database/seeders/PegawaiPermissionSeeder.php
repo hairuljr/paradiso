@@ -54,7 +54,7 @@ class PegawaiPermissionSeeder extends Seeder
         $user = User::factory()->create([
             'name' => 'Pegawaiku',
             'username' => 'pegawai',
-            'email' => 'pegawai@paradiso.com',
+            // 'email' => 'pegawai@paradiso.com',
             'password' => bcrypt('password')
         ]);
         $user->assignRole($pegawaiRole);

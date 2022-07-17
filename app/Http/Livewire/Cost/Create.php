@@ -2,18 +2,29 @@
 
 namespace App\Http\Livewire\Cost;
 
+use App\Models\Cost;
 use App\Models\Produk;
 use Livewire\Component;
 use App\Models\BahanBaku;
-use App\Models\BahanBakuMasuk;
-use App\Models\Cost;
-use App\Models\DetailCost;
 use App\Models\Sementara;
 use App\Models\Temporary;
+use App\Models\DetailCost;
+use Livewire\WithPagination;
+use App\Models\BahanBakuMasuk;
 use Illuminate\Support\Facades\DB;
 
 class Create extends Component
 {
+
+    use WithPagination;
+
+    public $search;
+    public $page = 1;
+
+    protected $updatesQueryString = [
+        ['page' => ['except' => 1]],
+        ['search' => ['except' => '']],
+    ];
 
     public $kode_bahan_baku;
     public $nama_bahan_baku;
@@ -120,6 +131,8 @@ class Create extends Component
 
     public function SelectData1($kode_produk)
     {
+        session()->forget('barcode');
+        session()->forget('nama');
         $produk = Produk::where('kode_produk', $kode_produk)->first();
         $this->produk_kode = $produk->kode_produk;
         $this->nama_produk = $produk->nama_produk;
@@ -151,7 +164,7 @@ class Create extends Component
     {
         $validasi = $this->validate();
 
-        Sementara::create($validasi, [
+        $produk = Sementara::create($validasi, [
 
             'produk_kode' => $this->produk_kode,
             'nama_produk' => $this->nama_produk,
@@ -160,6 +173,8 @@ class Create extends Component
             'cost' => $this->cost,
 
         ]);
+        session(['barcode' => $produk->produk_kode]);
+        session(['nama' => $produk->nama_produk]);
         session()->flash('pesan', 'Data berhasil ditambah');
         return redirect('/cost/create');
     }
@@ -186,9 +201,11 @@ class Create extends Component
                 'cost' => $sa->cost,
             );
             DetailCost::insert($data);
+
             $sa->delete();
         }
-
+        session()->forget('barcode');
+        session()->forget('nama');
         session()->flash('pesan', 'Data berhasil ditambah');
         return redirect('cost');
     }
@@ -200,17 +217,58 @@ class Create extends Component
 
         $detailcost = Cost::kode();
 
+        // Modal Bahan Baku
         $datanya = BahanBakuMasuk::with(['bahanbaku'])
             ->groupBy('bahan_baku_kode')
-            ->get();
+            ->join(
+                'tb_bahan_baku',
+                'tb_bahan_baku.kode_bahan_baku',
+                '=',
+                'tb_bahan_baku_masuk.bahan_baku_kode'
+            )
+            ->orderBy('bahan_baku_kode', 'DESC')
+            ->latest('tb_bahan_baku_masuk.created_at')
+            ->paginate(5);
 
-        $produk  = DB::table('tb_produk')->join(
+        //menampilkan 5 data Bahan Baku
+        if ($this->search !== null) {
+            $datanya = BahanBakuMasuk::with(['bahanbaku'])
+                ->groupBy('bahan_baku_kode')
+                ->join(
+                    'tb_bahan_baku',
+                    'tb_bahan_baku.kode_bahan_baku',
+                    '=',
+                    'tb_bahan_baku_masuk.bahan_baku_kode'
+                )->orderBy('bahan_baku_kode', 'DESC')
+                ->where('nama_bahan_baku', 'like', '%' . $this->search . '%')
+                ->latest('tb_bahan_baku_masuk.created_at')
+                ->paginate(5);
+        }
+
+
+        // Modal Produk
+        $produk = Produk::join(
             'tb_jenis_produk',
             'tb_jenis_produk.kode_jenis_produk',
             '=',
             'tb_produk.jenis_produk_kode'
-        )->get();
+        )->orderBy('kode_produk', 'DESC')->latest('tb_produk.created_at')->paginate(5);
 
+        //menampilkan 5 data produk
+        if ($this->search !== null) {
+            $produk = Produk::join(
+                'tb_jenis_produk',
+                'tb_jenis_produk.kode_jenis_produk',
+                '=',
+                'tb_produk.jenis_produk_kode'
+            )
+                ->orderBy('kode_produk', 'DESC')->where('nama_produk', 'like', '%' . $this->search . '%')
+                ->latest('tb_produk.created_at')
+                ->paginate(5);
+        }
+
+        $this->produk_kode = session('barcode') ?? $this->produk_kode;
+        $this->nama_produk = session('nama') ?? $this->nama_produk;
         // $bahanbaku = BahanBaku::all();
         $sementara = Sementara::all();
         $sementaras = Sementara::find(1);
@@ -255,6 +313,6 @@ class Create extends Component
 
 
         )
-            ->extends('template.app');
+            ->extends('template.sidebar');
     }
 }

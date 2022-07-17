@@ -98,9 +98,15 @@
                                     <div class="col-md-2">
                                         <div class="col-md-2 col-4">
                                             <button type="button" class="btn btn-primary waves-effect waves-light"
-                                                data-bs-toggle="modal" data-bs-target=".BahanBakuMasukModal">Cari</button>
+                                                data-bs-toggle="modal" data-bs-target=".bs-BahanBakuMasukModal-modal-lg">Cari</button>
                                         </div>
                                     </div>
+                                    {{-- <div class="col-md-2">
+                                        <div class="col-md-2 col-4">
+                                            <button type="button" class="btn btn-light waves-effect" 
+                                            data-bs-toggle="modal" data-bs-target=".bs-example-modal-lg">Large modal</button>
+                                        </div>
+                                    </div> --}}
                                 </div>
                                 <div class="row mb-3">
                                     <label class="col-sm-3 col-form-label">Nama</label>
@@ -141,7 +147,7 @@
                         <div class="card">
                             <div class="card-body">
                                 <div class="row mb-3">
-                                    <label class="col-sm-3 col-form-label">Digunakan</label>
+                                    <label class="col-sm-3 col-form-label">Jumlah yang Digunakan</label>
                                         <div class="col-sm-9">
                                             <input type="text" wire:model="digunakan" class="form-control" id="digunakan">
                                             @error('digunakan') <span class="error">{{ $message }}</span> @enderror
@@ -209,6 +215,7 @@
                                               
                                                 <th class="align-middle">Barcode</th>
                                                 <th class="align-middle">Nama Bahan Baku</th>
+                                                <th class="align-middle">Jumlah yang Digunakan</th>
                                                 <th class="align-middle">Cost</th>
                                                 <th class="align-middle">Actions</th>
 
@@ -227,6 +234,7 @@
                                                 <input type"hidden" value="{{ $sa->nama_produk}}"> --}}
                                                 <td>{{ $sa->bahan_baku_kode}}</td>
                                                 <td>{{ $sa->nama_bahan_baku}}</td>
+                                                <td>{{ $sa->digunakan}}</td>
                                                
                                                 <td>{{ $sa->cost}}</td>
                                                 <td>
@@ -255,6 +263,8 @@
                         </div>
                     </div> <!-- end col -->
                 </div>
+
+                
             <form wire:submit.prevent="save">
                 <div class="row">
                     <div class="col-xl-6">
@@ -299,7 +309,7 @@
                                     <label class="col-sm-3 col-form-label">Total Cgs</label>
                                     <div class="col-sm-9">
                                         <input id="total_cgs" type="hidden" wire:model="total_cgs" class="form-control" value="{{ $total_cgs }}" readonly>
-                                        <input id="total_cgs_masukan" type="text" class="form-control" value="{{ $total_cgs }}" readonly>
+                                        <input id="total_cgs_masukan" type="number" class="form-control" value="{{ $total_cgs }}" readonly>
                                       
                                         @error('total_cgs') <span class="error">{{ $message1 }}</span> @enderror
                                     </div>
@@ -307,15 +317,16 @@
                                 <div class="row mb-3">
                                     <label class="col-sm-3 col-form-label">Harga Jual</label>
                                     <div class="col-sm-9">
-                                        <input wire:model="harga_jual" id="hrg_jual" type="text" class="form-control">
-                                        @error('total_cgs') <span class="error">{{ $message1 }}</span> @enderror
+                                        <input wire:model="harga_jual" id="hrg_jual" type="hidden" class="form-control">
+                                        <input id="hrg_jual_masukan" type="text" class="form-control" readonly>
+                                        {{-- @error('total_cgs') <span class="error">{{ $message1 }}</span> @enderror --}}
                                     </div>
                                 </div>
                                 <div class="row mb-3"> 
                                     <label class="col-sm-3 col-form-label">Profit</label>
                                     <div class="col-sm-9">
-                                        <input id="profit" wire:model="profit" type="hidden" class="form-control" readonly>
-                                        <input id="profit_masukan" type="text" class="form-control" readonly>
+                                        <input id="profit" wire:model="profit" type="number" class="form-control" >
+                                        {{-- <input id="profit_masukan" type="text" class="form-control" readonly> --}}
                                         @error('profit') <span class="error">{{ $message1 }}</span> @enderror
                                     </div>
                                 </div>
@@ -334,81 +345,38 @@
 
 
             {{-- Modal  Bahan Baku--}}
-            <div wire:ignore.self class="modal fade BahanBakuMasukModal" id="modal-item" tabindex="-1" role="dialog"
-                aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
-                <div class="modal-dialog modal-xl">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="myExtraLargeModalLabel">Data Bahan Baku</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="card-body">
-                            <div class="table-responsive">
-                                <table id="datatable" class="table align-middle table-nowrap table-check">
-                                    <thead class="table-light">
-                                        <tr>
-                                            <th class="align-middle">No</th>
-                                            <th class="align-middle">Kode BK</th>
-                                            <th class="align-middle">Nama</th>
-                                            <th class="align-middle">Stok</th>
-                                            <th class="align-middle">Isi Satuan</th>
-                                            <th class="align-middle">Satuan</th>
-                                            <th class="align-middle">Harga</th>
-                                            <th class="align-middle">Actions</th>
-
-                                        </tr>
-                                    </thead>
-
-
-                                    <tbody>
-                                        @php $no = 1; @endphp
-                                        @foreach ($bahanbaku as $dt)
-                                        <tr>
-
-
-                                            <td>{{ $no++ }}</td>
-                                            <td>{{ $dt->bahan_baku_kode}}</td>
-                                            <td>{{ $dt->bahanbaku->nama_bahan_baku}}</td>
-                                            <td>{{ $dt->bahanbaku->persediaan}}</td>
-                                            <td>{{ $dt->bahanbaku->satuan_produk}}</td>
-                                            <td>{{ $dt->bahanbaku->satuan}}</td>
-                                            <td>{{ $dt->harga}}</td>
-
-                                            <td>
-                                                <button wire:click.prevent="SelectData('{{$dt->bahan_baku_kode}}')"
-                                                    class="btn btn-xs btn-info" id="select">
-                                                    <i class="fa fa-check"></i> Select
-
-                                                </button>
-                                            </td>
-                                        </tr>
-                                        @endforeach
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div> <!-- /.modal-content -->
-                    </div><!-- /.modal-dialog -->
-                </div><!-- /.modal -->
-            </div>
+      
 
             {{-- Modal Produk --}}
             <div wire:ignore.self class="modal fade ProdukModal" id="modal-item1" tabindex="-1" role="dialog"
                 aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
-                <div class="modal-dialog modal-xl">
+                <div class="modal-dialog modal-l">
                     <div class="modal-content">
                         <div class="modal-header">
                             <h5 class="modal-title" id="myExtraLargeModalLabel">Data Produk</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="card-body">
+                            <div class="row mb-2">
+                                <div class="col-sm-4">
+                                    <div class="search-box me-2 mb-2 d-inline-block">
+                                        <div class="position-relative">
+                                            <input wire:model="search" type="text" class="form-control" placeholder="Cari Nama Produk">
+                                           
+                                            <i class="bx bx-search-alt search-icon"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                               
+                            </div>
                             <div class="table-responsive">
                                 <table id="datatable" class="table align-middle table-nowrap table-check">
                                     <thead class="table-light">
                                         <tr>
                                             <th class="align-middle">No</th>
-                                            <th class="align-middle">Barcode</th>
+                                            {{-- <th class="align-middle">Barcode</th> --}}
                                             <th class="align-middle">Nama</th>
-                                            <th class="align-middle">Jenis Produk</th>
+                                            {{-- <th class="align-middle">Jenis Produk</th> --}}
                                             {{-- <th class="align-middle">Harga Satuan</th> --}}
 
                                             <th class="align-middle">Actions</th>
@@ -424,9 +392,9 @@
 
 
                                             <td>{{ $no++ }}</td>
-                                            <td>{{ $pk->kode_produk}}</td>
+                                            {{-- <td>{{ $pk->kode_produk}}</td> --}}
                                             <td>{{ $pk->nama_produk}}</td>
-                                            <td>{{ $pk->jenis_produk}}</td>
+                                            {{-- <td>{{ $pk->jenis_produk}}</td> --}}
                                             {{-- <td>{{ rupiah($pk->harga_satuan)}}</td> --}}
                                             <td>
                                                 <button wire:click.prevent="SelectData1('{{$pk->kode_produk}}')"
@@ -463,8 +431,77 @@
                     </div>
                 </div>
             </div>
+            
+            <div class="modal fade bs-BahanBakuMasukModal-modal-lg" id="modal-item" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="myLargeModalLabel">Bahan Baku</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="card-body">
+                            <div class="row mb-2">
+                                <div class="col-sm-4">
+                                    <div class="search-box me-2 mb-2 d-inline-block">
+                                        <div class="position-relative">
+                                            <input wire:model="search" type="text" class="form-control" placeholder="Cari Nama Bahan Baku">
+                                           
+                                            <i class="bx bx-search-alt search-icon"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                               
+                            </div>
+                            <div class="table-responsive">
+                                <table id="datatable" class="table align-middle table-nowrap table-check">
+                                    <thead class="table-light">
+                                        <tr>
+                                            <th class="align-middle">No</th>
+                                            {{-- <th class="align-middle">Kode BK</th> --}}
+                                            <th class="align-middle">Nama</th>
+                                            <th class="align-middle">Stok</th>
+                                            <th class="align-middle">Isi Satuan</th>
+                                            <th class="align-middle">Satuan</th>
+                                            <th class="align-middle">Harga</th>
+                                            <th class="align-middle">Actions</th>
+
+                                        </tr>
+                                    </thead>
+
+
+                                    <tbody>
+                                        @php $no = 1; @endphp
+                                        @foreach ($bahanbaku as $dt)
+                                        <tr>
+
+
+                                            <td>{{ $no++ }}</td>
+                                            {{-- <td>{{ $dt->bahan_baku_kode}}</td> --}}
+                                            <td>{{ $dt->bahanbaku->nama_bahan_baku}}</td>
+                                            <td>{{ $dt->bahanbaku->persediaan}}</td>
+                                            <td>{{ $dt->bahanbaku->satuan_produk}}</td>
+                                            <td>{{ $dt->bahanbaku->satuan}}</td>
+                                            <td>{{ $dt->harga}}</td>
+
+                                            <td>
+                                                <button wire:click.prevent="SelectData('{{$dt->bahan_baku_kode}}')"
+                                                    class="btn btn-primary btn-sm btn-rounded" id="select">
+                                                    <i class="fa fa-check"></i> Select
+
+                                                </button>
+                                            </td>
+                                        </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div> <!-- /.modal-content -->
+                    </div><!-- /.modal-content -->
+                </div><!-- /.modal-dialog -->
+            </div><!-- /.modal -->
     
     </div>
+
  
 </div>
 
@@ -522,7 +559,7 @@
             document.getElementById("id_cost").dispatchEvent(new Event('input'));
             // ---------------------------------------------------------------------
         // Hitung Profit
-        $("#hrg_jual").keyup(function () {
+        $("#profit").keyup(function () {
 
             $("#total_cgs_masukan").val();
             let total_cgs = $('#total_cgs_masukan').val()
@@ -530,21 +567,24 @@
 
             document.getElementById("total_cgs").dispatchEvent(new Event('input'));
 
-            let hrg_jual = $('#hrg_jual').val()
-            $("#profit_masukan").val(hrg_jual - total_cgs);
-            let profit = $("#profit_masukan").val()
-            $("#profit").val(profit);
+            // let hrg_jual = $('#hrg_jual').val()
+            // $("#profit_masukan").val(hrg_jual - total_cgs);
+            // let profit = $("#profit_masukan").val()
+            // $("#profit").val(profit);
 
-            document.getElementById("profit").dispatchEvent(new Event('input'));
+            let profit = $('#profit').val()
+            $("#hrg_jual_masukan").val(parseInt(total_cgs) + parseInt(total_cgs) * (profit/100));
+        
+            let hrg_jual = $("#hrg_jual_masukan").val()
+            $("#hrg_jual").val(hrg_jual);
+
+            document.getElementById("hrg_jual").dispatchEvent(new Event('input'));
+            // document.getElementById("profit").dispatchEvent(new Event('input'));
 
          
         });
 
-        function old_function (latest_value , default_Value) {
-
-            (default_alue);
-
-        }
+        
 
           
     });

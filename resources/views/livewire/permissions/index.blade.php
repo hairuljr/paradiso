@@ -4,21 +4,6 @@
             <div class="page-title-box d-sm-flex align-items-center justify-content-between">
                 <h4 class="mb-sm-0 font-size-18">Permissions</h4>
                 <div class="page-title-right">
-                    <ol class="breadcrumb m-0">
-                        <a href="{{ route('permissions.create') }}" type="button" class="btn btn-success "><i
-                                class="mdi mdi-plus me-1"></i> Add Data </a>
-                    </ol>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- end page title -->
-
-    <div class="row">
-        <div class="col-12">
-            <div class="card">
-                <div class="card-body">
-
                     <div class="row mb-2">
                         <div class="col-sm-4">
                             @if (session('pesan'))
@@ -44,6 +29,33 @@
                             @endif
                         </div>
                     </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end page title -->
+
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="row mb-2">
+                        <div class="col-sm-4">
+                            <div class="search-box me-2 mb-2 d-inline-block">
+                                <div class="position-relative">
+                                    <input wire:model="search" type="text" class="form-control" placeholder="Cari Nama Akses">
+                                   
+                                    <i class="bx bx-search-alt search-icon"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-8">
+                            <div class="text-sm-end">
+                                <a href="{{route('permissions.create')}}" type="button" class="btn btn-success btn-rounded waves-effect waves-light mb-1 me-1"><i class="mdi mdi-plus me-1"></i> Data</a>
+                            </div>
+                        </div><!-- end col-->
+                    </div>
+                    
                     <div class="table-responsive">
                         <table id="example" class="table align-middle table-nowrap table-check">
                             <thead class="table-light">
@@ -72,9 +84,13 @@
                                         </td>
                                     </tr>
                                 @endforeach
+                               
                             </tbody>
+                            
                         </table>
+                      
                     </div>
+                   
                 </div>
             </div>
         </div> <!-- end col -->

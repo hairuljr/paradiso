@@ -32,6 +32,11 @@ function rupiah($number)
 {
     return "Rp " . number_format($number, 0, ',', '.');
 }
+function persen($number)
+{
+    return ($number) . " %";
+}
+
 
 function separate_array($param)
 {

@@ -15,9 +15,9 @@ class CreateTbCostTable extends Migration
     {
         Schema::create('tb_cost', function (Blueprint $table) {
             $table->string('id_cost', 20)->primary();
-            $table->string('total_cgs', 20);
-            $table->string('harga_jual', 20);
-            $table->string('profit', 20);
+            $table->float('total_cgs', 20);
+            $table->float('harga_jual', 20);
+            $table->float('profit', 20);
             $table->timestamps();
         });
     }

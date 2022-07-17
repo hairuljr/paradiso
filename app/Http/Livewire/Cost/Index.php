@@ -5,10 +5,21 @@ namespace App\Http\Livewire\Cost;
 use App\Models\Cost;
 use Livewire\Component;
 use App\Models\DetailCost;
+use Livewire\WithPagination;
 use Illuminate\Support\Facades\DB;
 
 class Index extends Component
 {
+    use WithPagination;
+
+    public $search;
+    public $page = 1;
+
+    protected $updatesQueryString = [
+        ['page' => ['except' => 1]],
+        ['search' => ['except' => '']],
+    ];
+
 
     public $cost_id;
     public $total_cgs;
@@ -66,12 +77,34 @@ class Index extends Component
 
 
         $cost = DetailCost::with(['produk', 'Cost'])
-            ->groupBy('cost_id')
-            ->get();
+            ->groupBy('cost_id')->join(
+                'tb_produk',
+                'tb_produk.kode_produk',
+                '=',
+                'tb_detailcost.produk_kode'
+            )->orderBy('cost_id', 'DESC')
+            ->latest('tb_detailcost.created_at')
+            ->paginate(5);
+
+        if ($this->search !== null) {
+            $cost = DetailCost::with(['produk', 'Cost'])
+                ->groupBy('cost_id')->join(
+                    'tb_produk',
+                    'tb_produk.kode_produk',
+                    '=',
+                    'tb_detailcost.produk_kode'
+
+                )->orderBy('cost_id', 'DESC')->where('nama_produk', 'like', '%' .  $this->search . '%')
+
+                ->latest('tb_detailcost.created_at')
+                ->paginate(5);
+        }
+
 
         return view('livewire.cost.index', [
 
             'cost' => $cost,
+
         ])
             ->extends('template.app');
     }

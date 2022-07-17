@@ -3,12 +3,10 @@
         <div class="col-12">
             <div class="page-title-box d-sm-flex align-items-center justify-content-between">
                 <h4 class="mb-sm-0 font-size-18">Cost </h4>
-                <div class="page-title-right">
-                    <ol class="breadcrumb m-0">
-                        <a href="{{route('cost.create')}}" type="button" class="btn btn-success "><i
-                                class="mdi mdi-plus me-1"></i> Hitung </a>
-                    </ol>
-                </div>
+              
+              
+                   
+               
             </div>
         </div>
     </div>
@@ -20,7 +18,6 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-body">
-
                     <div class="row mb-2">
                         <div class="col-sm-4">
                             @if (session('pesan'))
@@ -46,6 +43,26 @@
                             @endif
                         </div>
                     </div>
+                    <div class="row mb-2">
+                        <div class="col-sm-4">
+                            <div class="search-box me-2 mb-2 d-inline-block">
+                                <div class="position-relative">
+                                    <input wire:model="search" type="text" class="form-control" placeholder="Cari Nama Produk">
+                                   
+                                    <i class="bx bx-search-alt search-icon"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-8">
+                            <div class="text-sm-end">
+                                <a href="{{route('cost.create')}}" type="button" class="btn btn-success btn-rounded waves-effect waves-light mb-1 me-1"><i class="mdi mdi-plus me-1"></i> Hitung</a>
+                            </div>
+                        </div><!-- end col-->
+                    </div>
+
+                  
+                  
+                    
                     <div class="table-responsive">
                         <table id="example" class="table align-middle table-nowrap table-check">
                             <thead class="table-light">
@@ -56,6 +73,7 @@
                                     <th class="align-middle">Total Cgs</th>
                                     <th class="align-middle">Harga Jual</th>
                                     <th class="align-middle">Profit</th>
+                                    <th class="align-middle">Cost Details</th>
                                     <th class="align-middle">Action</th>
                                 </tr>
                             </thead>
@@ -70,35 +88,35 @@
                                     <td>{{ $cs->produk->nama_produk}}</td>
                                     <td>{{ rupiah($cs->Cost->total_cgs) }}</td>
                                     <td>{{ rupiah($cs->Cost->harga_jual) }}</td>
-                                    <td>{{ rupiah($cs->Cost->profit)}}</td>
+                                    <td>{{ persen($cs->Cost->profit)  }}</td>
                                  
                                     <td>
                                         <div class="d-flex gap-3 cursor">
-                                            <a wire:click.prevent="DetailData('{{$cs->Cost->id_cost}}')"
-                                                class="text-success" data-bs-toggle="modal"
-                                                data-bs-target="#updateModal"><i
-                                                    class="mdi mdi-pencil font-size-18"></i>
-                                            </a>
-
+                                        
+                                            <button type="button" wire:click.prevent="DetailData('{{$cs->Cost->id_cost}}')" 
+                                                data-bs-toggle="modal"
+                                                data-bs-target="#updateModal" class="btn btn-primary btn-sm btn-rounded">
+                                                View Details
+                                            </button>
+                                    </td>
+                                    <td>
+                                        <div class="d-flex gap-3 cursor">
+                                        
                                             <a button class="text-danger"
                                                 wire:click="DetailData1('{{$cs->Cost->id_cost}}')"
                                                 data-bs-toggle="modal" data-bs-target="#deleteModal"><i
                                                     class="mdi mdi-delete font-size-18"></i>
                                             </a>
 
-                                            {{-- <a button class="text-secondary"
-                                            wire:click="DetailData('{{$cs->produk_kode}}')"
-                                            data-bs-toggle="modal" data-bs-target="#detailModal"><i
-                                                class="mdi-eye-outline font-size-18"></i>
-                                             </a> --}}
-
-
                                         </div>
                                     </td>
                                 </tr>
                                 @endforeach
+                               
                             </tbody>
+                           
                         </table>
+                      
                     </div>
                 </div>
             </div>

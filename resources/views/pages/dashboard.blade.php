@@ -50,7 +50,7 @@
             </div>
           </div>
         </div>
-        <div class="card">
+        {{-- <div class="card">
           <div class="card-body">
             <h4 class="card-title mb-4">Pendapatan Bulanan</h4>
             <div class="row">
@@ -61,8 +61,8 @@
             </div>
           </div>
         </div>
-      </div>
-      <div class="col-xl-8">
+      </div> --}}
+      {{-- <div class="col-xl-8">
         <div class="row">
           <div class="col-md-4">
             <div class="card mini-stats-wid">
@@ -239,7 +239,7 @@
               </div>
             </div>
           </div>
-        </div>
+        </div> --}}
         <!-- end row -->
       </div>
     </div>
