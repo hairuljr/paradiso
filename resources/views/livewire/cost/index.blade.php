@@ -3,10 +3,10 @@
         <div class="col-12">
             <div class="page-title-box d-sm-flex align-items-center justify-content-between">
                 <h4 class="mb-sm-0 font-size-18">Cost </h4>
-              
-              
-                   
-               
+
+
+
+
             </div>
         </div>
     </div>
@@ -47,22 +47,25 @@
                         <div class="col-sm-4">
                             <div class="search-box me-2 mb-2 d-inline-block">
                                 <div class="position-relative">
-                                    <input wire:model="search" type="text" class="form-control" placeholder="Cari Nama Produk">
-                                   
+                                    <input wire:model="search" type="text" class="form-control"
+                                        placeholder="Cari Nama Produk">
+
                                     <i class="bx bx-search-alt search-icon"></i>
                                 </div>
                             </div>
                         </div>
                         <div class="col-sm-8">
                             <div class="text-sm-end">
-                                <a href="{{route('cost.create')}}" type="button" class="btn btn-success btn-rounded waves-effect waves-light mb-1 me-1"><i class="mdi mdi-plus me-1"></i> Hitung</a>
+                                <a href="{{route('cost.create')}}" type="button"
+                                    class="btn btn-success btn-rounded waves-effect waves-light mb-1 me-1"><i
+                                        class="mdi mdi-plus me-1"></i> Hitung</a>
                             </div>
                         </div><!-- end col-->
                     </div>
 
-                  
-                  
-                    
+
+
+
                     <div class="table-responsive">
                         <table id="example" class="table align-middle table-nowrap table-check">
                             <thead class="table-light">
@@ -89,19 +92,20 @@
                                     <td>{{ rupiah($cs->Cost->total_cgs) }}</td>
                                     <td>{{ rupiah($cs->Cost->harga_jual) }}</td>
                                     <td>{{ persen($cs->Cost->profit)  }}</td>
-                                 
+
                                     <td>
                                         <div class="d-flex gap-3 cursor">
-                                        
-                                            <button type="button" wire:click.prevent="DetailData('{{$cs->Cost->id_cost}}')" 
-                                                data-bs-toggle="modal"
-                                                data-bs-target="#updateModal" class="btn btn-primary btn-sm btn-rounded">
+
+                                            <button type="button"
+                                                wire:click.prevent="DetailData('{{$cs->Cost->id_cost}}')"
+                                                data-bs-toggle="modal" data-bs-target="#updateModal"
+                                                class="btn btn-primary btn-sm btn-rounded">
                                                 View Details
                                             </button>
                                     </td>
                                     <td>
                                         <div class="d-flex gap-3 cursor">
-                                        
+
                                             <a button class="text-danger"
                                                 wire:click="DetailData1('{{$cs->Cost->id_cost}}')"
                                                 data-bs-toggle="modal" data-bs-target="#deleteModal"><i
@@ -112,11 +116,11 @@
                                     </td>
                                 </tr>
                                 @endforeach
-                               
+
                             </tbody>
-                           
+
                         </table>
-                      
+
                     </div>
                 </div>
             </div>
@@ -125,14 +129,14 @@
 
 
     {{-- MODAL DETAIL --}}
-    <div wire:ignore.self id="updateModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="updateModal"
-        aria-hidden="true">
+    <div wire:ignore.self id="updateModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="updateModal" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="updateModal">Large modal</h5>
+                    <h5 class="modal-title" id="updateModal">Detail Cost</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
+                <div class="card-body">
                 <div class="table-responsive">
                     <table id="example" class="table align-middle table-nowrap table-check">
                         <thead class="table-light">
@@ -142,29 +146,30 @@
                                 <th class="align-middle">Digunakan</th>
                                 <th class="align-middle">Satuan</th>
                                 <th class="align-middle">Cost</th>
-                                
-                              
+
+
                             </tr>
                         </thead>
-    
-    
+
+
                         <tbody>
                             @php $no = 1; @endphp
                             @foreach ($detailCosts as $ds)
-                                    <tr>
-                                        <td>{{ $no++ }}</td>
-                                        <td>{{ $ds->bahanbaku->nama_bahan_baku }}</td>
-                                        <td>{{ $ds->digunakan }}</td>
-                                        <td>{{ $ds->bahanbaku->satuan }}</td>
-                                        <td>{{  rupiah($ds->cost) }}</td>
-                                      
-                                    </tr>
-                             
-                                @endforeach
-                        
+                            <tr>
+                                <td>{{ $no++ }}</td>
+                                <td>{{ $ds->bahanbaku->nama_bahan_baku }}</td>
+                                <td>{{ $ds->digunakan }}</td>
+                                <td>{{ $ds->bahanbaku->satuan }}</td>
+                                <td>{{  rupiah($ds->cost) }}</td>
+
+                            </tr>
+
+                            @endforeach
+
                         </tbody>
                     </table>
                 </div>
+            </div>
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->

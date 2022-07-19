@@ -220,7 +220,7 @@
                                 <thead class="table-light">
                                     <tr>
                                         <th class="align-middle">Nama Bahan Baku</th>
-                                        <th class="align-middle">Jumlah yang Digunakan</th>
+                                        <th class="align-middle">Jumlah Digunakan</th>
                                         <th class="align-middle">Cost</th>
                                         <th class="align-middle">Actions</th>
 
@@ -241,7 +241,7 @@
                                         <td>{{ $sa->nama_bahan_baku}}</td>
                                         <td>{{ $sa->digunakan}}</td>
 
-                                        <td>{{ $sa->cost}}</td>
+                                        <td>{{ rupiah($sa->cost)}}</td>
                                         <td>
                                             <a button class="text-danger"
                                                 wire:click="DetailDataKeranjang('{{$sa->bahan_baku_kode}}')"
@@ -282,8 +282,10 @@
                                     </div>
 
                                     <label>Harga </label>
-                                  
                                     <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="">Rp.</span>
+                                        </div>
                                         <input id="harga" type="text" class="form-control" wire:model="harga" readonly>
                                         @error('harga') <span class="error">{{ $message }}</span> @enderror
                                     </div>
@@ -313,7 +315,7 @@
                                     </div>
                           
 
-                                    <label>Jumlah yang Digunakan </label>
+                                    <label>Jumlah Digunakan </label>
                                     <div class="input-group mb-3">
                                         <input id="digunakan" type="text" class="form-control" wire:model="digunakan">
                                         @error('digunakan') <span class="error">{{ $message }}</span> @enderror
