@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Livewire\Laporanbahanbakukeluar\Index;
 
 // Routing Manajemen Role & Permission
 Route::group(['middleware' => ['auth', 'role:admin']], function () {
@@ -59,12 +60,17 @@ Route::group(['middleware' => ['permission:view penjualan']], function () {
 });
 
 Route::group(['middleware' => ['permission:view bahan-baku-keluar']], function () {
-    Route::get('/bahanbakukeluar', \App\Http\Livewire\Bahanbakukeluar\Index::class)->middleware('auth')->name('bahanbakukeluar.index');
+    Route::get('/laporanbahanbakukeluar', \App\Http\Livewire\Bahanbakukeluar\Index::class)->middleware('auth')->name('bahanbakukeluar.index');
 });
 
-Route::get('/laporanbahanbakumasuk', \App\Http\Livewire\Laporanbahanbakumasuk\Index::class)->middleware(['auth', 'view laporan-bahan-baku-masuk'])->name('Laporanbahanbakumasuk.index');
-Route::get('/laporanpenjualan', \App\Http\Livewire\Laporanpenjualan\Index::class)->middleware(['auth', 'view laporan-penjualan'])->name('laporanpenjualan.index');
-Route::get('/laporanbahanbakukeluar', \App\Http\Livewire\Laporanbahanbakukeluar\Index::class)->middleware(['auth', 'view laporan-bahan-baku-keluar'])->name('Laporanbahanbakukeluar.index');
+Route::group(['middleware' => ['permission:view laporan-bahan-baku-masuk']], function () {
+    Route::get('/laporanbahanbakumasuk', \App\Http\Livewire\Laporanbahanbakumasuk\Index::class)->middleware('auth')->name('Laporanbahanbakumasuk.index');
+});
+
+Route::group(['middleware' => ['permission:view laporan-penjualan']], function () {
+    Route::get('/laporanpenjualan', \App\Http\Livewire\Laporanpenjualan\Index::class)->middleware('auth')->name('laporanpenjualan.index');
+});
+
 
 
 

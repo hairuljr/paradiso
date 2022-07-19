@@ -11,7 +11,12 @@ class Create extends Component
     protected $rules = [
         'name' => 'required',
     ];
+    protected $messages = [
+        'name.required' => 'Nama tidak boleh kosong.',
 
+
+
+    ];
     public function save()
     {
         $this->validate();

@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\DB;
 
 class Create extends Component
 {
-
+    public $searchQuery;
     public $bahan_baku_kode;
     public $kode_bahan_baku;
     public $nama_bahan_baku;
@@ -57,6 +57,10 @@ class Create extends Component
         $this->satuan_produk = $bahanbaku->satuan_produk;
     }
 
+    public function mount()
+    {
+        $this->searchQuery = '';
+    }
 
     public function save()
     {
@@ -92,7 +96,9 @@ class Create extends Component
     {
 
         $bahanbakumasuk = DB::table('tb_bahan_baku_masuk')->get();
-        $bahanbaku = DB::table('tb_bahan_baku')->get();
+        $bahanbaku = BahanBaku::when($this->searchQuery !== '', function ($query) {
+            $query->where('nama_bahan_baku', 'like', '%' . $this->searchQuery . '%');
+        })->orderBy('nama_bahan_baku', 'DESC')->paginate(5);
         return view('livewire.bahanbakumasuk.create', ['bahanbaku' => $bahanbaku], ['bahanbakumasuk' => $bahanbakumasuk])->extends('template.app');
     }
 }

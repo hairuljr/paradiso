@@ -3,12 +3,7 @@
         <div class="col-12">
             <div class="page-title-box d-sm-flex align-items-center justify-content-between">
                 <h4 class="mb-sm-0 font-size-18">Data Penjualan</h4>
-                <div class="page-title-right">
-                    <ol class="breadcrumb m-0">
-                        <a href="{{route('penjualan.create')}}" type="button" class="btn btn-success "><i
-                                class="mdi mdi-plus me-1"></i> Penjualan </a>
-                    </ol>
-                </div>
+                
             </div>
         </div>
     </div>
@@ -20,7 +15,6 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-body">
-
                     <div class="row mb-2">
                         <div class="col-sm-4">
                             @if (session('pesan'))
@@ -46,6 +40,22 @@
                             @endif
                         </div>
                     </div>
+                    <div class="row mb-2">
+                        <div class="col-sm-4">
+                            <div class="search-box me-2 mb-2 d-inline-block">
+                                <div class="position-relative">
+                                    <input wire:model="searchQuery" type="date" class="form-control" placeholder="Cari Tanggal Transaksi">
+                                   
+                                    <i class="bx bx-search-alt search-icon"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-8">
+                            <div class="text-sm-end">
+                                <a href="{{route('penjualan.create')}}" type="button" class="btn btn-success btn-rounded waves-effect waves-light mb-1 me-1"><i class="mdi mdi-plus me-1"></i> Add</a>
+                            </div>
+                        </div><!-- end col-->
+                    </div>
                     <div class="table-responsive">
                         <table id="example" class="table align-middle table-nowrap table-check">
                             <thead class="table-light">
@@ -56,6 +66,7 @@
                                     <th class="align-middle">Tanggal</th>
 
                                     <th class="align-middle">Sub Total</th>
+                                    <th class="align-middle">Detail Penjualan</th>
                                     <th class="align-middle">Action</th>
                                 </tr>
                             </thead>
@@ -72,21 +83,21 @@
                                     <td>{{ rupiah($pn->sub_total)}}</td>
                                     <td>
                                         <div class="d-flex gap-3 cursor">
-                                            <a wire:click.prevent="DetailData('{{$pn->no_transaksi}}')"
-                                                class="text-success" data-bs-toggle="modal"
-                                                data-bs-target="#updateModal"><i
-                                                    class="mdi mdi-eye font-size-18"></i>
-                                            </a>
-
+                                            
+                                            <button type="button" wire:click.prevent="DetailData('{{$pn->no_transaksi}}')" 
+                                                data-bs-toggle="modal"
+                                                data-bs-target="#updateModal" class="btn btn-primary btn-sm btn-rounded">
+                                                View Details
+                                            </button> 
+                                        </div>  
+                                    </td>
+                                    <td>
+                                        <div class="d-flex gap-3 cursor">
                                             <a button class="text-danger"
                                                 wire:click="DetailData1('{{$pn->no_transaksi}}')"
                                                 data-bs-toggle="modal" data-bs-target="#deleteModal"><i
                                                     class="mdi mdi-delete font-size-18"></i>
                                             </a>
-
-                                         
-
-
                                         </div>
                                     </td>
                                 </tr>

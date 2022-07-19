@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\DB;
 
 class Index extends Component
 {
+    public $seacrhQuery;
     public $kode_bahan_baku;
     public $nama_bahan_baku;
     public $persediaan;
@@ -39,7 +40,10 @@ class Index extends Component
         $this->satuan = '';
         $this->satuan_produk = '';
     }
-
+    public function mount()
+    {
+        $this->searchQuery = '';
+    }
 
     public function DetailData($kode_bahan_baku)
     {
@@ -80,7 +84,10 @@ class Index extends Component
 
     public function render()
     {
-        $bahanbaku = DB::table('tb_bahan_baku')->get();
+        $bahanbaku  = BahanBaku::when($this->searchQuery !== '', function ($query) {
+            $query->where('nama_bahan_baku', 'like', '%' . $this->searchQuery . '%');
+        })->orderBy('nama_bahan_baku', 'DESC')->paginate(5);
+
         return view('livewire.bahanbaku.index', ['bahanbaku' => $bahanbaku])->extends('template.app');
     }
 }

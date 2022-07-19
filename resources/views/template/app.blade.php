@@ -281,6 +281,7 @@
 
         </div> <!-- end slimscroll-menu-->
     </div>
+    
     @livewireScripts
   <!-- Sweet Alerts js -->
     <script src="{{ asset('assets/skote/libs/sweetalert2/sweetalert2.min.js')}}"></script>

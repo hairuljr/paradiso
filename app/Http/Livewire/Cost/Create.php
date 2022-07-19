@@ -17,13 +17,13 @@ class Create extends Component
 {
 
     use WithPagination;
-
+    public $searchQuery;
     public $search;
     public $page = 1;
 
     protected $updatesQueryString = [
-        ['page' => ['except' => 1]],
         ['search' => ['except' => '']],
+
     ];
 
     public $kode_bahan_baku;
@@ -81,10 +81,10 @@ class Create extends Component
         'nama_produk.required' => 'Nama Produk tidak boleh kosong.',
         'bahan_baku_kode.required' => 'Barcode tidak boleh kosong.',
         'nama_bahan_baku.required' => 'Nama Bahan Baku tidak boleh kosong.',
-        'harga.required' => 'Harga tidak boleh kosong.',
+        'harga.required' => 'Harga Bahan Baku tidak boleh kosong.',
         'satuan_produk.required' => 'Isi Satuan tidak boleh kosong.',
         'satuan.required' => 'Satuan tidak boleh kosong.',
-        'digunakan.required' => 'Digunakan Masuk tidak boleh kosong.',
+        'digunakan.required' => 'Jumlah yang digunakan tidak boleh kosong.',
         'cost.required' => 'Cost tidak boleh kosong.',
 
 
@@ -101,7 +101,10 @@ class Create extends Component
     ];
 
 
-
+    public function mount()
+    {
+        $this->searchQuery = '';
+    }
     public function ClearForm()
     {
         $this->produk_kode = '';
@@ -184,6 +187,7 @@ class Create extends Component
 
 
         $sementara = Sementara::all();
+
         Cost::create([
 
             'id_cost' => $this->id_cost,
@@ -217,7 +221,6 @@ class Create extends Component
 
         $detailcost = Cost::kode();
 
-        // Modal Bahan Baku
         $datanya = BahanBakuMasuk::with(['bahanbaku'])
             ->groupBy('bahan_baku_kode')
             ->join(
@@ -226,27 +229,12 @@ class Create extends Component
                 '=',
                 'tb_bahan_baku_masuk.bahan_baku_kode'
             )
-            ->orderBy('bahan_baku_kode', 'DESC')
-            ->latest('tb_bahan_baku_masuk.created_at')
-            ->paginate(5);
-
-        //menampilkan 5 data Bahan Baku
-        if ($this->search !== null) {
-            $datanya = BahanBakuMasuk::with(['bahanbaku'])
-                ->groupBy('bahan_baku_kode')
-                ->join(
-                    'tb_bahan_baku',
-                    'tb_bahan_baku.kode_bahan_baku',
-                    '=',
-                    'tb_bahan_baku_masuk.bahan_baku_kode'
-                )->orderBy('bahan_baku_kode', 'DESC')
-                ->where('nama_bahan_baku', 'like', '%' . $this->search . '%')
-                ->latest('tb_bahan_baku_masuk.created_at')
-                ->paginate(5);
-        }
+            ->when($this->searchQuery !== '', function ($query) {
+                $query->where('nama_bahan_baku', 'like', '%' . $this->searchQuery . '%');
+            })->orderBy('nama_bahan_baku', 'DESC')->paginate(5);
 
 
-        // Modal Produk
+
         $produk = Produk::join(
             'tb_jenis_produk',
             'tb_jenis_produk.kode_jenis_produk',

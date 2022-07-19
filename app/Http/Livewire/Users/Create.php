@@ -14,8 +14,17 @@ class Create extends Component
     public $role;
     protected $rules = [
         'name' => 'required',
-        'email' => 'required|email:rfc,dns|unique:users,email',
+        // 'email' => 'required|email:rfc,dns|unique:users,email',
         'username' => 'required|unique:users,username',
+    ];
+
+    protected $messages = [
+        'name.required' => 'Nama tidak boleh kosong.',
+        'username.required' => 'Username Produk tidak boleh kosong.',
+        // 'jenis_produk_kode.required' => 'Jenis Produk tidak boleh kosong.',
+
+
+
     ];
 
     public function save()

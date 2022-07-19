@@ -14,11 +14,15 @@ use Illuminate\Support\Facades\DB;
 
 class Create extends Component
 {
+    public $seacrhQuery;
+    public $id_cost;
+    public $cost_id;
     public $no_transaksi;
     public $transaksi_no;
     public $tgl_transaksi;
     public $jumlah;
     public $sub_total;
+    public $produk_kode;
 
     // public $produk;
     public $kode_produk;
@@ -45,24 +49,39 @@ class Create extends Component
 
     protected $rules = [
 
+        'kode_produk' => 'required',
         'nama_produk' => 'required',
         'jumlah' => 'required',
         'total' => 'required',
+        'harga_jual' => 'required',
 
     ];
+    protected $rules1 = [
 
+        'sub_total' => 'required',
+
+    ];
 
 
     protected $messages = [
+        'kode_produk.required' => 'Barcode tidak boleh kosong.',
         'nama_produk.required' => 'Nama Produk tidak boleh kosong.',
-        'jumlah.required' => 'Jumlah tidak boleh kosong.',
+        'jumlah.required' => 'Jumlah Produk tidak boleh kosong.',
         'total.required' => 'Total tidak boleh kosong.',
+        'harga_jual.required' => 'Harga Produk tidak boleh kosong.',
+
+    ];
+    protected $messages1 = [
+        'sub_total.required' => 'Sub Total tidak boleh kosong.',
 
 
     ];
 
 
-
+    public function mount()
+    {
+        $this->searchQuery = '';
+    }
     public function SelectData1($produk_kode)
     {
 
@@ -131,8 +150,8 @@ class Create extends Component
     {
         $sementara = SementaraPenjualan::get();
         // $subTotal = array_sum($sementara->pluck('total')->toArray());
-
-        Penjualan::create([
+        $validasi = $this->validate();
+        Penjualan::create($validasi, [
 
             'no_transaksi' => $this->no_transaksi,
             'user_id' => auth()->id(),
@@ -200,7 +219,15 @@ class Create extends Component
         // query join 3 tbl
         $datanya = DetailCost::with(['produk', 'cost'])
             ->groupBy('produk_kode')
-            ->get();
+            ->join(
+                'tb_produk',
+                'tb_produk.kode_produk',
+                '=',
+                'tb_detailcost.produk_kode'
+            )
+            ->when($this->searchQuery !== '', function ($query) {
+                $query->where('nama_produk', 'like', '%' . $this->searchQuery . '%');
+            })->orderBy('nama_produk', 'DESC')->paginate(5);
         // $datanya->first()->bahan_baku_kode;
         // $datanya->first()->produk->nama_produk;
         // $datanya->first()->detailCost->harga_jual;

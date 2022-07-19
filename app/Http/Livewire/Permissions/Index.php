@@ -25,7 +25,12 @@ class Index extends Component
     protected $rules = [
         'name' => 'required|unique:permissions,name'
     ];
+    protected $messages = [
+        'name.required' => 'Nama tidak boleh kosong.',
 
+
+
+    ];
     public function ClearForm()
     {
         $this->name = '';

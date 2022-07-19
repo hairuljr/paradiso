@@ -41,7 +41,7 @@
                             <div class="col-md-5">
                                 <div class="col-md-2 col-4">
                                     <button type="button" class="btn btn-primary waves-effect waves-light"
-                                        data-bs-toggle="modal" data-bs-target=".BahanBakuMasukModal">Cari</button>
+                                        data-bs-toggle="modal" data-bs-target=".bs-BahanBakuModal-modal-lg">Cari</button>
                                 </div>
                             </div>
                         </div>
@@ -108,15 +108,29 @@
     </div>
 
     {{-- modal --}}
-    <div wire:ignore.self class="modal fade BahanBakuMasukModal" id="modal-item" tabindex="-1" role="dialog"
+    <div wire:ignore.self class="modal fade bs-BahanBakuModal-modal-lg" id="modal-item" tabindex="-1" role="dialog"
         aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-xl">
+        <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="myExtraLargeModalLabel">Extra large modal</h5>
+                    <h5 class="modal-title" id="myExtraLargeModalLabel">Data Bahan Baku</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="card-body">
+                   
+                        <div class="row mb-2">
+                            <div class="col-sm-4">
+                                <div class="search-box me-2 mb-2 d-inline-block">
+                                    <div class="position-relative">
+                                        <input wire:model="searchQuery" type="text" class="form-control"
+                                            placeholder="Cari Nama Bahan Baku">
+
+                                        <i class="bx bx-search-alt search-icon"></i>
+                                    </div>
+                                </div>
+                            </div>
+
+                        
                     <div class="table-responsive">
                         <table id="datatable" class="table align-middle table-nowrap table-check">
                             <thead class="table-light">
@@ -146,7 +160,7 @@
                                     <td>{{ $bb->satuan_produk}}</td>
                                     <td>{{ $bb->satuan}}</td>
                                     <td>
-                                        <button wire:click.prevent="SelectData('{{$bb->kode_bahan_baku}}')" class="btn btn-xs btn-info" id="select">
+                                        <button wire:click.prevent="SelectData('{{$bb->kode_bahan_baku}}')" class="btn btn-primary btn-sm btn-rounded" id="select">
                                             <i class="fa fa-check"></i> Select
 
                                         </button>

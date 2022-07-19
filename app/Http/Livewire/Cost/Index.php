@@ -94,8 +94,8 @@ class Index extends Component
                     '=',
                     'tb_detailcost.produk_kode'
 
-                )->orderBy('cost_id', 'DESC')->where('nama_produk', 'like', '%' .  $this->search . '%')
-
+                )->orderBy('cost_id', 'DESC')
+                ->where('nama_produk', 'like', '%' .  $this->search . '%')
                 ->latest('tb_detailcost.created_at')
                 ->paginate(5);
         }

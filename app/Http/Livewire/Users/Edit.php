@@ -18,7 +18,7 @@ class Edit extends Component
     {
         $this->validate([
             'name' => 'required',
-            'email' => 'required|email:rfc,dns|unique:users,email,' . $this->user->id,
+
             'username' => 'required|unique:users,username,' . $this->user->id,
         ]);
         $this->user->update([

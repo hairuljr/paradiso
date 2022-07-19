@@ -30,15 +30,7 @@
                                 @enderror
                             </div>
                         </div>
-                        <div class="mb-3 row">
-                            <label class="col-md-2 col-form-label">Email</label>
-                            <div class="col-md-5">
-                                <input type="text" name="email" wire:model="email" class="form-control">
-                                @error('email')
-                                    <span class="error">{{ $message }}</span>
-                                @enderror
-                            </div>
-                        </div>
+                  
                         <div class="mb-3 row">
                             <label class="col-md-2 col-form-label">Username</label>
                             <div class="col-md-5">

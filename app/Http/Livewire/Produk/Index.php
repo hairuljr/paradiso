@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\DB;
 
 class Index extends Component
 {
-
+    public $seacrhQuery;
     public $kode_produk;
     public $nama_produk;
     public $jenis_produk_kode;
@@ -32,6 +32,10 @@ class Index extends Component
 
     ];
 
+    public function mount()
+    {
+        $this->searchQuery = '';
+    }
     public function ClearForm()
     {
         $this->kode_produk = '';
@@ -81,12 +85,15 @@ class Index extends Component
     {
         $jenisproduk = JenisProduk::all();
 
-        $produk  = DB::table('tb_produk')->join(
+        $produk  = Produk::join(
             'tb_jenis_produk',
             'tb_jenis_produk.kode_jenis_produk',
             '=',
             'tb_produk.jenis_produk_kode'
-        )->get();
+        )
+            ->when($this->searchQuery !== '', function ($query) {
+                $query->where('nama_produk', 'like', '%' . $this->searchQuery . '%');
+            })->orderBy('nama_produk', 'DESC')->paginate(5);
 
         return view('livewire.produk.index', ['produk' => $produk], ['jenisproduk' => $jenisproduk])->extends('template.app');
     }

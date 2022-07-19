@@ -33,7 +33,7 @@
 
 </head>
 
-<body data-sidebar="dark" data-keep-enlarged="true" class="vertical-collpsed">
+<body data-sidebar="dark" >
     <div id="layout-wrapper">
         <header id="page-topbar">
             <div class="navbar-header">

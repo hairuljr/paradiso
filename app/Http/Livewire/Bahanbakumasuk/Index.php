@@ -4,11 +4,22 @@ namespace App\Http\Livewire\Bahanbakumasuk;
 
 use Livewire\Component;
 use App\Models\BahanBaku;
+use Livewire\WithPagination;
 use App\Models\BahanBakuMasuk;
 use Illuminate\Support\Facades\DB;
 
 class Index extends Component
 {
+    use WithPagination;
+
+    public $search;
+    public $page = 1;
+
+    protected $updatesQueryString = [
+        ['page' => ['except' => 1]],
+        ['search' => ['except' => '']],
+    ];
+
     public $DetailData = '';
     public $bahan_baku_kode;
     public $kode_bahan_baku;
@@ -23,6 +34,8 @@ class Index extends Component
         'bahan_baku_kode' => 'required',
         'jumlah' => 'required',
         'harga' => 'required',
+        'satuan_produk' => 'required',
+
 
     ];
 
@@ -119,8 +132,22 @@ class Index extends Component
             'tb_bahan_baku.kode_bahan_baku',
             '=',
             'tb_bahan_baku_masuk.bahan_baku_kode'
-        )->with('user')->get();
+        )->with('user')->orderBy('bahan_baku_kode', 'DESC')
+            ->latest('tb_bahan_baku_masuk.created_at')
+            ->paginate(5);
 
+        if ($this->search !== null) {
+            $bahanbakumasuk = BahanBakuMasuk::join(
+                'tb_bahan_baku',
+                'tb_bahan_baku.kode_bahan_baku',
+                '=',
+                'tb_bahan_baku_masuk.bahan_baku_kode'
+            )->with('user')
+                ->orderBy('bahan_baku_kode', 'DESC')
+                ->where('nama_bahan_baku', 'like', '%' .  $this->search . '%')
+                ->latest('tb_bahan_baku_masuk.created_at')
+                ->paginate(5);
+        }
         return view('livewire.bahanbakumasuk.index', ['bahanbakumasuk' => $bahanbakumasuk])->extends('template.app');
     }
 }

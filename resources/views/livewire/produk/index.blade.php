@@ -3,12 +3,7 @@
         <div class="col-12">
             <div class="page-title-box d-sm-flex align-items-center justify-content-between">
                 <h4 class="mb-sm-0 font-size-18">Data Produk</h4>
-                <div class="page-title-right">
-                    <ol class="breadcrumb m-0">
-                        <a href="{{route('produk.create')}}" type="button" class="btn btn-success "><i
-                                class="mdi mdi-plus me-1"></i> Add Data </a>
-                    </ol>
-                </div>
+              
             </div>
         </div>
     </div>
@@ -46,13 +41,29 @@
                             @endif
                         </div>
                     </div>
+                    <div class="row mb-2">
+                        <div class="col-sm-4">
+                            <div class="search-box me-2 mb-2 d-inline-block">
+                                <div class="position-relative">
+                                    <input wire:model="searchQuery" type="text" class="form-control" placeholder="Cari Nama Produk">
+                                   
+                                    <i class="bx bx-search-alt search-icon"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-8">
+                            <div class="text-sm-end">
+                                <a href="{{route('produk.create')}}" type="button" class="btn btn-success btn-rounded waves-effect waves-light mb-1 me-1"><i class="mdi mdi-plus me-1"></i> Add</a>
+                            </div>
+                        </div><!-- end col-->
+                    </div>
                     <div class="table-responsive">
                         <table id="example" class="table align-middle table-nowrap table-check">
                             <thead class="table-light">
                                 <tr>
                                     <th class="align-middle">No</th>
                                     <th class="align-middle">Barcode</th>
-                                    <th class="align-middle">Nama</th>
+                                    <th class="align-middle">Nama Produk</th>
                                     <th class="align-middle">Jenis Produk</th>
                                     {{-- <th class="align-middle">Harga Satuan</th> --}}
                                     <th class="align-middle">Actions</th>
@@ -105,7 +116,7 @@
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="updateModal">Large modal</h5>
+                    <h5 class="modal-title" id="updateModal">Ubah Bahan Baku</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">

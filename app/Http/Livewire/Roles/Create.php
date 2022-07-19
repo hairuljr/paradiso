@@ -15,7 +15,12 @@ class Create extends Component
         'name' => 'required',
         'permission' => 'required',
     ];
+    protected $messages = [
+        'name.required' => 'Nama tidak boleh kosong.',
 
+
+
+    ];
     public function save()
     {
         if ($this->allPermit) {

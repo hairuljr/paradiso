@@ -12,7 +12,9 @@ use Illuminate\Support\Facades\DB;
 
 class Index extends Component
 {
+    public $searchQuery;
     public $DetailData2 = '';
+    public $DetailDataDelete;
     public $no_transaksi;
     public $detailTransaksi = [];
     public $tgl_transaksi;
@@ -22,6 +24,11 @@ class Index extends Component
     public $kode_bahan_baku;
     public $jumlah;
 
+
+    public function mount()
+    {
+        $this->searchQuery = '';
+    }
     public function DetailData($no_transaksi)
     {
         $penjualan = DetailPenjualan::with('produk')->where('transaksi_no', $no_transaksi)->get();
@@ -47,7 +54,10 @@ class Index extends Component
         $this->sub_total = $penjualan->sub_total;
     }
 
-
+    public function DetailDataDelete($bahan_baku_kode)
+    {
+        $this->DetailDataDelete = $bahan_baku_kode;
+    }
     public function delete()
     {
 
@@ -59,22 +69,14 @@ class Index extends Component
             'tb_bahan_baku_keluar.transaksi_no'
         )->where('no_transaksi', $this->no_transaksi)->first();
 
-        // $bahanbakukeluar = BahanBakuKeluar::join(
-        //     'tb_bahan_baku',
-        //     'tb_bahan_baku.kode_bahan_baku',
-        //     '=',
-        //     'tb_bahan_baku_keluar.bahan_baku_kode'
-        // )->get();
-
         $bahanbaku = BahanBaku::where('kode_bahan_baku', $bahanbakukeluar->bahan_baku_kode)->first();
-
-
 
         if ($bahanbaku) {
             $bahanbaku->update([
-                'persediaan' => $bahanbaku->persediaan + $this->jumlah
+                'persediaan' => $bahanbaku->persediaan + $bahanbakukeluar->jumlah
             ]);
         }
+
         Penjualan::where('no_transaksi', $this->no_transaksi)->delete();
 
         $this->emit('deleteModal');
@@ -82,7 +84,11 @@ class Index extends Component
     public function render()
     {
 
-        $penjualan = Penjualan::with('user')->get();
+        $penjualan = Penjualan::with('user')->when($this->searchQuery !== '', function ($query) {
+            $query->where('tgl_transaksi', 'like', '%' . $this->searchQuery . '%');
+        })->orderBy('tgl_transaksi', 'DESC')->paginate(5);
+
+
         return view('livewire.penjualan.index', [
 
             'penjualan' => $penjualan

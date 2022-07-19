@@ -4,12 +4,7 @@
         <div class="col-12">
             <div class="page-title-box d-sm-flex align-items-center justify-content-between">
                 <h4 class="mb-sm-0 font-size-18">Data Bahan Baku</h4>
-                <div class="page-title-right">
-                    <ol class="breadcrumb m-0">
-                        <a href="{{route('bahanbaku.create')}}" type="button" class="btn btn-success "><i
-                                class="mdi mdi-plus me-1"></i> Add Data </a>
-                    </ol>
-                </div>
+              
             </div>
         </div>
     </div>
@@ -46,6 +41,22 @@
                             </div>
                             @endif
                         </div>
+                    </div>
+                    <div class="row mb-2">
+                        <div class="col-sm-4">
+                            <div class="search-box me-2 mb-2 d-inline-block">
+                                <div class="position-relative">
+                                    <input wire:model="searchQuery" type="text" class="form-control" placeholder="Cari Nama Bahan Baku">
+                                   
+                                    <i class="bx bx-search-alt search-icon"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-8">
+                            <div class="text-sm-end">
+                                <a href="{{route('bahanbaku.create')}}" type="button" class="btn btn-success btn-rounded waves-effect waves-light mb-1 me-1"><i class="mdi mdi-plus me-1"></i> Add</a>
+                            </div>
+                        </div><!-- end col-->
                     </div>
                     <div class="table-responsive">
                         <table id="example" class="table align-middle table-nowrap table-check">
@@ -110,7 +121,7 @@
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="updateModal">Large modal</h5>
+                    <h5 class="modal-title" id="updateModal">Ubah Bahan Baku</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -119,7 +130,7 @@
                             <label class="col-md-2 col-form-label">Barcode</label>
                             <div class="col-md-5">
                                 <input type="text" name="kode_bahan_baku" wire:model="kode_bahan_baku"
-                                    class="form-control" >
+                                    class="form-control" readonly>
                                 @error('kode_bahan_baku') <span class="error">{{ $message }}</span> @enderror
                             </div>
                         </div>
@@ -135,7 +146,7 @@
                         <div class="mb-3 row">
                             <label class="col-md-2 col-form-label">Persediaan</label>
                             <div class="col-md-10">
-                                <input type="text" name="persediaan" wire:model="persediaan" class="form-control">
+                                <input type="text" name="persediaan" wire:model="persediaan" class="form-control" readonly>
                                 @error('persediaan') <span class="error">{{ $message }}</span> @enderror
                             </div>
                         </div>
@@ -149,7 +160,7 @@
                         <div class="mb-3 row">
                             <label class="col-md-2 col-form-label">Satuan</label>
                             <div class="col-md-5">
-                                <input type="text" name="satuan" wire:model="satuan" class="form-control">
+                                <input type="text" name="satuan" wire:model="satuan" class="form-control" readonly>
                                 @error('satuan') <span class="error">{{ $message }}</span> @enderror
                             </div>
                             <div class="col-md-5">
