@@ -50,31 +50,7 @@
             </div>
             <div class="card">
                 <div class="card-body">
-                    <div class="row mb-2">
-                        <div class="col-sm-8">
-                            @if (session('pesan'))
-                            <div class="alert alert-primary alert-dismissible fade show" role="alert">
-                                {{ session('pesan')}}
-                                <button type="button" class="btn-close" data-bs-dismiss="alert"
-                                    aria-label="Close"></button>
-                            </div>
-                            @endif
-                            @if (session('pesan1'))
-                            <div class="alert alert-primary alert-dismissible fade show" role="alert">
-                                {{ session('pesan1')}}
-                                <button type="button" class="btn-close" data-bs-dismiss="alert"
-                                    aria-label="Close"></button>
-                            </div>
-                            @endif
-                            @if (session('hapus'))
-                            <div class="alert alert-primary alert-dismissible fade show" role="alert">
-                                {{ session('hapus')}}
-                                <button type="button" class="btn-close" data-bs-dismiss="alert"
-                                    aria-label="Close"></button>
-                            </div>
-                            @endif
-                        </div>
-                    </div>
+                  
                  
                     <div class="table-responsive">
                         <table id="example" class="table align-middle table-nowrap table-check">
@@ -101,8 +77,7 @@
                                     <td>
                                         <a button class="text-danger"
                                             wire:click="DetailDataKeranjang('{{ $item->produk_kode }}')"
-                                            data-bs-toggle="modal" data-bs-target="#deleteModal"><i
-                                                class="mdi mdi-delete font-size-18"></i></a>
+                                            ><i class="mdi mdi-delete font-size-18"></i></a>
 
                                     </td>
                                 </tr>
@@ -257,7 +232,7 @@
                     </div><!-- /.modal -->
 
                 </div>
-                <div wire:ignore.self class="modal fade" id="deleteModal" data-bs-backdrop="static"
+                {{-- <div wire:ignore.self class="modal fade" id="deleteModal" data-bs-backdrop="static"
                     data-bs-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel"
                     aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered" role="document">
@@ -277,7 +252,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> --}}
 
             </div>
             <div class="card">

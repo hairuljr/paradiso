@@ -53,7 +53,7 @@
                         <div class="modal-dialog modal-lg">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title" id="myLargeModalLabel">Bahan Baku</h5>
+                                    <h5 class="modal-title" id="myLargeModalLabel">Data Bahan Baku</h5>
                                     <button type="button" class="btn-close" data-bs-dismiss="modal"
                                         aria-label="Close"></button>
                                 </div>
@@ -131,7 +131,7 @@
                                 </div>
                                 <div class="card-body">
                                     <div class="row mb-2">
-                                        <div class="col-sm-4">
+                                        <div class="col-sm-6">
                                             <div class="search-box me-2 mb-2 d-inline-block">
                                                 <div class="position-relative">
                                                     <input wire:model="search" type="text" class="form-control"
@@ -187,7 +187,7 @@
                             </div><!-- /.modal -->
                         </div>
                         {{-- Modal Delete Keranjang --}}
-                        <div wire:ignore.self class="modal fade" id="deleteModal" data-bs-backdrop="static"
+                        {{-- <div wire:ignore.self class="modal fade" id="deleteModal" data-bs-backdrop="static"
                             data-bs-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel"
                             aria-hidden="true">
                             <div class="modal-dialog modal-dialog-centered" role="document">
@@ -208,37 +208,13 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> --}}
                     </div>
 
                 </div>
                 <div class="card">
                     <div class="card-body">
-                        <div class="row mb-2">
-                            <div class="col-sm-7">
-                                @if (session('pesan'))
-                                <div class="alert alert-primary alert-dismissible fade show" role="alert">
-                                    {{ session('pesan')}}
-                                    <button type="button" class="btn-close" data-bs-dismiss="alert"
-                                        aria-label="Close"></button>
-                                </div>
-                                @endif
-                                @if (session('pesan1'))
-                                <div class="alert alert-primary alert-dismissible fade show" role="alert">
-                                    {{ session('pesan1')}}
-                                    <button type="button" class="btn-close" data-bs-dismiss="alert"
-                                        aria-label="Close"></button>
-                                </div>
-                                @endif
-                                @if (session('hapus'))
-                                <div class="alert alert-primary alert-dismissible fade show" role="alert">
-                                    {{ session('hapus')}}
-                                    <button type="button" class="btn-close" data-bs-dismiss="alert"
-                                        aria-label="Close"></button>
-                                </div>
-                                @endif
-                            </div>
-                        </div>
+                     
                         <div class="table-responsive">
                             <table id="example" class="table align-middle table-nowrap table-check">
                                 <thead class="table-light">
@@ -269,8 +245,8 @@
                                         <td>
                                             <a button class="text-danger"
                                                 wire:click="DetailDataKeranjang('{{$sa->bahan_baku_kode}}')"
-                                                data-bs-toggle="modal" data-bs-target="#deleteModal"><i
-                                                    class="mdi mdi-delete font-size-18"></i>
+                                              ><i class="mdi mdi-delete font-size-18"></i>
+                                                    
                                             </a>
                                         </td>
                                     </tr>

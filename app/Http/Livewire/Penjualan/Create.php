@@ -131,12 +131,11 @@ class Create extends Component
     }
     public function DetailDataKeranjang($produk_kode)
     {
-        $temp = SementaraPenjualan::where('produk_kode', $produk_kode)->first();
-        $this->produk_kode = $temp->produk_kode;
-        $this->nama_produk = $temp->nama_produk;
-        $this->jumlah = $temp->jumlah;
-        $this->total = $temp->total;
-        $this->bahan_baku = $temp->bahan_baku;
+
+        if ($produk_kode) {
+            $temp = SementaraPenjualan::where('produk_kode', $produk_kode)->first();
+            $temp->delete();
+        }
     }
 
     public function DeleteKeranjang()

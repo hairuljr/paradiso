@@ -59,7 +59,7 @@ class Create extends Component
         'produk_kode' => 'required',
         'nama_produk' => 'required',
         'bahan_baku_kode' => 'required',
-        'nama_bahan_baku' => 'required',
+        'nama_bahan_baku' => 'required|unique:tb_sementara|',
         'harga' => 'required',
         'satuan_produk' => 'required',
         'satuan' => 'required',
@@ -80,6 +80,7 @@ class Create extends Component
         'produk_kode.required' => 'Barcode tidak boleh kosong.',
         'nama_produk.required' => 'Nama Produk tidak boleh kosong.',
         'bahan_baku_kode.required' => 'Barcode tidak boleh kosong.',
+        'bahan_baku_kode.unique' => 'Nama Bahan Baku tidak boleh sama.',
         'nama_bahan_baku.required' => 'Nama Bahan Baku tidak boleh kosong.',
         'harga.required' => 'Harga Bahan Baku tidak boleh kosong.',
         'satuan_produk.required' => 'Isi Satuan tidak boleh kosong.',
@@ -145,13 +146,11 @@ class Create extends Component
 
     public function DetailDataKeranjang($bahan_baku_kode)
     {
-        $sementara = Sementara::where('bahan_baku_kode', $bahan_baku_kode)->first();
-        $this->id = $sementara->id;
-        $this->produk_kode = $sementara->produk_kode;
-        $this->nama_produk = $sementara->nama_produk;
-        $this->bahan_baku_kode = $sementara->bahan_baku_kode;
-        $this->nama_bahan_baku = $sementara->nama_bahan_baku;
-        $this->cost = $sementara->cost;
+
+        if ($bahan_baku_kode) {
+            $sementara = Sementara::where('bahan_baku_kode', $bahan_baku_kode)->first();
+            $sementara->delete();
+        }
     }
 
     public function DeleteKeranjang()
