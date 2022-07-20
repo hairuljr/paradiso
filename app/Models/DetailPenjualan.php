@@ -13,6 +13,7 @@ class DetailPenjualan extends Model
 
     protected $table = 'tb_detail_penjualan';
     protected $guarded = [];
+    protected $with = ['produk'];
 
     public function produk()
     {

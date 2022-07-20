@@ -7,6 +7,7 @@ use App\Models\BahanBaku;
 use Livewire\WithPagination;
 use App\Models\BahanBakuMasuk;
 use Illuminate\Support\Facades\DB;
+use PDF;
 
 class Index extends Component
 {
@@ -121,6 +122,22 @@ class Index extends Component
         //flash message
         session()->flash('hapus', 'Data Berhasil Dihapus.');
         $this->emit('deleteModal');
+    }
+
+    public function cetak()
+    {
+        $bahanbaku = BahanBakuMasuk::join(
+            'tb_bahan_baku',
+            'tb_bahan_baku.kode_bahan_baku',
+            '=',
+            'tb_bahan_baku_masuk.bahan_baku_kode'
+        )->with('user')->orderBy('bahan_baku_kode', 'DESC')
+            ->latest('tb_bahan_baku_masuk.created_at')->get();
+        $data = PDF::loadview('components.laporan-bahan-baku-masuk-pdf', ['data' => $bahanbaku])->setPaper('a4', 'landscape')->output();
+        return response()->streamDownload(
+            fn () => print($data),
+            "laporan-bahan-baku-masuk.pdf"
+        );
     }
 
     public function render()

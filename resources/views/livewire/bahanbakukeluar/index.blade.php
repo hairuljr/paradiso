@@ -5,7 +5,7 @@
                 <h4 class="mb-sm-0 font-size-18">DATA BAHAN BAKU KELUAR</h4>
                 <div class="page-title-right">
                     <ol class="breadcrumb m-0">
-                      
+
                     </ol>
                 </div>
             </div>
@@ -23,27 +23,36 @@
                     <div class="row mb-2">
                         <div class="col-sm-4">
                             @if (session('pesan'))
-                            <div class="alert alert-primary alert-dismissible fade show" role="alert">
-                                {{ session('pesan')}}
-                                <button type="button" class="btn-close" data-bs-dismiss="alert"
-                                    aria-label="Close"></button>
-                            </div>
+                                <div class="alert alert-primary alert-dismissible fade show" role="alert">
+                                    {{ session('pesan') }}
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                        aria-label="Close"></button>
+                                </div>
                             @endif
                             @if (session('pesan1'))
-                            <div class="alert alert-primary alert-dismissible fade show" role="alert">
-                                {{ session('pesan1')}}
-                                <button type="button" class="btn-close" data-bs-dismiss="alert"
-                                    aria-label="Close"></button>
-                            </div>
+                                <div class="alert alert-primary alert-dismissible fade show" role="alert">
+                                    {{ session('pesan1') }}
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                        aria-label="Close"></button>
+                                </div>
                             @endif
                             @if (session('hapus'))
-                            <div class="alert alert-primary alert-dismissible fade show" role="alert">
-                                {{ session('hapus')}}
-                                <button type="button" class="btn-close" data-bs-dismiss="alert"
-                                    aria-label="Close"></button>
-                            </div>
+                                <div class="alert alert-primary alert-dismissible fade show" role="alert">
+                                    {{ session('hapus') }}
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                        aria-label="Close"></button>
+                                </div>
                             @endif
                         </div>
+                    </div>
+                    <div class="row mb-2">
+                        <div class="col-sm-4">
+                            <div class="text-sm-start">
+                                <a wire:click="cetak" href="#" type="button"
+                                    class="btn btn-primary btn-rounded waves-effect waves-light mb-1 me-1"><i
+                                        class="mdi mdi-printer-settings me-1"></i> Print</a>
+                            </div>
+                        </div><!-- end col-->
                     </div>
                     <div class="table-responsive">
                         <table id="example" class="table align-middle table-nowrap table-check">
@@ -55,7 +64,7 @@
                                     <th class="align-middle">Nama Bahan Baku</th>
                                     <th class="align-middle">Jumlah Keluar</th>
                                     <th class="align-middle">Satuan</th>
-                                 
+
 
                                 </tr>
                             </thead>
@@ -64,15 +73,15 @@
                             <tbody>
                                 @php $no = 1; @endphp
                                 @foreach ($bahanbakukeluar as $br)
-                                <tr>
-                                    <td>{{ $no++ }}</td>
-                                    <td>{{ $br->tgl_transaksi}}</td>
-                                    <td>{{ $br->bahan_baku_kode}}</td>
-                                    <td>{{ $br->nama_bahan_baku}}</td>
-                                    <td>{{ $br->jumlah}}</td>
-                                    <td>{{ $br->satuan}}</td>
-                                   
-                                </tr>
+                                    <tr>
+                                        <td>{{ $no++ }}</td>
+                                        <td>{{ $br->tgl_transaksi }}</td>
+                                        <td>{{ $br->bahan_baku_kode }}</td>
+                                        <td>{{ $br->nama_bahan_baku }}</td>
+                                        <td>{{ $br->jumlah }}</td>
+                                        <td>{{ $br->satuan }}</td>
+
+                                    </tr>
                                 @endforeach
                             </tbody>
                         </table>
@@ -84,8 +93,8 @@
 
 
     {{-- MODAL EDIT --}}
-    <div wire:ignore.self id="updateModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="updateModal"
-        aria-hidden="true">
+    <div wire:ignore.self id="updateModal" class="modal fade" tabindex="-1" role="dialog"
+        aria-labelledby="updateModal" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
@@ -99,7 +108,9 @@
                             <div class="col-md-5">
                                 <input type="text" name="kode_jenis_produk" wire:model="kode_jenis_produk"
                                     class="form-control" readonly>
-                                @error('kode_jenis_produk') <span class="error">{{ $message }}</span> @enderror
+                                @error('kode_jenis_produk')
+                                    <span class="error">{{ $message }}</span>
+                                @enderror
                             </div>
                         </div>
 
@@ -108,7 +119,9 @@
                             <div class="col-md-10">
                                 <input type="text" name="jenis_produk" wire:model="jenis_produk"
                                     class="form-control">
-                                @error('jenis_produk') <span class="error">{{ $message }}</span> @enderror
+                                @error('jenis_produk')
+                                    <span class="error">{{ $message }}</span>
+                                @enderror
                             </div>
                         </div>
                         <div class="mb-3 row">

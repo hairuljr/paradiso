@@ -11,4 +11,14 @@ class BahanBakuKeluar extends Model
 
     protected $table = 'tb_bahan_baku_keluar';
     protected $guarded = [];
+
+    public function bahanbaku()
+    {
+        return $this->hasOne(BahanBaku::class, 'kode_bahan_baku', 'bahan_baku_kode');
+    }
+
+    public function penjualan()
+    {
+        return $this->hasOne(Penjualan::class, 'no_transaksi', 'transaksi_no');
+    }
 }

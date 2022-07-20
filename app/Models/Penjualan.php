@@ -38,4 +38,9 @@ class Penjualan extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function detailPenjualan()
+    {
+        return $this->hasOne(DetailPenjualan::class, 'transaksi_no', 'no_transaksi');
+    }
 }

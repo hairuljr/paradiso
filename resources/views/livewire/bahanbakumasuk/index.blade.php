@@ -3,7 +3,7 @@
         <div class="col-12">
             <div class="page-title-box d-sm-flex align-items-center justify-content-between">
                 <h4 class="mb-sm-0 font-size-18">Data Bahan Baku Masuk</h4>
-              
+
             </div>
         </div>
     </div>
@@ -18,25 +18,25 @@
                     <div class="row mb-2">
                         <div class="col-sm-4">
                             @if (session('pesan'))
-                            <div class="alert alert-primary alert-dismissible fade show" role="alert">
-                                {{ session('pesan')}}
-                                <button type="button" class="btn-close" data-bs-dismiss="alert"
-                                    aria-label="Close"></button>
-                            </div>
+                                <div class="alert alert-primary alert-dismissible fade show" role="alert">
+                                    {{ session('pesan') }}
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                        aria-label="Close"></button>
+                                </div>
                             @endif
                             @if (session('pesan1'))
-                            <div class="alert alert-primary alert-dismissible fade show" role="alert">
-                                {{ session('pesan1')}}
-                                <button type="button" class="btn-close" data-bs-dismiss="alert"
-                                    aria-label="Close"></button>
-                            </div>
+                                <div class="alert alert-primary alert-dismissible fade show" role="alert">
+                                    {{ session('pesan1') }}
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                        aria-label="Close"></button>
+                                </div>
                             @endif
                             @if (session('hapus'))
-                            <div class="alert alert-primary alert-dismissible fade show" role="alert">
-                                {{ session('hapus')}}
-                                <button type="button" class="btn-close" data-bs-dismiss="alert"
-                                    aria-label="Close"></button>
-                            </div>
+                                <div class="alert alert-primary alert-dismissible fade show" role="alert">
+                                    {{ session('hapus') }}
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                        aria-label="Close"></button>
+                                </div>
                             @endif
                         </div>
                     </div>
@@ -44,17 +44,23 @@
                         <div class="col-sm-4">
                             <div class="search-box me-2 mb-2 d-inline-block">
                                 <div class="position-relative">
-                                    <input wire:model="search" type="text" class="form-control" placeholder="Cari Nama Bahan Baku">
-                                   
+                                    <input wire:model="search" type="text" class="form-control"
+                                        placeholder="Cari Nama Bahan Baku">
+
                                     <i class="bx bx-search-alt search-icon"></i>
                                 </div>
                             </div>
                         </div>
                         <div class="col-sm-8">
                             <div class="text-sm-end">
-                                <a href="{{route('bahanbakumasuk.create')}}" type="button" class="btn btn-success btn-rounded waves-effect waves-light mb-1 me-1"><i class="mdi mdi-plus me-1"></i> Add</a>
+                                <a href="{{ route('bahanbakumasuk.create') }}" type="button"
+                                    class="btn btn-success btn-rounded waves-effect waves-light mb-1 me-1"><i
+                                        class="mdi mdi-plus me-1"></i> Add</a>
+                                <a wire:click="cetak" href="#" type="button"
+                                    class="btn btn-primary btn-rounded waves-effect waves-light mb-1 me-1"><i
+                                        class="mdi mdi-printer-settings me-1"></i> Print</a>
                             </div>
-                        </div><!-- end col-->
+                        </div>
                     </div>
                     <div class="table-responsive">
                         <table id="example" class="table align-middle table-nowrap table-check">
@@ -76,34 +82,34 @@
                             <tbody>
                                 @php $no = 1; @endphp
                                 @foreach ($bahanbakumasuk as $bbm)
-                                <tr>
-                                    <td>{{ $no++ }}</td>
-                              
-                                    <td>{{ $bbm->bahan_baku_kode}}</td>
-                                    <td>{{ $bbm->nama_bahan_baku}}</td>
-                                    <td>{{ $bbm->tgl_transaksi}}</td>
-                                    <td>{{ $bbm->user->name}}</td>
-                                    <td>{{ $bbm->stok_masuk}}</td>
-                                    <td>{{ $bbm->satuan}}</td>
-                                    <td>{{ rupiah($bbm->harga) }}</td>
-                                    <td>
-                                        <div class="d-flex gap-3 cursor">
-                                            <a wire:click.prevent="DetailData1('{{$bbm->bahan_baku_kode}}')"
-                                                class="text-success" data-bs-toggle="modal"
-                                                data-bs-target="#updateModal"><i
-                                                    class="mdi mdi-pencil font-size-18"></i>
-                                            </a>
+                                    <tr>
+                                        <td>{{ $no++ }}</td>
 
-                                            <a button class="text-danger"
-                                                wire:click="DetailData('{{$bbm->id}}')"
-                                                data-bs-toggle="modal" data-bs-target="#deleteModal"><i
-                                                    class="mdi mdi-delete font-size-18"></i></a>
+                                        <td>{{ $bbm->bahan_baku_kode }}</td>
+                                        <td>{{ $bbm->nama_bahan_baku }}</td>
+                                        <td>{{ $bbm->tgl_transaksi }}</td>
+                                        <td>{{ $bbm->user->name }}</td>
+                                        <td>{{ $bbm->stok_masuk }}</td>
+                                        <td>{{ $bbm->satuan }}</td>
+                                        <td>{{ rupiah($bbm->harga) }}</td>
+                                        <td>
+                                            <div class="d-flex gap-3 cursor">
+                                                <a wire:click.prevent="DetailData1('{{ $bbm->bahan_baku_kode }}')"
+                                                    class="text-success" data-bs-toggle="modal"
+                                                    data-bs-target="#updateModal"><i
+                                                        class="mdi mdi-pencil font-size-18"></i>
+                                                </a>
+
+                                                <a button class="text-danger"
+                                                    wire:click="DetailData('{{ $bbm->id }}')"
+                                                    data-bs-toggle="modal" data-bs-target="#deleteModal"><i
+                                                        class="mdi mdi-delete font-size-18"></i></a>
 
 
 
-                                        </div>
-                                    </td>
-                                </tr>
+                                            </div>
+                                        </td>
+                                    </tr>
                                 @endforeach
                             </tbody>
                         </table>
@@ -115,8 +121,8 @@
 
 
     {{-- MODAL EDIT --}}
-    <div wire:ignore.self id="updateModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="updateModal"
-        aria-hidden="true">
+    <div wire:ignore.self id="updateModal" class="modal fade" tabindex="-1" role="dialog"
+        aria-labelledby="updateModal" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
@@ -128,9 +134,10 @@
                         <div class="mb-3 row">
                             <label class="col-md-2 col-form-label">Barcode</label>
                             <div class="col-md-5">
-                                <input type="text" wire:model="bahan_baku_kode" 
-                                    class="form-control" readonly>
-                                @error('bahan_baku_kode') <span class="error">{{ $message }}</span> @enderror
+                                <input type="text" wire:model="bahan_baku_kode" class="form-control" readonly>
+                                @error('bahan_baku_kode')
+                                    <span class="error">{{ $message }}</span>
+                                @enderror
                             </div>
                         </div>
 
@@ -145,39 +152,47 @@
                             <label class="col-md-2 col-form-label">Jumlah</label>
                             <div class="col-md-10">
                                 <input type="text" id="jumlah" wire:model="jumlah" class="form-control">
-                                @error('jumlah') <span class="error">{{ $message }}</span> @enderror
+                                @error('jumlah')
+                                    <span class="error">{{ $message }}</span>
+                                @enderror
 
                             </div>
                         </div>
                         <div class="mb-3 row">
                             <label class="col-md-2 col-form-label">Isi Satuan</label>
                             <div class="col-md-10">
-                                <input type="text" id="satuan_produk" wire:model="satuan_produk"  class="form-control" readonly>
-                               
+                                <input type="text" id="satuan_produk" wire:model="satuan_produk"
+                                    class="form-control" readonly>
+
 
                             </div>
                         </div>
                         <div class="mb-3 row">
                             <label class="col-md-2 col-form-label">Stok Masuk</label>
                             <div class="col-md-10">
-                                <input type="text" id="stok_masuk" wire:model="stok_masuk" class="form-control" readonly>
+                                <input type="text" id="stok_masuk" wire:model="stok_masuk" class="form-control"
+                                    readonly>
                                 <input id="stok_masukan" type="hidden" class="form-control" readonly>
-                                @error('stok_masuk') <span class="error">{{ $message }}</span> @enderror
+                                @error('stok_masuk')
+                                    <span class="error">{{ $message }}</span>
+                                @enderror
 
                             </div>
                         </div>
                         <div class="mb-3 row">
                             <label class="col-md-2 col-form-label">Satuan</label>
                             <div class="col-md-10">
-                                <input type="text" name="satuan" wire:model="satuan" class="form-control" 
+                                <input type="text" name="satuan" wire:model="satuan" class="form-control"
                                     readonly>
                             </div>
                         </div>
                         <div class="mb-3 row">
                             <label class="col-md-2 col-form-label">Harga</label>
                             <div class="col-md-10">
-                                <input type="text" name="harga" wire:model="harga" class="form-control" >
-                                @error('harga') <span class="error">{{ $message }}</span> @enderror
+                                <input type="text" name="harga" wire:model="harga" class="form-control">
+                                @error('harga')
+                                    <span class="error">{{ $message }}</span>
+                                @enderror
                             </div>
                         </div>
 
@@ -222,18 +237,17 @@
 
 </div>
 <script type="text/javascript">
-    
-    $(document).ready(function () {
-     //Hitung pembelian Bahan Baku
-     $("#jumlah").keyup(function () {
+    $(document).ready(function() {
+        //Hitung pembelian Bahan Baku
+        $("#jumlah").keyup(function() {
             let satuan_produk = $('#satuan_produk').val()
             let jumlah = $('#jumlah').val()
             $("#stok_masukan").val(jumlah * satuan_produk);
             let stok = $("#stok_masukan").val()
             $("#stok_masuk").val(stok);
-            
+
             document.getElementById("stok_masuk").dispatchEvent(new Event('input'));
-        }); 
+        });
 
     });
-    </script>
+</script>

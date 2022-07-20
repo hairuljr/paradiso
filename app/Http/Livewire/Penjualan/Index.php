@@ -9,6 +9,7 @@ use App\Models\BahanBakuMasuk;
 use App\Models\BahanBakuKeluar;
 use App\Models\DetailPenjualan;
 use Illuminate\Support\Facades\DB;
+use PDF;
 
 class Index extends Component
 {
@@ -81,6 +82,19 @@ class Index extends Component
 
         $this->emit('deleteModal');
     }
+
+    public function cetak()
+    {
+        $penjualan = Penjualan::with(['user', 'detailPenjualan'])->when($this->searchQuery !== '', function ($query) {
+            $query->where('tgl_transaksi', 'like', '%' . $this->searchQuery . '%');
+        })->orderBy('tgl_transaksi', 'DESC')->get();
+        $data = PDF::loadview('components.laporan-penjualan-pdf', ['data' => $penjualan])->setPaper('a4', 'landscape')->output();
+        return response()->streamDownload(
+            fn () => print($data),
+            "laporan-penjualan.pdf"
+        );
+    }
+
     public function render()
     {
 
