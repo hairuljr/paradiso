@@ -30,7 +30,7 @@ class Cost extends Model
         if (strlen($detailcost) == 1) {
             $addNol = "00";
         } elseif (strlen($detailcost) == 2) {
-            $addNol = "00";
+            $addNol = "0";
         } elseif (strlen($detailcost == 3)) {
             $addNol = "0";
         }

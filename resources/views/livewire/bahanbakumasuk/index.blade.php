@@ -176,7 +176,7 @@
                         <div class="mb-3 row">
                             <label class="col-md-2 col-form-label">Harga</label>
                             <div class="col-md-10">
-                                <input type="text" name="harga" wire:model="harga" class="form-control" readonly>
+                                <input type="text" name="harga" wire:model="harga" class="form-control" >
                                 @error('harga') <span class="error">{{ $message }}</span> @enderror
                             </div>
                         </div>

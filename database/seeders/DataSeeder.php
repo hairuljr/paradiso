@@ -337,7 +337,7 @@ class DataSeeder extends Seeder
             ],
             [
                 'kode_produk' => 'PK-013',
-                'nama_produk' => 'Coconut Iced Coffie',
+                'nama_produk' => 'Red Valvet Choco',
                 'jenis_produk_kode' => 'JP-001',
                 'created_at' => new \DateTime,
                 'updated_at' => null,
@@ -483,6 +483,7 @@ class DataSeeder extends Seeder
                 'created_at' => new \DateTime,
                 'updated_at' => null,
             ],
+
 
 
         ];

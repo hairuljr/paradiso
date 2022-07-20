@@ -84,7 +84,7 @@ class Index extends Component
                 'tb_detailcost.produk_kode'
             )->orderBy('cost_id', 'DESC')
             ->latest('tb_detailcost.created_at')
-            ->paginate(5);
+            ->paginate(35);
 
         if ($this->search !== null) {
             $cost = DetailCost::with(['produk', 'Cost'])
@@ -97,7 +97,7 @@ class Index extends Component
                 )->orderBy('cost_id', 'DESC')
                 ->where('nama_produk', 'like', '%' .  $this->search . '%')
                 ->latest('tb_detailcost.created_at')
-                ->paginate(5);
+                ->paginate(35);
         }
 
 

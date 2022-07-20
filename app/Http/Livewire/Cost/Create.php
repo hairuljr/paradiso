@@ -239,7 +239,7 @@ class Create extends Component
             'tb_jenis_produk.kode_jenis_produk',
             '=',
             'tb_produk.jenis_produk_kode'
-        )->orderBy('kode_produk', 'DESC')->latest('tb_produk.created_at')->paginate(5);
+        )->orderBy('kode_produk', 'DESC')->latest('tb_produk.created_at')->paginate(15);
 
         //menampilkan 5 data produk
         if ($this->search !== null) {
@@ -251,7 +251,7 @@ class Create extends Component
             )
                 ->orderBy('kode_produk', 'DESC')->where('nama_produk', 'like', '%' . $this->search . '%')
                 ->latest('tb_produk.created_at')
-                ->paginate(5);
+                ->paginate(15);
         }
 
         $this->produk_kode = session('barcode') ?? $this->produk_kode;
