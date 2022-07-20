@@ -149,8 +149,8 @@ class Create extends Component
     {
         $sementara = SementaraPenjualan::get();
         // $subTotal = array_sum($sementara->pluck('total')->toArray());
-        $validasi = $this->validate();
-        Penjualan::create($validasi, [
+
+        Penjualan::create([
 
             'no_transaksi' => $this->no_transaksi,
             'user_id' => auth()->id(),
