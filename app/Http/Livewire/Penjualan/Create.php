@@ -56,11 +56,11 @@ class Create extends Component
         'harga_jual' => 'required',
 
     ];
-    protected $rules1 = [
+    // protected $rules1 = [
 
-        'sub_total' => 'required',
+    //     'sub_total' => 'required',
 
-    ];
+    // ];
 
 
     protected $messages = [
@@ -71,11 +71,11 @@ class Create extends Component
         'harga_jual.required' => 'Harga Produk tidak boleh kosong.',
 
     ];
-    protected $messages1 = [
-        'sub_total.required' => 'Sub Total tidak boleh kosong.',
+    // protected $messages1 = [
+    //     'sub_total.required' => 'Sub Total tidak boleh kosong.',
 
 
-    ];
+    // ];
 
 
     public function mount()
