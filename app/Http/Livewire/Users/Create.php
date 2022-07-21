@@ -13,14 +13,17 @@ class Create extends Component
     public $username;
     public $role;
     protected $rules = [
-        'name' => 'required',
+        'name' => 'required|alpha',
         // 'email' => 'required|email:rfc,dns|unique:users,email',
         'username' => 'required|unique:users,username',
     ];
 
     protected $messages = [
         'name.required' => 'Nama tidak boleh kosong.',
-        'username.required' => 'Username Produk tidak boleh kosong.',
+        'username.required' => 'Username tidak boleh kosong.',
+        'username.unique' => 'Username tidak boleh sama.',
+        'name.alpha' => 'Nama tidak boleh angka.',
+
         // 'jenis_produk_kode.required' => 'Jenis Produk tidak boleh kosong.',
 
 

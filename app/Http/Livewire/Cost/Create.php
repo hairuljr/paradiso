@@ -59,11 +59,11 @@ class Create extends Component
         'produk_kode' => 'required',
         'nama_produk' => 'required',
         'bahan_baku_kode' => 'required',
-        'nama_bahan_baku' => 'required|unique:tb_sementara|',
+        'nama_bahan_baku' => 'required|unique:tb_sementara,nama_bahan_baku',
         'harga' => 'required',
         'satuan_produk' => 'required',
         'satuan' => 'required',
-        'digunakan' => 'required',
+        'digunakan' => 'required|numeric',
         'cost' => 'required',
 
 
@@ -86,7 +86,8 @@ class Create extends Component
         'satuan_produk.required' => 'Isi Satuan tidak boleh kosong.',
         'satuan.required' => 'Satuan tidak boleh kosong.',
         'digunakan.required' => 'Jumlah yang digunakan tidak boleh kosong.',
-        'cost.required' => 'Cost tidak boleh kosong.',
+        'digunakan.numeric' => 'Jumlah yang digunakan tidak boleh selain angka.',
+        'cost.required' => 'Harga Cost tidak boleh kosong.',
 
 
 

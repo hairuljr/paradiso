@@ -43,6 +43,14 @@
                                 @endif
                             </div>
                         </div>
+                        <div class="col-sm-8">
+                            <div class="text-sm-end">
+                               
+                                <a wire:click="cetak" href="#" type="button"
+                                    class="btn btn-primary btn-rounded waves-effect waves-light mb-1 me-1"><i
+                                        class="mdi mdi-printer-settings me-1"></i> Print</a>
+                            </div>
+                        </div><!-- end col-->
                         <div class="table-responsive">
                             <table id="example" class="table align-middle table-nowrap table-check">
                                 <thead class="table-light">
@@ -63,7 +71,19 @@
     
     
                                 <tbody>
-                                 
+                                    @php $no = 1; @endphp
+                                    @foreach ($data as $bbm)
+                                        <tr>
+                                            <td>{{ $no++ }}</td>
+                                            <td>{{ $bbm->no_transaksi }}</td>
+                                            <td>{{ $bbm->tgl_transaksi }}</td>
+                                            <td>{{ $bbm->detailPenjualan?->produk?->kode_produk }}</td>
+                                            <td>{{ $bbm->detailPenjualan?->produk?->nama_produk }}</td>
+                                            <td>{{ $bbm->detailPenjualan?->jumlah }}</td>
+                                            <td>{{ rupiah($bbm->sub_total) }}</td>
+                                            <td>{{ rupiah($bbm->detailPenjualan?->total) }}</td>
+                                        </tr>
+                                    @endforeach
                                 </tbody>
                             </table>
                         </div>

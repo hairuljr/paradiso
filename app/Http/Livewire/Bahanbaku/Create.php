@@ -18,18 +18,20 @@ class Create extends Component
 
     protected $rules = [
         // 'kode_bahan_baku' => 'required',
-        'nama_bahan_baku' => 'required',
+        'nama_bahan_baku' => 'required|alpha',
         'persediaan' => 'required',
-        'satuan' => 'required',
-        'satuan_produk' => 'required',
+        // 'satuan' => 'required',
+        'satuan_produk' => 'required|numeric',
         // 'harga' => 'required'
     ];
     protected $messages = [
         'kode_bahan_baku.required' => 'Barcode tidak boleh kosong.',
+        'nama_bahan_baku.alpha' => 'Nama Bahan Baku tidak boleh angka.',
         'nama_bahan_baku.required' => 'Nama Bahan Baku tidak boleh kosong.',
         'persediaan.required' => 'Persediaan tidak boleh kosong.',
-        'satuan.required' => 'Satuan tidak boleh kosong.',
+        // 'satuan.required' => 'Satuan tidak boleh kosong.',
         'satuan_produk.required' => 'Isi Satuan tidak boleh kosong.',
+        'satuan_produk.numeric' => 'Isi Satuan tidak boleh selain angka.',
         // 'harga.required' => 'Harga tidak boleh kosong.',
 
     ];

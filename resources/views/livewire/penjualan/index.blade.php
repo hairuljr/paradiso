@@ -56,9 +56,7 @@
                                 <a href="{{ route('penjualan.create') }}" type="button"
                                     class="btn btn-success btn-rounded waves-effect waves-light mb-1 me-1"><i
                                         class="mdi mdi-plus me-1"></i> Add</a>
-                                <a wire:click="cetak" href="#" type="button"
-                                    class="btn btn-primary btn-rounded waves-effect waves-light mb-1 me-1"><i
-                                        class="mdi mdi-printer-settings me-1"></i> Print</a>
+                              
                             </div>
                         </div><!-- end col-->
                     </div>

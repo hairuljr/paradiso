@@ -134,7 +134,7 @@
                                 <div class="input-group mb-3">
                                     <input id="nama_produk" type="text" class="form-control" wire:model="nama_produk"
                                         readonly autofocus>
-                                    @error('nama_produk') <span class="error">{{ $message }}</span> @enderror
+                                        @error('nama_produk') <span class="error">{{ $message }}</span> @enderror
                                 </div>
 
                                 <label>Total </label>

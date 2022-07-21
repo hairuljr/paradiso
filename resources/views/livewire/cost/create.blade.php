@@ -33,13 +33,11 @@
                             <div class="col-sm-6">
                                 <div class="mb-3">
                                     <label>Nama Produk </label>
-                                    <div class="input-group mb-3">
-                                        <input id="nama_produk" type="text" class="form-control"
-                                            wire:model="nama_produk" readonly>
-                                        <input id="old1" type="hidden" class="form-control" readonly
-                                            value=" {{$this->nama_produk}}  ">
-                                        @error('nama_produk') <span class="error">{{ $message }}</span> @enderror
-                                    </div>
+                                    <div class="input-group mb-2">
+                                        <input id="nama_produk" type="text" class="form-control" wire:model="nama_produk" readonly>
+                                           
+                                    </div> @error('nama_produk') <span class="error">{{ $message }}</span> @enderror
+
                                 </div>
                             </div>
                         </div>

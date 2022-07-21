@@ -21,15 +21,16 @@ class Create extends Component
 
     protected $rules = [
         // 'kode_produk' => 'required',
-        'nama_produk' => 'required',
-        'jenis_produk_kode' => 'required',
+        'nama_produk' => 'required|alpha',
+
         // 'harga_satuan' => 'required',
 
     ];
     protected $messages = [
         'kode_produk.required' => 'Barcode tidak boleh kosong.',
         'nama_produk.required' => 'Nama Produk tidak boleh kosong.',
-        'jenis_produk_kode.required' => 'Jenis Produk tidak boleh kosong.',
+        'nama_produk.alpha' => 'Nama Produk tidak boleh angka.',
+
         'harga_satuan.required' => 'Harga tidak boleh kosong.',
 
 

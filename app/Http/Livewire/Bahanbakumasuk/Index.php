@@ -124,21 +124,7 @@ class Index extends Component
         $this->emit('deleteModal');
     }
 
-    public function cetak()
-    {
-        $bahanbaku = BahanBakuMasuk::join(
-            'tb_bahan_baku',
-            'tb_bahan_baku.kode_bahan_baku',
-            '=',
-            'tb_bahan_baku_masuk.bahan_baku_kode'
-        )->with('user')->orderBy('bahan_baku_kode', 'DESC')
-            ->latest('tb_bahan_baku_masuk.created_at')->get();
-        $data = PDF::loadview('components.laporan-bahan-baku-masuk-pdf', ['data' => $bahanbaku])->setPaper('a4', 'landscape')->output();
-        return response()->streamDownload(
-            fn () => print($data),
-            "laporan-bahan-baku-masuk.pdf"
-        );
-    }
+
 
     public function render()
     {

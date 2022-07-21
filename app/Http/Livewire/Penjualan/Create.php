@@ -51,7 +51,7 @@ class Create extends Component
 
         'kode_produk' => 'required',
         'nama_produk' => 'required',
-        'jumlah' => 'required',
+        'jumlah' => 'required|numeric',
         'total' => 'required',
         'harga_jual' => 'required',
 
@@ -65,9 +65,10 @@ class Create extends Component
 
     protected $messages = [
         'kode_produk.required' => 'Barcode tidak boleh kosong.',
-        'nama_produk.required' => 'Nama Produk tidak boleh kosong.',
+        'nama_produk.required' => 'Nama Produk tidak boleh dikosongkan.',
         'jumlah.required' => 'Jumlah Produk tidak boleh kosong.',
-        'total.required' => 'Total tidak boleh kosong.',
+        'jumlah.numeric' => 'Jumlah Produk tidak boleh selain angka.',
+        'total.required' => 'Total harga tidak boleh kosong.',
         'harga_jual.required' => 'Harga Produk tidak boleh kosong.',
 
     ];
